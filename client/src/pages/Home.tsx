@@ -351,12 +351,15 @@ function MenuSection() {
 
         {/* Menu Items Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {currentMenu.map((item, idx) => (
+          {currentMenu.map((item, idx) => {
+            const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa';
+            return (
             <div
               key={idx}
               className="bg-gray-900/50 border border-amber-900/30 overflow-hidden hover:border-amber-500/50 transition-all duration-200 hover:shadow-lg hover:shadow-amber-900/20"
             >
-              {/* Product Image */}
+              {/* Product Image - Only for Pizza categories */}
+              {showImage && (
               <div className="relative h-48 overflow-hidden bg-gray-800">
                 <img
                   src={item.image}
@@ -364,9 +367,10 @@ function MenuSection() {
                   className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                 />
               </div>
+              )}
 
               {/* Product Info */}
-              <div className="p-4">
+              <div className={showImage ? 'p-4' : 'p-6'}>
                 <h3
                   className="text-lg font-bold text-amber-100 mb-2"
                   style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
@@ -404,7 +408,8 @@ function MenuSection() {
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
