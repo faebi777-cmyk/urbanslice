@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, ShoppingCart, MapPin, Phone, Mail, Instagram, Facebook, Music, ChevronDown, Check, AlertCircle } from 'lucide-react';
+import { Menu, X, ShoppingCart, MapPin, Phone, Mail, Instagram, Facebook, Music, ChevronDown, Check, AlertCircle, Globe, Star } from 'lucide-react';
 
 /**
  * URBAN SLICE - ARTISAN PIZZERIA WEBSITE
@@ -138,6 +138,26 @@ const MENU_DATA = {
     { name: 'Cappuccino', image: IMAGE_URLS.margherita, sizes: { '200ml': { price: 15, weight: '200 ml' } }, ingredients: '' },
   ],
 };
+// Business Hours
+const BUSINESS_HOURS = {
+  Monday: { open: '12:00', close: '22:00' },
+  Tuesday: { open: '12:30', close: '22:00' },
+  Wednesday: { open: '12:30', close: '22:00' },
+  Thursday: { open: '12:30', close: '22:00' },
+  Friday: { open: '12:30', close: '22:00' },
+  Saturday: { open: '12:30', close: '22:00' },
+  Sunday: { open: '12:30', close: '22:00' },
+};
+
+// Testimonials/Reviews
+const TESTIMONIALS = [
+  { name: 'Mihai Popescu', rating: 5, text: 'Pizza extraordinară! Ingrediente proaspete și gust autentic. Recomand cu plăcere!' },
+  { name: 'Ana Ionescu', rating: 5, text: 'Serviciu rapid și prietenos. Mâncare delicioasă, prezentare frumoasă. Voi reveni sigur!' },
+  { name: 'Cristian Vasile', rating: 5, text: 'Cea mai bună pizzerie din București! Calitate premium la prețuri rezonabile.' },
+  { name: 'Elena Stoian', rating: 5, text: 'Ambianță plăcută, personal atent. Pizza e crocantă și savuroasă. Bravo!' },
+  { name: 'Radu Gheorghe', rating: 5, text: 'Panuzzo-urile sunt fenomenale! Combinații de ingrediente unice și gustoase.' },
+  { name: 'Ioana Marinescu', rating: 5, text: 'Meniu variat, preparate gustoase. Urban Slice e alegerea perfectă pentru o cină de calitate.' },
+];
 
 // Component: Navigation Bar
 function Navigation() {
@@ -342,6 +362,64 @@ function AboutSection() {
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Component: Testimonials Section
+function TestimonialsSection() {
+  return (
+    <section className="py-20 bg-gradient-to-b from-slate-900 to-slate-950 overflow-hidden">
+      <div className="container">
+        <h2 className="text-4xl md:text-5xl font-playfair text-center mb-2 text-amber-400">
+          Ce spun clienții noștri
+        </h2>
+        <p className="text-center text-slate-400 mb-12">Recenzii autentice de la clienții satisfăcuți</p>
+        
+        {/* Marquee Container */}
+        <div className="relative w-full overflow-hidden">
+          <style>{`
+            @keyframes marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .marquee {
+              animation: marquee 30s linear infinite;
+            }
+            .marquee:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
+          
+          <div className="marquee flex gap-6 w-fit">
+            {/* First set of testimonials */}
+            {TESTIMONIALS.map((testimonial, idx) => (
+              <div key={idx} className="flex-shrink-0 w-96 bg-slate-800 border border-amber-400/20 rounded-lg p-6 hover:border-amber-400/50 transition-all">
+                <div className="flex items-center gap-1 mb-3">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <p className="text-slate-200 mb-4 italic">"{testimonial.text}"</p>
+                <p className="text-amber-400 font-semibold">{testimonial.name}</p>
+              </div>
+            ))}
+            
+            {/* Duplicate set for seamless loop */}
+            {TESTIMONIALS.map((testimonial, idx) => (
+              <div key={`dup-${idx}`} className="flex-shrink-0 w-96 bg-slate-800 border border-amber-400/20 rounded-lg p-6 hover:border-amber-400/50 transition-all">
+                <div className="flex items-center gap-1 mb-3">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <p className="text-slate-200 mb-4 italic">"{testimonial.text}"</p>
+                <p className="text-amber-400 font-semibold">{testimonial.name}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -1213,6 +1291,7 @@ export default function Home() {
       <Navigation />
       <HeroSection />
       <AboutSection />
+      <TestimonialsSection />
       <MenuSection />
       <GallerySection />
       <ReservationSection />
