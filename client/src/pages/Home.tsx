@@ -336,6 +336,15 @@ function HeroSection({ setShowPolicy }: { setShowPolicy?: (policy: string) => vo
           >
             COMANDĂ ACUM
           </button>
+          <a
+            href="https://glovoapp.com/ro/ro/bucharest/stores/urban-slice-pizza-buc"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 sm:px-8 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-base sm:text-lg transition-all duration-300 hover:scale-105 transform shadow-lg"
+            style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '2px', fontWeight: 700 }}
+          >
+            COMANDĂ PRIN GLOVO
+          </a>
         </div>
 
         {/* Scroll Indicator */}
