@@ -951,13 +951,22 @@ function OrderSection() {
                     <span className="text-lg text-amber-400">{cartTotal} RON</span>
                   </div>
                 </div>
-                <button
-                  onClick={() => setShowCart(true)}
-                  className="w-full bg-amber-500 text-black font-bold py-2 hover:bg-amber-400 transition-all"
-                  style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
-                >
-                  FINALIZEAZĂ COMANDA
-                </button>
+                <div className="space-y-2">
+                  <button
+                    onClick={() => setShowCart(true)}
+                    className="w-full bg-amber-500 text-black font-bold py-2 hover:bg-amber-400 transition-all"
+                    style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
+                  >
+                    FINALIZEAZĂ COMANDA
+                  </button>
+                  <button
+                    onClick={() => setCart({})}
+                    className="w-full bg-red-600/70 text-white font-bold py-2 hover:bg-red-600 transition-all"
+                    style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
+                  >
+                    GOLEȘTE COȘUL
+                  </button>
+                </div>
               </>
             ) : (
               <p className="text-amber-50/50 text-sm">Coșul este gol</p>
