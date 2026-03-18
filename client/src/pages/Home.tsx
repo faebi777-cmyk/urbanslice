@@ -1132,7 +1132,7 @@ function LocationSection() {
           {/* Map */}
           <div className="h-96 bg-gray-900 rounded overflow-hidden">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2834.7366347656396!2d26.10385!3d44.43688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b201d4e4e4e4e5%3A0x1234567890abcdef!2sBucharest%2C%20Romania!5e0!3m2!1sen!2sro!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2835.5!2d26.0971!3d44.4368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b201e4e4e4e4e5%3A0x123456789abcdef!2sUrban%20Slice%20Pizzeria%2C%20Strada%20M%C4%83gura%20Vulturului%202%2C%20Bucure%C8%99ti!5e0!3m2!1sen!2sro!4v1710769200"
               width="100%"
               height="100%"
               style={{ border: 0 }}
