@@ -4,78 +4,103 @@ import { Menu, X, ShoppingCart, MapPin, Phone, Mail, Instagram, Facebook, Music,
 /**
  * URBAN SLICE - ARTISAN PIZZERIA WEBSITE
  * 
- * DESIGN PHILOSOPHY: Dark, moody, editorial aesthetic
+ * DESIGN PHILOSOPHY: Dark, moody, editorial aesthetic with Italian elements
  * - Deep charcoal/black backgrounds (#1a1a1a, #2d2d2d)
  * - Warm ember/brick accents (#e8541a, #c0392b)
  * - Gold highlights (#d4a843)
  * - Cream text (#f5f0e8)
- * - Typography: Bebas Neue (headlines), Playfair Display (subheadings), DM Sans (body)
- * - Asymmetric layouts, overlapping elements, bold transitions, subtle grain texture
+ * - Modern typography with Italian flair
+ * - Animated rotating pizza background
+ * - Asymmetric layouts, overlapping elements, bold transitions
  */
 
-// Menu data structure
+// Image URLs from CDN
+const IMAGE_URLS = {
+  cover: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/ 1. Cover_f80e1aff.png',
+  margherita: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/margherita_654b8716.png',
+  vegetariana: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/vegerariana_cae58381.png',
+  capricciosa: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/capricciosa_a3f529c2.png',
+  prosciuttoFunghi: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/prosciutto e funghi_06e662c4.png',
+  quattroFormaggi: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/quattro fromaggi_5687a92d.png',
+  tonno: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/tonno_bd3cfa2a.jpeg',
+  caprese: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/capresse_30794f3a.png',
+  diavola: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/diavola_eb7c3fa5.png',
+  salami: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/salami_0f5f3a4b.png',
+  calzone: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/calzone_f2aab74b.png',
+  taraneasca: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/taraneasca_d34444e8.png',
+  quattroStagioni: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/quattro stagioni_ebd125f3.png',
+  zucchini: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/quattro fromaggi_5687a92d.png',
+  urban: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/pollo_81e6630f.png',
+  mortadella: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/prosciutto crudo_28078c58.png',
+  carbonara: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/carbonara_20be5bff.png',
+  prosciuttoCrudo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/prosciutto crudo_28078c58.png',
+  diavola_tartufata: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/diavola_eb7c3fa5.png',
+  salami_tartufata: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/salami_0f5f3a4b.png',
+};
+
+// Complete Menu Data
 const MENU_DATA = {
   pizzaClassica: [
-    { name: 'MARGHERITA', sizes: { '32cm': { price: 40, weight: '580 g' }, '40cm': { price: 55, weight: '700 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, busuioc' },
-    { name: 'VEGETARIANA', sizes: { '32cm': { price: 40, weight: '660 g' }, '40cm': { price: 55, weight: '770 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, ciuperci, ardei gras, porumb, măsline' },
-    { name: 'CAPRICIOSA', sizes: { '32cm': { price: 45, weight: '670 g' }, '40cm': { price: 65, weight: '870 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, șuncă, ciuperci, măsline, cârnați' },
-    { name: 'PROSCIUTTO FUNGHI', sizes: { '32cm': { price: 45, weight: '620 g' }, '40cm': { price: 65, weight: '720 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, șuncă, ciuperci' },
-    { name: 'QUATTRO FORMAGGI', sizes: { '32cm': { price: 50, weight: '600 g' }, '40cm': { price: 65, weight: '740 g' } }, ingredients: 'Palina, cheddar, mozzarella, gorgonzola, parmezan' },
-    { name: 'COTTO', sizes: { '32cm': { price: 42, weight: '600 g' }, '40cm': { price: 65, weight: '700 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, șuncă' },
-    { name: 'TONNO', sizes: { '32cm': { price: 45, weight: '650 g' }, '40cm': { price: 65, weight: '890 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, ton, măsline, ceapă' },
-    { name: 'CAPRESE', sizes: { '32cm': { price: 45, weight: '615 g' }, '40cm': { price: 65, weight: '770 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pesto, roșii cherry' },
-    { name: 'DIAVOLA', sizes: { '32cm': { price: 45, weight: '630 g' }, '40cm': { price: 65, weight: '730 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam, peperoncini' },
-    { name: 'SALAMI', sizes: { '32cm': { price: 45, weight: '630 g' }, '40cm': { price: 65, weight: '750 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam' },
-    { name: 'CALZONE', sizes: { '32cm': { price: 45, weight: '560 g' }, '40cm': { price: 65, weight: '760 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, șuncă, bacon' },
-    { name: 'TARANEASCA', sizes: { '32cm': { price: 50, weight: '620 g' }, '40cm': { price: 70, weight: '820 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, bacon, șuncă, salam, cârnați, ciuperci, ardei gras, porumb, ceapă' },
-    { name: 'QUATTRO STAGIONI', sizes: { '32cm': { price: 45, weight: '660 g' }, '40cm': { price: 65, weight: '880 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, șuncă, ciuperci, salam, măsline' },
+    { name: 'MARGHERITA', image: IMAGE_URLS.margherita, sizes: { '32cm': { price: 40, weight: '580 g' }, '40cm': { price: 55, weight: '700 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, busuioc' },
+    { name: 'VEGETARIANA', image: IMAGE_URLS.vegetariana, sizes: { '32cm': { price: 40, weight: '660 g' }, '40cm': { price: 55, weight: '770 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, ciuperci, ardei gras, porumb, măsline' },
+    { name: 'CAPRICIOSA', image: IMAGE_URLS.capricciosa, sizes: { '32cm': { price: 45, weight: '670 g' }, '40cm': { price: 65, weight: '870 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, șuncă, ciuperci, măsline, cârnați' },
+    { name: 'PROSCIUTTO FUNGHI', image: IMAGE_URLS.prosciuttoFunghi, sizes: { '32cm': { price: 45, weight: '620 g' }, '40cm': { price: 65, weight: '720 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, șuncă, ciuperci' },
+    { name: 'QUATTRO FORMAGGI', image: IMAGE_URLS.quattroFormaggi, sizes: { '32cm': { price: 50, weight: '600 g' }, '40cm': { price: 65, weight: '740 g' } }, ingredients: 'Palina, cheddar, mozzarella, gorgonzola, parmezan' },
+    { name: 'COTTO', image: IMAGE_URLS.margherita, sizes: { '32cm': { price: 42, weight: '600 g' }, '40cm': { price: 65, weight: '700 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, șuncă' },
+    { name: 'TONNO', image: IMAGE_URLS.tonno, sizes: { '32cm': { price: 45, weight: '650 g' }, '40cm': { price: 65, weight: '890 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, ton, măsline, ceapă' },
+    { name: 'CAPRESE', image: IMAGE_URLS.caprese, sizes: { '32cm': { price: 45, weight: '615 g' }, '40cm': { price: 65, weight: '770 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pesto, roșii cherry' },
+    { name: 'DIAVOLA', image: IMAGE_URLS.diavola, sizes: { '32cm': { price: 45, weight: '630 g' }, '40cm': { price: 65, weight: '730 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam, peperoncini' },
+    { name: 'SALAMI', image: IMAGE_URLS.salami, sizes: { '32cm': { price: 45, weight: '630 g' }, '40cm': { price: 65, weight: '750 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam' },
+    { name: 'CALZONE', image: IMAGE_URLS.calzone, sizes: { '32cm': { price: 45, weight: '560 g' }, '40cm': { price: 65, weight: '760 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, șuncă, bacon' },
+    { name: 'TARANEASCA', image: IMAGE_URLS.taraneasca, sizes: { '32cm': { price: 50, weight: '620 g' }, '40cm': { price: 70, weight: '820 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, bacon, șuncă, salam, cârnați, ciuperci, ardei gras, porumb, ceapă' },
+    { name: 'QUATTRO STAGIONI', image: IMAGE_URLS.quattroStagioni, sizes: { '32cm': { price: 45, weight: '660 g' }, '40cm': { price: 65, weight: '880 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, șuncă, ciuperci, salam, măsline' },
   ],
   pizzaCasa: [
-    { name: 'ZUCCHINI', sizes: { '32cm': { price: 40, weight: '630 g' }, '40cm': { price: 55, weight: '740 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, zucchini, gorgonzola, peperoncino' },
-    { name: 'URBAN', sizes: { '32cm': { price: 45, weight: '660 g' }, '40cm': { price: 65, weight: '800 g' } }, ingredients: 'Palina, sos roșii, mozzarella, chorizo, gorgonzola, cedar, parmezan' },
-    { name: 'MORTADELLA', sizes: { '32cm': { price: 50, weight: '640 g' }, '40cm': { price: 70, weight: '840 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, mortadella, pesto, busuioc' },
-    { name: 'EL CIOLANESCU', sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '800 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, ciolan afumat, ouă de prepeliță, ardei gras, usturoi, piper, ulei de măsline extravirgin' },
-    { name: 'QUATTRO CARNE', sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '660 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam Napoli, prosciutto cotto, ventricina, cârnați, parmezan' },
-    { name: 'QUATTRO FORMAGGI E VENTRICINA', sizes: { '32cm': { price: 50, weight: '640 g' }, '40cm': { price: 70, weight: '640 g' } }, ingredients: 'Palina, sos alb, cheddar, mozzarella, gorgonzola, parmezan, ventricina' },
-    { name: 'TARTUFO E SALSICCIA', sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '660 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pastă de trufe, cârnat proaspăt salsiccia' },
-    { name: 'PASTRAMI CON POMODORI SECCHI', sizes: { '32cm': { price: 45, weight: '660 g' }, '40cm': { price: 65, weight: '660 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pastramă, roșii uscate' },
-    { name: 'PROSCIUTTO CRUDO E RUCOLA', sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '660 g' } }, ingredients: 'Palina, mozzarella, roșii cherry, rucola, prosciutto crudo, parmezan' },
-    { name: 'CARBONARA', sizes: { '32cm': { price: 45, weight: '620 g' }, '40cm': { price: 65, weight: '800 g' } }, ingredients: 'Palina, sos alb, mozzarella, pancetta, ou' },
-    { name: 'DIAVOLA TARTUFATA', sizes: { '32cm': { price: 45, weight: '660 g' }, '40cm': { price: 65, weight: '800 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam, pasta de trufe, peperoncini' },
-    { name: 'SALAMI TARTUFATA', sizes: { '32cm': { price: 50, weight: '650 g' }, '40cm': { price: 70, weight: '750 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam, pastă de trufe' },
+    { name: 'ZUCCHINI', image: IMAGE_URLS.zucchini, sizes: { '32cm': { price: 40, weight: '630 g' }, '40cm': { price: 55, weight: '740 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, zucchini, gorgonzola, peperoncino' },
+    { name: 'URBAN', image: IMAGE_URLS.urban, sizes: { '32cm': { price: 45, weight: '660 g' }, '40cm': { price: 65, weight: '800 g' } }, ingredients: 'Palina, sos roșii, mozzarella, chorizo, gorgonzola, cedar, parmezan' },
+    { name: 'MORTADELLA', image: IMAGE_URLS.mortadella, sizes: { '32cm': { price: 50, weight: '640 g' }, '40cm': { price: 70, weight: '840 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, mortadella, pesto, busuioc' },
+    { name: 'EL CIOLANESCU', image: IMAGE_URLS.margherita, sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '800 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, ciolan afumat, ouă de prepeliță, ardei gras, usturoi, piper, ulei de măsline extravirgin' },
+    { name: 'QUATTRO CARNE', image: IMAGE_URLS.quattroFormaggi, sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '660 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam Napoli, prosciutto cotto, ventricina, cârnați, parmezan' },
+    { name: 'QUATTRO FORMAGGI E VENTRICINA', image: IMAGE_URLS.quattroFormaggi, sizes: { '32cm': { price: 50, weight: '640 g' }, '40cm': { price: 70, weight: '640 g' } }, ingredients: 'Palina, sos alb, cheddar, mozzarella, gorgonzola, parmezan, ventricina' },
+    { name: 'TARTUFO E SALSICCIA', image: IMAGE_URLS.margherita, sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '660 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pastă de trufe, cârnat proaspăt salsiccia' },
+    { name: 'PASTRAMI CON POMODORI SECCHI', image: IMAGE_URLS.margherita, sizes: { '32cm': { price: 45, weight: '660 g' }, '40cm': { price: 65, weight: '660 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pastramă, roșii uscate' },
+    { name: 'PROSCIUTTO CRUDO E RUCOLA', image: IMAGE_URLS.prosciuttoCrudo, sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '660 g' } }, ingredients: 'Palina, mozzarella, roșii cherry, rucola, prosciutto crudo, parmezan' },
+    { name: 'CARBONARA', image: IMAGE_URLS.carbonara, sizes: { '32cm': { price: 45, weight: '620 g' }, '40cm': { price: 65, weight: '800 g' } }, ingredients: 'Palina, sos alb, mozzarella, pancetta, ou' },
+    { name: 'DIAVOLA TARTUFATA', image: IMAGE_URLS.diavola_tartufata, sizes: { '32cm': { price: 45, weight: '660 g' }, '40cm': { price: 65, weight: '800 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam, pasta de trufe, peperoncini' },
+    { name: 'SALAMI TARTUFATA', image: IMAGE_URLS.salami_tartufata, sizes: { '32cm': { price: 50, weight: '650 g' }, '40cm': { price: 70, weight: '750 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam, pastă de trufe' },
   ],
   streetFood: [
-    { name: 'URBAN HOT DOG', sizes: { 'standard': { price: 30, weight: '280 g' } }, ingredients: 'Cârnat semiafumat, sos Urban, cheddar, mozzarella, parmezan' },
-    { name: 'PANUZZO COTTO', sizes: { 'standard': { price: 30, weight: '320 g' } }, ingredients: 'Palina, sos de roșii cu busuioc, mozzarella, prosciutto cotto, rucola, unt, ulei de măsline' },
-    { name: 'PANUZZO MORTADELA', sizes: { 'standard': { price: 35, weight: '320 g' } }, ingredients: 'Palina, mortadella, rucola, stracciatella, pesto, ulei de măsline' },
-    { name: 'PANUZZO CHORIZO', sizes: { 'standard': { price: 30, weight: '320 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, chorizo, rucola, cheddar, ulei picant' },
-    { name: 'PANUZZO CRISPY', sizes: { 'standard': { price: 35, weight: '320 g' } }, ingredients: 'Palina, pui crispy, sos Urban, rucola' },
-    { name: 'PANUZZO CAPRESE', sizes: { 'standard': { price: 30, weight: '320 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pesto, roșii cherry, rucola, ulei de măsline' },
-    { name: 'PANUZZO VENTRICINA', sizes: { 'standard': { price: 30, weight: '320 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam ventricina, rucola' },
-    { name: 'BURGER URBAN BLACK ANGUS', sizes: { 'standard': { price: 50, weight: '350 g' } }, ingredients: 'Chiflă burger, burger Black Angus România, sos Urban, cheddar, mozzarella, castraveți murați, salată, bacon, ceapă' },
-    { name: 'BURGER CRISPY', sizes: { 'standard': { price: 45, weight: '350 g' } }, ingredients: 'Chiflă burger, 120 g pui crispy, sos Urban, cheddar, mozzarella, castraveți murați, salată, bacon, ceapă' },
+    { name: 'URBAN HOT DOG', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '280 g' } }, ingredients: 'Cârnat semiafumat, sos Urban, cheddar, mozzarella, parmezan' },
+    { name: 'PANUZZO COTTO', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '320 g' } }, ingredients: 'Palina, sos de roșii cu busuioc, mozzarella, prosciutto cotto, rucola, unt, ulei de măsline' },
+    { name: 'PANUZZO MORTADELA', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 35, weight: '320 g' } }, ingredients: 'Palina, mortadella, rucola, stracciatella, pesto, ulei de măsline' },
+    { name: 'PANUZZO CHORIZO', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '320 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, chorizo, rucola, cheddar, ulei picant' },
+    { name: 'PANUZZO CRISPY', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 35, weight: '320 g' } }, ingredients: 'Palina, pui crispy, sos Urban, rucola' },
+    { name: 'PANUZZO CAPRESE', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '320 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pesto, roșii cherry, rucola, ulei de măsline' },
+    { name: 'PANUZZO VENTRICINA', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '320 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam ventricina, rucola' },
+    { name: 'BURGER URBAN BLACK ANGUS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 50, weight: '350 g' } }, ingredients: 'Chiflă burger, burger Black Angus România, sos Urban, cheddar, mozzarella, castraveți murați, salată, bacon, ceapă' },
+    { name: 'BURGER CRISPY', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 45, weight: '350 g' } }, ingredients: 'Chiflă burger, 120 g pui crispy, sos Urban, cheddar, mozzarella, castraveți murați, salată, bacon, ceapă' },
   ],
   gratar: [
-    { name: 'MICI', sizes: { 'standard': { price: 7, weight: '90 g' } }, ingredients: 'Carne vită, carne porc, condimente' },
-    { name: 'CÂRNAȚI SEMIAFUMAȚI', sizes: { 'standard': { price: 25, weight: '80 g' } }, ingredients: 'Carne porc, usturoi, condimente' },
-    { name: 'CEAFĂ DE PORC LA GRĂTAR', sizes: { 'standard': { price: 25, weight: '200 g' } }, ingredients: 'Ceafă de porc, condimente' },
-    { name: 'COTLET DE PORC LA GRĂTAR', sizes: { 'standard': { price: 20, weight: '200 g' } }, ingredients: 'Cotlet de porc, condimente' },
-    { name: 'PIEPT DE PORC LA GRĂTAR', sizes: { 'standard': { price: 25, weight: '200 g' } }, ingredients: 'Piept de porc, condimente' },
-    { name: 'PIEPT DE PUI LA GRĂTAR', sizes: { 'standard': { price: 20, weight: '200 g' } }, ingredients: 'Piept de pui, condimente' },
-    { name: 'PASTRAMĂ DE BERBECUȚ', sizes: { 'standard': { price: 25, weight: '100 g' } }, ingredients: 'Carne de berbecuț, condimente' },
+    { name: 'MICI', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 7, weight: '90 g' } }, ingredients: 'Carne vită, carne porc, condimente' },
+    { name: 'CÂRNAȚI SEMIAFUMAȚI', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '80 g' } }, ingredients: 'Carne porc, usturoi, condimente' },
+    { name: 'CEAFĂ DE PORC LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '200 g' } }, ingredients: 'Ceafă de porc, condimente' },
+    { name: 'COTLET DE PORC LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '200 g' } }, ingredients: 'Cotlet de porc, condimente' },
+    { name: 'PIEPT DE PORC LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '200 g' } }, ingredients: 'Piept de porc, condimente' },
+    { name: 'PIEPT DE PUI LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '200 g' } }, ingredients: 'Piept de pui, condimente' },
+    { name: 'PASTRAMĂ DE BERBECUȚ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '100 g' } }, ingredients: 'Carne de berbecuț, condimente' },
   ],
   beverages: [
-    { name: 'Pepsi', sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
-    { name: 'Mirinda', sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
-    { name: 'Lipton', sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
-    { name: 'Apa plată', sizes: { '500ml': { price: 10, weight: '500 ml' } }, ingredients: '' },
-    { name: 'Apa minerală', sizes: { '500ml': { price: 10, weight: '500 ml' } }, ingredients: '' },
-    { name: 'Limonada simplă', sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
-    { name: 'Limonada arome', sizes: { 'standard': { price: 18, weight: '' } }, ingredients: '' },
-    { name: 'Ceai cald', sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
-    { name: 'Espresso', sizes: { '30ml': { price: 10, weight: '30 ml' } }, ingredients: '' },
-    { name: 'Latte', sizes: { '280ml': { price: 15, weight: '280 ml' } }, ingredients: '' },
-    { name: 'Cappuccino', sizes: { '200ml': { price: 15, weight: '200 ml' } }, ingredients: '' },
+    { name: 'Pepsi', image: IMAGE_URLS.margherita, sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
+    { name: 'Mirinda', image: IMAGE_URLS.margherita, sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
+    { name: 'Lipton', image: IMAGE_URLS.margherita, sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
+    { name: 'Apa plată', image: IMAGE_URLS.margherita, sizes: { '500ml': { price: 10, weight: '500 ml' } }, ingredients: '' },
+    { name: 'Apa minerală', image: IMAGE_URLS.margherita, sizes: { '500ml': { price: 10, weight: '500 ml' } }, ingredients: '' },
+    { name: 'Limonada simplă', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
+    { name: 'Limonada arome', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 18, weight: '' } }, ingredients: '' },
+    { name: 'Ceai cald', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
+    { name: 'Espresso', image: IMAGE_URLS.margherita, sizes: { '30ml': { price: 10, weight: '30 ml' } }, ingredients: '' },
+    { name: 'Latte', image: IMAGE_URLS.margherita, sizes: { '280ml': { price: 15, weight: '280 ml' } }, ingredients: '' },
+    { name: 'Cappuccino', image: IMAGE_URLS.margherita, sizes: { '200ml': { price: 15, weight: '200 ml' } }, ingredients: '' },
   ],
 };
 
@@ -106,7 +131,7 @@ function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold text-amber-400" style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '2px' }}>
+            <h1 className="text-2xl font-bold text-amber-400" style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}>
               URBAN SLICE
             </h1>
           </div>
@@ -118,7 +143,7 @@ function Navigation() {
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase().replace(/\s/g, '-'))}
                 className="text-amber-100 hover:text-amber-400 transition-colors duration-200 text-sm font-medium"
-                style={{ fontFamily: 'DM Sans, sans-serif' }}
+                style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 500 }}
               >
                 {item}
               </button>
@@ -144,7 +169,7 @@ function Navigation() {
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase().replace(/\s/g, '-'))}
                 className="block w-full text-left px-4 py-2 text-amber-100 hover:text-amber-400 hover:bg-amber-900/20 transition-colors"
-                style={{ fontFamily: 'DM Sans, sans-serif' }}
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
                 {item}
               </button>
@@ -156,7 +181,7 @@ function Navigation() {
   );
 }
 
-// Component: Hero Section
+// Component: Hero Section with Rotating Pizza
 function HeroSection() {
   const [showScroll, setShowScroll] = useState(true);
 
@@ -170,14 +195,18 @@ function HeroSection() {
 
   return (
     <section className="relative h-screen bg-black overflow-hidden pt-16">
-      {/* Background Image with Overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=1200&h=800&fit=crop)',
-          opacity: 0.4,
-        }}
-      />
+      {/* Animated Rotating Pizza Background */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+        <div className="relative w-96 h-96 animate-spin" style={{ animationDuration: '20s' }}>
+          <img
+            src={IMAGE_URLS.margherita}
+            alt="Pizza"
+            className="w-full h-full object-cover rounded-full blur-xl"
+          />
+        </div>
+      </div>
+
+      {/* Background Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black" />
 
       {/* Content */}
@@ -185,7 +214,7 @@ function HeroSection() {
         <div className="space-y-6 max-w-3xl">
           <h1
             className="text-5xl md:text-7xl font-bold text-amber-100 leading-tight"
-            style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '3px' }}
+            style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '3px', fontWeight: 700 }}
           >
             PIZZA ARTIZANALĂ
             <br />
@@ -194,7 +223,7 @@ function HeroSection() {
 
           <p
             className="text-lg md:text-xl text-amber-50/80 max-w-2xl mx-auto"
-            style={{ fontFamily: 'DM Sans, sans-serif' }}
+            style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
           >
             Fiecare pizza este o creație artizanală, preparată cu ingrediente premium și pasiune pentru detalii. Bine venit la Urban Slice.
           </p>
@@ -202,15 +231,15 @@ function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
             <button
               onClick={() => document.getElementById('rezerva-masa')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-3 bg-amber-500 text-black font-bold hover:bg-amber-400 transition-colors duration-200"
-              style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '1px' }}
+              className="px-8 py-3 bg-amber-500 text-black font-bold hover:bg-amber-400 transition-all duration-200 hover:scale-105 transform"
+              style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '1px', fontWeight: 700 }}
             >
               REZERVĂ MASĂ
             </button>
             <button
               onClick={() => document.getElementById('comanda')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-3 border-2 border-amber-400 text-amber-400 font-bold hover:bg-amber-400/10 transition-colors duration-200"
-              style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '1px' }}
+              className="px-8 py-3 border-2 border-amber-400 text-amber-400 font-bold hover:bg-amber-400/10 transition-all duration-200 hover:scale-105 transform"
+              style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '1px', fontWeight: 700 }}
             >
               COMANDĂ ACUM
             </button>
@@ -228,7 +257,7 @@ function HeroSection() {
   );
 }
 
-// Component: About Section
+// Component: About Section with Cover Image
 function AboutSection() {
   return (
     <section className="bg-gradient-to-b from-black to-gray-900 py-20 px-4">
@@ -237,42 +266,41 @@ function AboutSection() {
         <div className="space-y-6">
           <h2
             className="text-4xl md:text-5xl font-bold text-amber-100"
-            style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '2px' }}
+            style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}
           >
             DESPRE URBAN SLICE
           </h2>
 
           <p
             className="text-amber-50/70 leading-relaxed"
-            style={{ fontFamily: 'DM Sans, sans-serif' }}
+            style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
           >
             Urban Slice nu este doar o pizzerie. Este o pasiune transformată în fiecare bucată pe care o servim. Folosim doar ingrediente premium, provenite din furnizori selectați, și o rețetă tradițională de aluat care se odihnește 72 de ore.
           </p>
 
           <p
             className="text-amber-50/70 leading-relaxed"
-            style={{ fontFamily: 'DM Sans, sans-serif' }}
+            style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
           >
             Cuptorul nostru de lemn, încălzit la 350°C, asigură o coacere perfectă în doar 90 de secunde. Fiecare pizza este o operă de artă, preparată cu atenție la detalii și iubire pentru meserie.
           </p>
 
           <p
             className="text-amber-50/70 leading-relaxed"
-            style={{ fontFamily: 'DM Sans, sans-serif' }}
+            style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
           >
             Bun venit în lumea Urban Slice, unde tradiția italiană se întâlnește cu spiritul urban și inovația.
           </p>
         </div>
 
-        {/* Image */}
-        <div className="relative h-96 rounded-lg overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: 'url(https://images.unsplash.com/photo-1571407-4713efb1f6b8?w=600https://images.unsplash.com/photo-1514432324607-2e467f4af445?w=600&h=600&fit=croph=600https://images.unsplash.com/photo-1514432324607-2e467f4af445?w=600&h=600&fit=cropfit=crop)',
-            }}
+        {/* Cover Image */}
+        <div className="relative h-96 rounded-lg overflow-hidden shadow-2xl">
+          <img
+            src={IMAGE_URLS.cover}
+            alt="Urban Slice Cover"
+            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
         </div>
       </div>
     </section>
@@ -295,10 +323,10 @@ function MenuSection() {
 
   return (
     <section id="meniu" className="bg-black py-20 px-4">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <h2
           className="text-4xl md:text-5xl font-bold text-center text-amber-100 mb-12"
-          style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '2px' }}
+          style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}
         >
           MENIU COMPLET
         </h2>
@@ -314,7 +342,7 @@ function MenuSection() {
                   ? 'bg-amber-500 text-black'
                   : 'bg-gray-800 text-amber-100 hover:bg-gray-700'
               }`}
-              style={{ fontFamily: 'Bebas Neue, sans-serif' }}
+              style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
             >
               {cat.label}
             </button>
@@ -322,58 +350,61 @@ function MenuSection() {
         </div>
 
         {/* Menu Items Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {currentMenu.map((item, idx) => (
             <div
               key={idx}
-              className="bg-gray-900/50 border border-amber-900/30 p-6 hover:border-amber-500/50 transition-all duration-200"
+              className="bg-gray-900/50 border border-amber-900/30 overflow-hidden hover:border-amber-500/50 transition-all duration-200 hover:shadow-lg hover:shadow-amber-900/20"
             >
-              <h3
-                className="text-lg font-bold text-amber-100 mb-2"
-                style={{ fontFamily: 'Playfair Display, serif' }}
-              >
-                {item.name}
-              </h3>
+              {/* Product Image */}
+              <div className="relative h-48 overflow-hidden bg-gray-800">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                />
+              </div>
 
-              <p
-                className="text-sm text-amber-50/60 mb-4"
-                style={{ fontFamily: 'DM Sans, sans-serif' }}
-              >
-                {item.ingredients}
-              </p>
+              {/* Product Info */}
+              <div className="p-4">
+                <h3
+                  className="text-lg font-bold text-amber-100 mb-2"
+                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
+                >
+                  {item.name}
+                </h3>
 
-              <div className="flex flex-wrap gap-4 items-center justify-between">
-                {Object.entries(item.sizes).map(([size, data]) => (
-                  <div key={size} className="flex items-center gap-3">
-                    <div>
-                      <p
-                        className="text-xs text-amber-50/50"
-                        style={{ fontFamily: 'DM Sans, sans-serif' }}
-                      >
-                        {size}
-                        {data.weight && ` • ${data.weight}`}
-                      </p>
-                      <p
-                        className="text-xl font-bold text-amber-400"
-                        style={{ fontFamily: 'Bebas Neue, sans-serif' }}
-                      >
-                        {data.price} RON
-                      </p>
+                <p
+                  className="text-sm text-amber-50/60 mb-4"
+                  style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
+                >
+                  {item.ingredients}
+                </p>
+
+                <div className="flex flex-wrap gap-3 items-center justify-between">
+                  {Object.entries(item.sizes).map(([size, data]) => (
+                    <div key={size} className="flex items-center gap-2">
+                      <div>
+                        <p
+                          className="text-xs text-amber-50/50"
+                          style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
+                        >
+                          {size}
+                          {data.weight && ` • ${data.weight}`}
+                        </p>
+                        <p
+                          className="text-lg font-bold text-amber-400"
+                          style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
+                        >
+                          {data.price} RON
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           ))}
-        </div>
-
-        <div
-          className="mt-12 p-6 bg-amber-900/20 border border-amber-500/30 text-center text-amber-50/70"
-          style={{ fontFamily: 'DM Sans, sans-serif' }}
-        >
-          <p className="italic">
-            Meniul complet cu gramaje și ingrediente detaliate este disponibil în restaurant. Comenzi speciale și diete particulare sunt bine-venite.
-          </p>
         </div>
       </div>
     </section>
@@ -383,12 +414,12 @@ function MenuSection() {
 // Component: Gallery Section
 function GallerySection() {
   const galleryImages = [
-    { url: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=500&h=500&fit=crop', caption: 'Pizza Artizanală' },
-    { url: 'https://images.unsplash.com/photo-1571407-4713efb1f6b8?w=500&h=500&fit=crop', caption: 'Cuptorul Nostru' },
-    { url: 'https://images.unsplash.com/photo-1571407-4713efb1f6b8?w=500https://images.unsplash.com/photo-1514432324607-2e467f4af445?w=500&h=500&fit=croph=500https://images.unsplash.com/photo-1514432324607-2e467f4af445?w=500&h=500&fit=cropfit=crop', caption: 'Ingrediente Premium' },
-    { url: 'https://images.unsplash.com/photo-1577003833154-a92bbd4f2f5a?w=500https://images.unsplash.com/photo-1555939594-58d7cb561404?w=500&h=500&fit=croph=500https://images.unsplash.com/photo-1555939594-58d7cb561404?w=500&h=500&fit=cropfit=crop', caption: 'Echipa Noastră' },
-    { url: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=500https://images.unsplash.com/photo-1595521624512-6d4ee2871583?w=500&h=500&fit=croph=500https://images.unsplash.com/photo-1595521624512-6d4ee2871583?w=500&h=500&fit=cropfit=crop', caption: 'Spațiul Nostru' },
-    { url: 'https://images.unsplash.com/photo-1571407-4713efb1f6b8?w=500&h=500&fit=crop', caption: 'Preparare Tradițională' },
+    { url: IMAGE_URLS.margherita, caption: 'Pizza Artizanală' },
+    { url: IMAGE_URLS.diavola, caption: 'Diavola Specială' },
+    { url: IMAGE_URLS.cover, caption: 'Ingrediente Premium' },
+    { url: IMAGE_URLS.quattroFormaggi, caption: 'Quattro Formaggi' },
+    { url: IMAGE_URLS.taraneasca, caption: 'Taraneasca' },
+    { url: IMAGE_URLS.carbonara, caption: 'Carbonara Tradițională' },
   ];
 
   return (
@@ -396,7 +427,7 @@ function GallerySection() {
       <div className="max-w-6xl mx-auto">
         <h2
           className="text-4xl md:text-5xl font-bold text-center text-amber-100 mb-12"
-          style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '2px' }}
+          style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}
         >
           GALERIE FOTO
         </h2>
@@ -405,7 +436,7 @@ function GallerySection() {
           {galleryImages.map((image, idx) => (
             <div
               key={idx}
-              className="relative h-64 overflow-hidden group cursor-pointer"
+              className="relative h-64 overflow-hidden group cursor-pointer rounded-lg"
             >
               <img
                 src={image.url}
@@ -415,7 +446,7 @@ function GallerySection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                 <p
                   className="text-amber-100 font-bold"
-                  style={{ fontFamily: 'Playfair Display, serif' }}
+                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
                 >
                   {image.caption}
                 </p>
@@ -428,14 +459,11 @@ function GallerySection() {
   );
 }
 
-// Component: Reservation Form
+// Component: Simplified Reservation Form
 function ReservationSection() {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    email: '',
-    date: '',
-    time: '',
     guests: '2',
     requests: '',
   });
@@ -451,36 +479,23 @@ function ReservationSection() {
     e.preventDefault();
     setError('');
 
-    // Validation
-    if (!formData.name || !formData.phone || !formData.email || !formData.date || !formData.time) {
+    if (!formData.name || !formData.phone) {
       setError('Vă rugăm completați toate câmpurile obligatorii.');
       return;
     }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setError('Vă rugăm introduceți o adresă de email validă.');
-      return;
-    }
-
-    // Phone validation (basic)
     if (formData.phone.length < 10) {
       setError('Vă rugăm introduceți un număr de telefon valid.');
       return;
     }
 
     try {
-      // Using Formspree for form submission
       const response = await fetch('https://formspree.io/f/xyzabc123', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: formData.name,
           phone: formData.phone,
-          email: formData.email,
-          date: formData.date,
-          time: formData.time,
           guests: formData.guests,
           requests: formData.requests,
           subject: 'Nouă Rezervare - Urban Slice',
@@ -489,7 +504,7 @@ function ReservationSection() {
 
       if (response.ok) {
         setSubmitted(true);
-        setFormData({ name: '', phone: '', email: '', date: '', time: '', guests: '2', requests: '' });
+        setFormData({ name: '', phone: '', guests: '2', requests: '' });
         setTimeout(() => setSubmitted(false), 5000);
       } else {
         setError('A apărut o eroare. Vă rugăm contactați-ne direct.');
@@ -504,7 +519,7 @@ function ReservationSection() {
       <div className="max-w-2xl mx-auto">
         <h2
           className="text-4xl md:text-5xl font-bold text-center text-amber-100 mb-12"
-          style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '2px' }}
+          style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}
         >
           REZERVĂ MASĂ
         </h2>
@@ -527,70 +542,39 @@ function ReservationSection() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid md:grid-cols-2 gap-6">
-            <input
-              type="text"
-              name="name"
-              placeholder="Nume"
-              value={formData.name}
-              onChange={handleChange}
-              className="bg-gray-900 border border-amber-900/30 text-amber-50 px-4 py-3 focus:outline-none focus:border-amber-500"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              className="bg-gray-900 border border-amber-900/30 text-amber-50 px-4 py-3 focus:outline-none focus:border-amber-500"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
-            />
-          </div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Nume *"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full bg-gray-900 border border-amber-900/30 text-amber-50 px-4 py-3 focus:outline-none focus:border-amber-500"
+            style={{ fontFamily: "'Montserrat', sans-serif" }}
+          />
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Telefon"
-              value={formData.phone}
-              onChange={handleChange}
-              className="bg-gray-900 border border-amber-900/30 text-amber-50 px-4 py-3 focus:outline-none focus:border-amber-500"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
-            />
-            <input
-              type="date"
-              name="date"
-              value={formData.date}
-              onChange={handleChange}
-              className="bg-gray-900 border border-amber-900/30 text-amber-50 px-4 py-3 focus:outline-none focus:border-amber-500"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
-            />
-          </div>
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Telefon *"
+            value={formData.phone}
+            onChange={handleChange}
+            className="w-full bg-gray-900 border border-amber-900/30 text-amber-50 px-4 py-3 focus:outline-none focus:border-amber-500"
+            style={{ fontFamily: "'Montserrat', sans-serif" }}
+          />
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <input
-              type="time"
-              name="time"
-              value={formData.time}
-              onChange={handleChange}
-              className="bg-gray-900 border border-amber-900/30 text-amber-50 px-4 py-3 focus:outline-none focus:border-amber-500"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
-            />
-            <select
-              name="guests"
-              value={formData.guests}
-              onChange={handleChange}
-              className="bg-gray-900 border border-amber-900/30 text-amber-50 px-4 py-3 focus:outline-none focus:border-amber-500"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
-            >
-              {[1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20].map((num) => (
-                <option key={num} value={num}>
-                  {num} {num === 1 ? 'persoană' : 'persoane'}
-                </option>
-              ))}
-            </select>
-          </div>
+          <select
+            name="guests"
+            value={formData.guests}
+            onChange={handleChange}
+            className="w-full bg-gray-900 border border-amber-900/30 text-amber-50 px-4 py-3 focus:outline-none focus:border-amber-500"
+            style={{ fontFamily: "'Montserrat', sans-serif" }}
+          >
+            {[1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20].map((num) => (
+              <option key={num} value={num}>
+                {num} {num === 1 ? 'persoană' : 'persoane'}
+              </option>
+            ))}
+          </select>
 
           <textarea
             name="requests"
@@ -599,13 +583,13 @@ function ReservationSection() {
             onChange={handleChange}
             rows={4}
             className="w-full bg-gray-900 border border-amber-900/30 text-amber-50 px-4 py-3 focus:outline-none focus:border-amber-500"
-            style={{ fontFamily: 'DM Sans, sans-serif' }}
+            style={{ fontFamily: "'Montserrat', sans-serif" }}
           />
 
           <button
             type="submit"
-            className="w-full bg-amber-500 text-black font-bold py-3 hover:bg-amber-400 transition-colors duration-200"
-            style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '1px' }}
+            className="w-full bg-amber-500 text-black font-bold py-3 hover:bg-amber-400 transition-all duration-200 hover:scale-105 transform"
+            style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '1px', fontWeight: 700 }}
           >
             REZERVĂ MASA
           </button>
@@ -615,7 +599,7 @@ function ReservationSection() {
   );
 }
 
-// Component: Online Order Section
+// Component: Online Order Section - All Products
 function OrderSection() {
   const [cart, setCart] = useState<Array<{ name: string; size: string; price: number; quantity: number }>>([]);
   const [showCart, setShowCart] = useState(false);
@@ -624,15 +608,16 @@ function OrderSection() {
   const [customerData, setCustomerData] = useState({
     name: '',
     phone: '',
-    email: '',
     address: '',
     notes: '',
   });
 
   const allItems = [
-    ...MENU_DATA.pizzaClassica.map((p) => ({ ...p, category: 'Pizza Clasică' })),
-    ...MENU_DATA.pizzaCasa.map((p) => ({ ...p, category: 'Pizza Della Casa' })),
-    ...MENU_DATA.streetFood.map((p) => ({ ...p, category: 'Street Food' })),
+    ...MENU_DATA.pizzaClassica,
+    ...MENU_DATA.pizzaCasa,
+    ...MENU_DATA.streetFood,
+    ...MENU_DATA.gratar,
+    ...MENU_DATA.beverages,
   ];
 
   const addToCart = (item: any, size: string) => {
@@ -669,7 +654,7 @@ function OrderSection() {
     e.preventDefault();
     setOrderError('');
 
-    if (!customerData.name || !customerData.phone || !customerData.email || !customerData.address) {
+    if (!customerData.name || !customerData.phone || !customerData.address) {
       setOrderError('Vă rugăm completați toate câmpurile obligatorii.');
       return;
     }
@@ -688,7 +673,6 @@ function OrderSection() {
         body: JSON.stringify({
           name: customerData.name,
           phone: customerData.phone,
-          email: customerData.email,
           address: customerData.address,
           notes: customerData.notes,
           order_details: orderDetails,
@@ -700,7 +684,7 @@ function OrderSection() {
       if (response.ok) {
         setOrderSubmitted(true);
         setCart([]);
-        setCustomerData({ name: '', phone: '', email: '', address: '', notes: '' });
+        setCustomerData({ name: '', phone: '', address: '', notes: '' });
         setTimeout(() => {
           setOrderSubmitted(false);
           setShowCart(false);
@@ -715,50 +699,64 @@ function OrderSection() {
 
   return (
     <section id="comanda" className="bg-gradient-to-b from-black to-gray-900 py-20 px-4">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <h2
           className="text-4xl md:text-5xl font-bold text-center text-amber-100 mb-12"
-          style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '2px' }}
+          style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}
         >
           COMANDĂ ONLINE
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-4 gap-8">
           {/* Menu Items */}
-          <div className="md:col-span-2 space-y-6">
-            {allItems.slice(0, 12).map((item, idx) => (
-              <div key={idx} className="bg-gray-900/50 border border-amber-900/30 p-4">
-                <h3 className="text-amber-100 font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
-                  {item.name}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {Object.entries(item.sizes).map(([size, data]) => (
-                    <button
-                      key={size}
-                      onClick={() => addToCart(item, size)}
-                      className="px-3 py-2 bg-amber-500 text-black text-sm font-bold hover:bg-amber-400 transition-colors"
-                      style={{ fontFamily: 'Bebas Neue, sans-serif' }}
-                    >
-                      {size} - {data.price} RON
-                    </button>
-                  ))}
+          <div className="lg:col-span-3 space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              {allItems.map((item, idx) => (
+                <div key={idx} className="bg-gray-900/50 border border-amber-900/30 overflow-hidden hover:border-amber-500/50 transition-all duration-200">
+                  {/* Product Image */}
+                  <div className="relative h-40 overflow-hidden bg-gray-800">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  {/* Product Info */}
+                  <div className="p-4">
+                    <h3 className="text-amber-100 font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
+                      {item.name}
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {Object.entries(item.sizes).map(([size, data]) => (
+                        <button
+                          key={size}
+                          onClick={() => addToCart(item, size)}
+                          className="px-3 py-2 bg-amber-500 text-black text-sm font-bold hover:bg-amber-400 transition-colors"
+                          style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
+                        >
+                          {size} - {data.price} RON
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           {/* Cart Sidebar */}
-          <div className="bg-gray-900/50 border border-amber-900/30 p-6 h-fit sticky top-24">
+          <div className="bg-gray-900/50 border border-amber-900/30 p-6 h-fit sticky top-24 rounded-lg">
             <h3
               className="text-amber-100 font-bold mb-4 flex items-center justify-between"
-              style={{ fontFamily: 'Bebas Neue, sans-serif' }}
+              style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
             >
               COȘUL MEU
               <span className="bg-amber-500 text-black px-2 py-1 text-sm rounded">{cart.length}</span>
             </h3>
 
             {cart.length === 0 ? (
-              <p className="text-amber-50/50 text-sm" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+              <p className="text-amber-50/50 text-sm" style={{ fontFamily: "'Montserrat', sans-serif" }}>
                 Coșul dvs. este gol
               </p>
             ) : (
@@ -800,7 +798,7 @@ function OrderSection() {
                 <button
                   onClick={() => setShowCart(!showCart)}
                   className="w-full bg-amber-500 text-black font-bold py-2 hover:bg-amber-400 transition-colors"
-                  style={{ fontFamily: 'Bebas Neue, sans-serif' }}
+                  style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
                 >
                   {showCart ? 'ASCUNDE FORMULAR' : 'FINALIZEAZĂ COMANDA'}
                 </button>
@@ -823,35 +821,27 @@ function OrderSection() {
 
                 <input
                   type="text"
-                  placeholder="Nume"
+                  placeholder="Nume *"
                   value={customerData.name}
                   onChange={(e) => setCustomerData({ ...customerData, name: e.target.value })}
                   className="w-full bg-gray-800 border border-amber-900/30 text-amber-50 px-3 py-2 text-sm focus:outline-none focus:border-amber-500"
-                  style={{ fontFamily: 'DM Sans, sans-serif' }}
+                  style={{ fontFamily: "'Montserrat', sans-serif" }}
                 />
                 <input
                   type="tel"
-                  placeholder="Telefon"
+                  placeholder="Telefon *"
                   value={customerData.phone}
                   onChange={(e) => setCustomerData({ ...customerData, phone: e.target.value })}
                   className="w-full bg-gray-800 border border-amber-900/30 text-amber-50 px-3 py-2 text-sm focus:outline-none focus:border-amber-500"
-                  style={{ fontFamily: 'DM Sans, sans-serif' }}
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={customerData.email}
-                  onChange={(e) => setCustomerData({ ...customerData, email: e.target.value })}
-                  className="w-full bg-gray-800 border border-amber-900/30 text-amber-50 px-3 py-2 text-sm focus:outline-none focus:border-amber-500"
-                  style={{ fontFamily: 'DM Sans, sans-serif' }}
+                  style={{ fontFamily: "'Montserrat', sans-serif" }}
                 />
                 <input
                   type="text"
-                  placeholder="Adresă livrare"
+                  placeholder="Adresă livrare *"
                   value={customerData.address}
                   onChange={(e) => setCustomerData({ ...customerData, address: e.target.value })}
                   className="w-full bg-gray-800 border border-amber-900/30 text-amber-50 px-3 py-2 text-sm focus:outline-none focus:border-amber-500"
-                  style={{ fontFamily: 'DM Sans, sans-serif' }}
+                  style={{ fontFamily: "'Montserrat', sans-serif" }}
                 />
                 <textarea
                   placeholder="Note (opțional)"
@@ -859,12 +849,12 @@ function OrderSection() {
                   onChange={(e) => setCustomerData({ ...customerData, notes: e.target.value })}
                   rows={2}
                   className="w-full bg-gray-800 border border-amber-900/30 text-amber-50 px-3 py-2 text-sm focus:outline-none focus:border-amber-500"
-                  style={{ fontFamily: 'DM Sans, sans-serif' }}
+                  style={{ fontFamily: "'Montserrat', sans-serif" }}
                 />
                 <button
                   type="submit"
                   className="w-full bg-green-600 text-white font-bold py-2 hover:bg-green-700 transition-colors text-sm"
-                  style={{ fontFamily: 'Bebas Neue, sans-serif' }}
+                  style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
                 >
                   PLASEAZĂ COMANDA
                 </button>
@@ -885,8 +875,8 @@ function CateringSection() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1577003833154-a92bbd4f2f5a?w=1200https://images.unsplash.com/photo-1555939594-58d7cb561404?w=1200&h=600&fit=croph=600https://images.unsplash.com/photo-1555939594-58d7cb561404?w=1200&h=600&fit=cropfit=crop)',
-          opacity: 0.3,
+          backgroundImage: `url(${IMAGE_URLS.cover})`,
+          opacity: 0.2,
         }}
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/50" />
@@ -894,36 +884,36 @@ function CateringSection() {
       <div className="max-w-4xl mx-auto relative z-10">
         <h2
           className="text-4xl md:text-5xl font-bold text-amber-100 mb-6"
-          style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '2px' }}
+          style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}
         >
           CATERING & EVENIMENTE
         </h2>
 
         <p
           className="text-lg text-amber-50/80 mb-8 leading-relaxed"
-          style={{ fontFamily: 'DM Sans, sans-serif' }}
+          style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
         >
           Urban Slice oferă servicii de catering de înaltă calitate pentru corporate events, nunți, petreceri private și orice ocazie specială. Echipa noastră se ocupă de toate detaliile, de la preparare până la servire, asigurând o experiență memorabilă pentru oaspeții dvs.
         </p>
 
         <p
           className="text-lg text-amber-50/80 mb-8 leading-relaxed"
-          style={{ fontFamily: 'DM Sans, sans-serif' }}
+          style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
         >
           Oferim meniuri personalizate, adaptate la bugetul și preferințele dvs., cu ingrediente premium și prezentare impecabilă.
         </p>
 
-        <div className="bg-amber-500 text-black p-8 text-center">
+        <div className="bg-amber-500 text-black p-8 text-center rounded-lg">
           <p
             className="text-lg font-bold mb-4"
-            style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '1px' }}
+            style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '1px', fontWeight: 700 }}
           >
             PENTRU DETALII ȘI OFERTE PERSONALIZATE
           </p>
           <a
             href="tel:+40740011876"
             className="text-2xl font-bold hover:underline"
-            style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '2px' }}
+            style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}
           >
             (0740) 011 876
           </a>
@@ -940,7 +930,7 @@ function LocationSection() {
       <div className="max-w-6xl mx-auto">
         <h2
           className="text-4xl md:text-5xl font-bold text-center text-amber-100 mb-12"
-          style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '2px' }}
+          style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}
         >
           LOCAȚIE & CONTACT
         </h2>
@@ -963,13 +953,13 @@ function LocationSection() {
             <div>
               <h3
                 className="text-2xl font-bold text-amber-100 mb-4"
-                style={{ fontFamily: 'Bebas Neue, sans-serif' }}
+                style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
               >
                 ADRESĂ
               </h3>
               <p
                 className="text-amber-50/70"
-                style={{ fontFamily: 'DM Sans, sans-serif' }}
+                style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
               >
                 Urban Slice Pizzeria
                 <br />
@@ -980,11 +970,11 @@ function LocationSection() {
             <div>
               <h3
                 className="text-2xl font-bold text-amber-100 mb-4"
-                style={{ fontFamily: 'Bebas Neue, sans-serif' }}
+                style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
               >
                 PROGRAM
               </h3>
-              <div className="space-y-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+              <div className="space-y-2" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>
                 <p className="text-amber-50/70">Luni - Joi: 11:00 - 23:00</p>
                 <p className="text-amber-50/70">Vineri - Sâmbătă: 11:00 - 00:00</p>
                 <p className="text-amber-50/70">Duminică: 12:00 - 23:00</p>
@@ -994,7 +984,7 @@ function LocationSection() {
             <div>
               <h3
                 className="text-2xl font-bold text-amber-100 mb-4"
-                style={{ fontFamily: 'Bebas Neue, sans-serif' }}
+                style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
               >
                 CONTACT
               </h3>
@@ -1002,7 +992,7 @@ function LocationSection() {
                 <a
                   href="tel:+40740011876"
                   className="flex items-center gap-3 text-amber-100 hover:text-amber-400 transition-colors"
-                  style={{ fontFamily: 'DM Sans, sans-serif' }}
+                  style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 500 }}
                 >
                   <Phone size={20} />
                   (0740) 011 876
@@ -1010,7 +1000,7 @@ function LocationSection() {
                 <a
                   href="mailto:mihai.grigoras82@gmail.com"
                   className="flex items-center gap-3 text-amber-100 hover:text-amber-400 transition-colors"
-                  style={{ fontFamily: 'DM Sans, sans-serif' }}
+                  style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 500 }}
                 >
                   <Mail size={20} />
                   mihai.grigoras82@gmail.com
@@ -1029,53 +1019,35 @@ function Footer() {
   return (
     <footer className="bg-gray-950 border-t border-amber-900/30 py-12 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-bold text-amber-400 mb-2" style={{ fontFamily: 'Bebas Neue, sans-serif' }}>
+            <h3 className="text-2xl font-bold text-amber-400 mb-2" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
               URBAN SLICE
             </h3>
-            <p className="text-amber-50/60 text-sm" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+            <p className="text-amber-50/60 text-sm" style={{ fontFamily: "'Montserrat', sans-serif" }}>
               Pizza artizanală cu suflet urban
             </p>
           </div>
 
           {/* Links */}
           <div>
-            <h4 className="text-amber-100 font-bold mb-4" style={{ fontFamily: 'Bebas Neue, sans-serif' }}>
+            <h4 className="text-amber-100 font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
               MENIU
             </h4>
-            <ul className="space-y-2 text-amber-50/60 text-sm" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+            <ul className="space-y-2 text-amber-50/60 text-sm" style={{ fontFamily: "'Montserrat', sans-serif" }}>
               <li><a href="#meniu" className="hover:text-amber-400 transition-colors">Meniu Complet</a></li>
               <li><a href="#galerie" className="hover:text-amber-400 transition-colors">Galerie</a></li>
               <li><a href="#catering" className="hover:text-amber-400 transition-colors">Catering</a></li>
             </ul>
           </div>
 
-          {/* Social */}
-          <div>
-            <h4 className="text-amber-100 font-bold mb-4" style={{ fontFamily: 'Bebas Neue, sans-serif' }}>
-              URMĂREȘTE-NE
-            </h4>
-            <div className="flex gap-4">
-              <a href="#" className="text-amber-100 hover:text-amber-400 transition-colors">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="text-amber-100 hover:text-amber-400 transition-colors">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="text-amber-100 hover:text-amber-400 transition-colors">
-                <Music size={20} />
-              </a>
-            </div>
-          </div>
-
           {/* Contact */}
           <div>
-            <h4 className="text-amber-100 font-bold mb-4" style={{ fontFamily: 'Bebas Neue, sans-serif' }}>
+            <h4 className="text-amber-100 font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
               CONTACT
             </h4>
-            <div className="space-y-2 text-amber-50/60 text-sm" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+            <div className="space-y-2 text-amber-50/60 text-sm" style={{ fontFamily: "'Montserrat', sans-serif" }}>
               <p>(0740) 011 876</p>
               <p>mihai.grigoras82@gmail.com</p>
             </div>
@@ -1083,32 +1055,11 @@ function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-amber-900/30 pt-8 text-center text-amber-50/50 text-sm" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+        <div className="border-t border-amber-900/30 pt-8 text-center text-amber-50/50 text-sm" style={{ fontFamily: "'Montserrat', sans-serif" }}>
           <p>© 2025 Urban Slice. Toate drepturile rezervate.</p>
-          <div className="mt-4 flex justify-center gap-6">
-            <a href="#privacy" className="hover:text-amber-400 transition-colors">Politica de Confidențialitate</a>
-            <a href="#terms" className="hover:text-amber-400 transition-colors">Termeni și Condiții</a>
-          </div>
         </div>
       </div>
     </footer>
-  );
-}
-
-// Component: WhatsApp Floating Button
-function WhatsAppButton() {
-  return (
-    <a
-      href="https://wa.me/40740011876"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-colors z-40 hover:scale-110 transform duration-200"
-      title="Contactează-ne pe WhatsApp"
-    >
-      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.946 1.347l-.355.203-.368-.088c-1.262-.304-2.454-.966-3.428-1.996C2.432 5.904 1.846 4.757 1.846 3.649c0-2.176 1.773-3.946 3.954-3.946 1.05 0 2.047.398 2.832 1.116l.26.245.273-.073c1.315-.358 2.718-.356 4.006.105l.21.07.26-.248c.784-.718 1.78-1.116 2.83-1.116 2.18 0 3.954 1.77 3.954 3.946 0 1.108-.586 2.255-1.604 3.272-1.973 1.973-4.805 2.727-7.398 2.727m5.231 9.375c-.788 0-1.5.236-2.119.664-.306.206-.59.453-.84.734-.249-.281-.534-.528-.84-.734-.619-.428-1.331-.664-2.119-.664-.788 0-1.5.236-2.119.664-.306.206-.59.453-.84.734-.249-.281-.534-.528-.84-.734-.619-.428-1.331-.664-2.119-.664-1.657 0-3 1.343-3 3s1.343 3 3 3c.788 0 1.5-.236 2.119-.664.306-.206.59-.453.84-.734.249.281.534.528.84.734.619.428 1.331.664 2.119.664.788 0 1.5-.236 2.119-.664.306-.206.59-.453.84-.734.249.281.534.528.84.734.619.428 1.331.664 2.119.664 1.657 0 3-1.343 3-3s-1.343-3-3-3z" />
-      </svg>
-    </a>
   );
 }
 
@@ -1133,13 +1084,13 @@ function CookieConsent() {
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-gray-900/95 backdrop-blur-md border-t border-amber-900/30 p-4 z-30">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-amber-50/70 text-sm" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+        <p className="text-amber-50/70 text-sm" style={{ fontFamily: "'Montserrat', sans-serif" }}>
           Folosim cookies pentru a îmbunătăți experiența dvs. Continuând, acceptați politica noastră de cookies.
         </p>
         <button
           onClick={handleAccept}
           className="px-6 py-2 bg-amber-500 text-black font-bold hover:bg-amber-400 transition-colors whitespace-nowrap"
-          style={{ fontFamily: 'Bebas Neue, sans-serif' }}
+          style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
         >
           ACCEPT
         </button>
@@ -1154,10 +1105,10 @@ export default function Home() {
     <div className="bg-black text-amber-50 overflow-hidden">
       {/* Google Fonts */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;500;700&display=swap');
         
         * {
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'Montserrat', sans-serif;
         }
         
         /* Grain texture overlay */
@@ -1213,7 +1164,6 @@ export default function Home() {
       <CateringSection />
       <LocationSection />
       <Footer />
-      <WhatsAppButton />
       <CookieConsent />
     </div>
   );
