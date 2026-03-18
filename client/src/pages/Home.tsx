@@ -1141,9 +1141,7 @@ function LocationSection() {
                 PROGRAM
               </h3>
               <div className="space-y-2" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>
-                <p className="text-amber-50/70">Luni - Joi: 11:00 - 23:00</p>
-                <p className="text-amber-50/70">Vineri - Sâmbătă: 11:00 - 00:00</p>
-                <p className="text-amber-50/70">Duminică: 12:00 - 23:00</p>
+                <p className="text-amber-50/70">Luni - Duminică: 12:00 - 22:00</p>
               </div>
             </div>
 
