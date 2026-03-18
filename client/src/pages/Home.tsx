@@ -578,12 +578,12 @@ function ReservationSection() {
   );
 }
 
-// Component: Online Order Section - All Products
+// Component: Online Order Section
 function OrderSection() {
-  const [cart, setCart] = useState<Array<{ name: string; size: string; price: number; quantity: number }>>([]);
+  const [activeCategory, setActiveCategory] = useState('pizzaClassica');
+  const [cart, setCart] = useState<{ [key: string]: number }>({});
   const [showCart, setShowCart] = useState(false);
   const [orderSubmitted, setOrderSubmitted] = useState(false);
-  const [orderError, setOrderError] = useState('');
   const [customerData, setCustomerData] = useState({
     name: '',
     phone: '',
@@ -591,209 +591,239 @@ function OrderSection() {
     notes: '',
   });
 
-  const allItems = [
-    ...MENU_DATA.pizzaClassica,
-    ...MENU_DATA.pizzaCasa,
-    ...MENU_DATA.streetFood,
-    ...MENU_DATA.gratar,
-    ...MENU_DATA.beverages,
+  const categories = [
+    { id: 'pizzaClassica', label: 'PIZZA CLASICĂ' },
+    { id: 'pizzaCasa', label: 'PIZZA DELLA CASA' },
+    { id: 'streetFood', label: 'STREET FOOD' },
+    { id: 'gratar', label: 'GRĂTAR' },
+    { id: 'beverages', label: 'BĂUTURI' },
   ];
 
-  const addToCart = (item: any, size: string) => {
-    const price = item.sizes[size].price;
-    const cartItem = { name: item.name, size, price, quantity: 1 };
+  const currentMenu = MENU_DATA[activeCategory as keyof typeof MENU_DATA];
+
+  const addToCart = (itemName: string, size: string, price: number) => {
+    const key = `${itemName}|${size}|${price}`;
+    setCart((prev) => ({
+      ...prev,
+      [key]: (prev[key] || 0) + 1,
+    }));
+  };
+
+  const removeFromCart = (key: string) => {
     setCart((prev) => {
-      const existing = prev.find((c) => c.name === item.name && c.size === size);
-      if (existing) {
-        return prev.map((c) =>
-          c.name === item.name && c.size === size ? { ...c, quantity: c.quantity + 1 } : c
-        );
-      }
-      return [...prev, cartItem];
+      const newCart = { ...prev };
+      delete newCart[key];
+      return newCart;
     });
   };
 
-  const removeFromCart = (name: string, size: string) => {
-    setCart((prev) => prev.filter((c) => !(c.name === name && c.size === size)));
-  };
-
-  const updateQuantity = (name: string, size: string, quantity: number) => {
+  const updateQuantity = (key: string, quantity: number) => {
     if (quantity <= 0) {
-      removeFromCart(name, size);
+      removeFromCart(key);
     } else {
-      setCart((prev) =>
-        prev.map((c) => (c.name === name && c.size === size ? { ...c, quantity } : c))
-      );
+      setCart((prev) => ({
+        ...prev,
+        [key]: quantity,
+      }));
     }
   };
 
-  const cartTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const cartTotal = Object.entries(cart).reduce((sum, [key, qty]) => {
+    const price = parseInt(key.split('|')[2]);
+    return sum + price * qty;
+  }, 0);
 
   const handleOrderSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setOrderError('');
-
+    if (Object.keys(cart).length === 0) {
+      alert('Adaugă produse în coș!');
+      return;
+    }
     if (!customerData.name || !customerData.phone || !customerData.address) {
-      setOrderError('Vă rugăm completați toate câmpurile obligatorii.');
+      alert('Completează toate câmpurile!');
       return;
     }
 
-    if (cart.length === 0) {
-      setOrderError('Coșul dvs. este gol. Adăugați articole înainte de a comanda.');
-      return;
-    }
+    const cartItems = Object.entries(cart)
+      .map(([key, qty]) => {
+        const [name, size, price] = key.split('|');
+        return `${name} (${size}) x${qty} = ${parseInt(price) * qty} RON`;
+      })
+      .join('\n');
+
+    const message = `COMANDĂ NOUĂ\n\nClient: ${customerData.name}\nTelefon: ${customerData.phone}\nAdresă: ${customerData.address}\n\nProduse:\n${cartItems}\n\nTotal: ${cartTotal} RON\n\nNote: ${customerData.notes || 'N/A'}`;
 
     try {
-      const orderDetails = cart.map((item) => `${item.quantity}x ${item.name} (${item.size}) - ${item.price * item.quantity} RON`).join('\n');
-
-      const response = await fetch('https://formspree.io/f/xyzabc123', {
+      await fetch('https://formspree.io/f/YOUR_FORM_ID', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: customerData.name,
-          phone: customerData.phone,
-          address: customerData.address,
-          notes: customerData.notes,
-          order_details: orderDetails,
-          total: `${cartTotal} RON`,
-          subject: 'Nouă Comandă Online - Urban Slice',
-        }),
+        body: JSON.stringify({ message }),
       });
-
-      if (response.ok) {
-        setOrderSubmitted(true);
-        setCart([]);
-        setCustomerData({ name: '', phone: '', address: '', notes: '' });
-        setTimeout(() => {
-          setOrderSubmitted(false);
-          setShowCart(false);
-        }, 5000);
-      } else {
-        setOrderError('A apărut o eroare. Vă rugăm contactați-ne direct.');
-      }
-    } catch (err) {
-      setOrderError('A apărut o eroare. Vă rugăm contactați-ne direct la (0740) 011 876.');
+      setOrderSubmitted(true);
+      setCart({});
+      setCustomerData({ name: '', phone: '', address: '', notes: '' });
+      setTimeout(() => setOrderSubmitted(false), 3000);
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
   return (
-    <section id="comanda" className="bg-gradient-to-b from-black to-gray-900 py-20 px-4">
+    <section id="comanda" className="bg-black py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <h2
-          className="text-4xl md:text-5xl font-bold text-center text-amber-100 mb-12"
+          className="text-4xl md:text-5xl font-bold text-center text-amber-100 mb-8"
           style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}
         >
-          COMANDĂ ONLINE
+          COMANDĂ ACUM
         </h2>
 
+        {/* Category Tabs */}
+        <div className="flex justify-center gap-2 mb-8 overflow-x-auto pb-2">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-4 py-2 font-bold transition-all duration-200 whitespace-nowrap text-sm ${
+                activeCategory === cat.id
+                  ? 'bg-amber-500 text-black'
+                  : 'bg-gray-800 text-amber-100 hover:bg-gray-700'
+              }`}
+              style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Main Layout */}
         <div className="grid lg:grid-cols-5 gap-4">
-          {/* Menu Items */}
+          {/* Products */}
           <div className="lg:col-span-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {allItems.map((item, idx) => (
-                <div key={idx} className="bg-gray-900/50 border border-amber-900/30 hover:border-amber-500/50 transition-all duration-200 overflow-hidden">
+              {currentMenu.map((item, idx) => {
+                const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa';
+                return (
+                  <div
+                    key={idx}
+                    className="bg-gray-900/50 border border-amber-900/30 hover:border-amber-500/50 transition-all duration-200 overflow-hidden"
+                  >
+                    {showImage && (
+                      <div className="relative h-32 overflow-hidden bg-gray-800">
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+                      </div>
+                    )}
                     <div className="p-3">
                       <h3 className="text-sm font-bold text-amber-100 mb-2" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
                         {item.name}
                       </h3>
-                      <div className="flex flex-wrap gap-2">
-                      {Object.entries(item.sizes).map(([size, data]) => (
-                        <button
-                          key={size}
-                          onClick={() => addToCart(item, size)}
-                          className="px-3 py-2 bg-amber-500 text-black text-sm font-bold hover:bg-amber-400 transition-colors"
-                          style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
-                        >
-                          {size} - {data.price} RON
-                        </button>
-                      ))}
+                      <div className="space-y-2">
+                        {Object.entries(item.sizes).map(([size, data]) => {
+                          const key = `${item.name}|${size}|${data.price}`;
+                          const qty = cart[key] || 0;
+                          return (
+                            <div key={size} className="flex items-center justify-between bg-gray-800/50 p-2 rounded">
+                              <div>
+                                <p className="text-xs text-amber-50/70" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>
+                                  {size} • {data.price} RON
+                                </p>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                {qty > 0 ? (
+                                  <>
+                                    <button
+                                      onClick={() => updateQuantity(key, qty - 1)}
+                                      className="w-6 h-6 bg-amber-500 text-black text-sm font-bold hover:bg-amber-400"
+                                    >
+                                      −
+                                    </button>
+                                    <span className="w-6 text-center text-amber-400 font-bold">{qty}</span>
+                                    <button
+                                      onClick={() => addToCart(item.name, size, data.price)}
+                                      className="w-6 h-6 bg-amber-500 text-black text-sm font-bold hover:bg-amber-400"
+                                    >
+                                      +
+                                    </button>
+                                    <button
+                                      onClick={() => removeFromCart(key)}
+                                      className="w-6 h-6 bg-red-600 text-white text-sm font-bold hover:bg-red-500"
+                                    >
+                                      ✕
+                                    </button>
+                                  </>
+                                ) : (
+                                  <button
+                                    onClick={() => addToCart(item.name, size, data.price)}
+                                    className="px-3 py-1 bg-amber-500 text-black text-xs font-bold hover:bg-amber-400"
+                                  >
+                                    ADAUGĂ
+                                  </button>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
           {/* Cart Sidebar */}
           <div className="bg-gray-900/50 border border-amber-900/30 p-4 h-fit sticky top-24 rounded-lg">
-            <h3
-              className="text-amber-100 font-bold mb-4 flex items-center justify-between"
-              style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
-            >
-              COȘUL MEU
-              <span className="bg-amber-500 text-black px-2 py-1 text-sm rounded">{cart.length}</span>
+            <h3 className="text-lg font-bold text-amber-100 mb-4" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
+              COȘ ({Object.keys(cart).length})
             </h3>
 
-            {cart.length === 0 ? (
-              <p className="text-amber-50/50 text-sm" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-                Coșul dvs. este gol
-              </p>
-            ) : (
+            {Object.keys(cart).length > 0 ? (
               <>
-                <div className="space-y-3 mb-4 max-h-64 overflow-y-auto">
-                  {cart.map((item, idx) => (
-                    <div key={idx} className="border-b border-amber-900/20 pb-3">
-                      <p className="text-amber-100 text-sm font-bold">{item.name}</p>
-                      <p className="text-amber-50/50 text-xs">{item.size}</p>
-                      <div className="flex items-center justify-between mt-2">
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => updateQuantity(item.name, item.size, item.quantity - 1)}
-                            className="px-2 py-1 bg-gray-800 text-amber-100 text-xs hover:bg-gray-700"
-                          >
-                            −
-                          </button>
-                          <span className="text-amber-100 text-sm font-bold w-6 text-center">{item.quantity}</span>
-                          <button
-                            onClick={() => updateQuantity(item.name, item.size, item.quantity + 1)}
-                            className="px-2 py-1 bg-gray-800 text-amber-100 text-xs hover:bg-gray-700"
-                          >
-                            +
-                          </button>
-                        </div>
-                        <p className="text-amber-400 font-bold">{item.price * item.quantity} RON</p>
+                <div className="space-y-2 mb-4 max-h-64 overflow-y-auto">
+                  {Object.entries(cart).map(([key, qty]) => {
+                    const [name, size, price] = key.split('|');
+                    return (
+                      <div key={key} className="text-sm text-amber-50/80 flex justify-between items-center">
+                        <span>{name} ({size}) x{qty}</span>
+                        <span className="text-amber-400 font-bold">{parseInt(price) * qty} RON</span>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
-
-                <div className="border-t border-amber-900/20 pt-4 mb-4">
-                  <p className="flex justify-between text-amber-100 font-bold">
-                    <span>TOTAL:</span>
-                    <span>{cartTotal} RON</span>
-                  </p>
+                <div className="border-t border-amber-900/30 pt-2 mb-4">
+                  <div className="flex justify-between items-center text-amber-100 font-bold">
+                    <span>Total:</span>
+                    <span className="text-lg text-amber-400">{cartTotal} RON</span>
+                  </div>
                 </div>
-
                 <button
-                  onClick={() => setShowCart(!showCart)}
-                  className="w-full bg-amber-500 text-black font-bold py-2 hover:bg-amber-400 transition-colors"
+                  onClick={() => setShowCart(true)}
+                  className="w-full bg-amber-500 text-black font-bold py-2 hover:bg-amber-400 transition-all"
                   style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
                 >
-                  {showCart ? 'ASCUNDE FORMULAR' : 'FINALIZEAZĂ COMANDA'}
+                  FINALIZEAZĂ COMANDA
                 </button>
               </>
+            ) : (
+              <p className="text-amber-50/50 text-sm">Coșul este gol</p>
             )}
+          </div>
+        </div>
 
-            {showCart && cart.length > 0 && (
-              <form onSubmit={handleOrderSubmit} className="mt-6 space-y-3 border-t border-amber-900/20 pt-6">
-                {orderSubmitted && (
-                  <div className="p-3 bg-green-900/30 border border-green-500/50 rounded text-green-100 text-sm">
-                    ✓ Comanda ta a fost plasată! Vei fi contactat în scurt timp.
-                  </div>
-                )}
-
-                {orderError && (
-                  <div className="p-3 bg-red-900/30 border border-red-500/50 rounded text-red-100 text-sm">
-                    {orderError}
-                  </div>
-                )}
-
+        {/* Checkout Modal */}
+        {showCart && (
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+            <div className="bg-gray-900 border border-amber-900/50 p-6 max-w-md w-full rounded-lg">
+              <h3 className="text-2xl font-bold text-amber-100 mb-4" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
+                FINALIZEAZĂ COMANDA
+              </h3>
+              <form onSubmit={handleOrderSubmit} className="space-y-4">
                 <input
                   type="text"
                   placeholder="Nume *"
                   value={customerData.name}
                   onChange={(e) => setCustomerData({ ...customerData, name: e.target.value })}
-                  className="w-full bg-gray-800 border border-amber-900/30 text-amber-50 px-3 py-2 text-sm focus:outline-none focus:border-amber-500"
+                  className="w-full bg-gray-800 border border-amber-900/30 text-amber-50 px-4 py-2 focus:outline-none focus:border-amber-500"
                   style={{ fontFamily: "'Montserrat', sans-serif" }}
                 />
                 <input
@@ -801,7 +831,7 @@ function OrderSection() {
                   placeholder="Telefon *"
                   value={customerData.phone}
                   onChange={(e) => setCustomerData({ ...customerData, phone: e.target.value })}
-                  className="w-full bg-gray-800 border border-amber-900/30 text-amber-50 px-3 py-2 text-sm focus:outline-none focus:border-amber-500"
+                  className="w-full bg-gray-800 border border-amber-900/30 text-amber-50 px-4 py-2 focus:outline-none focus:border-amber-500"
                   style={{ fontFamily: "'Montserrat', sans-serif" }}
                 />
                 <input
@@ -809,28 +839,44 @@ function OrderSection() {
                   placeholder="Adresă livrare *"
                   value={customerData.address}
                   onChange={(e) => setCustomerData({ ...customerData, address: e.target.value })}
-                  className="w-full bg-gray-800 border border-amber-900/30 text-amber-50 px-3 py-2 text-sm focus:outline-none focus:border-amber-500"
+                  className="w-full bg-gray-800 border border-amber-900/30 text-amber-50 px-4 py-2 focus:outline-none focus:border-amber-500"
                   style={{ fontFamily: "'Montserrat', sans-serif" }}
                 />
                 <textarea
                   placeholder="Note (opțional)"
                   value={customerData.notes}
                   onChange={(e) => setCustomerData({ ...customerData, notes: e.target.value })}
-                  rows={2}
-                  className="w-full bg-gray-800 border border-amber-900/30 text-amber-50 px-3 py-2 text-sm focus:outline-none focus:border-amber-500"
+                  rows={3}
+                  className="w-full bg-gray-800 border border-amber-900/30 text-amber-50 px-4 py-2 focus:outline-none focus:border-amber-500"
                   style={{ fontFamily: "'Montserrat', sans-serif" }}
                 />
-                <button
-                  type="submit"
-                  className="w-full bg-green-600 text-white font-bold py-2 hover:bg-green-700 transition-colors text-sm"
-                  style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
-                >
-                  PLASEAZĂ COMANDA
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowCart(false)}
+                    className="flex-1 bg-gray-700 text-amber-100 font-bold py-2 hover:bg-gray-600"
+                    style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
+                  >
+                    ÎNAPOI
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 bg-amber-500 text-black font-bold py-2 hover:bg-amber-400"
+                    style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
+                  >
+                    TRIMITE COMANDA
+                  </button>
+                </div>
               </form>
-            )}
+            </div>
           </div>
-        </div>
+        )}
+
+        {orderSubmitted && (
+          <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg z-50">
+            Comandă trimisă cu succes!
+          </div>
+        )}
       </div>
     </section>
   );
