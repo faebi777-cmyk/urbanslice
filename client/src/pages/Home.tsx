@@ -699,7 +699,7 @@ function OrderSection() {
         {/* Main Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
           {/* Products */}
-          <div className="lg:col-span-4 order-2 lg:order-1">
+          <div className="lg:col-span-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {currentMenu.map((item, idx) => {
                 const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa';
@@ -772,7 +772,7 @@ function OrderSection() {
           </div>
 
           {/* Cart Sidebar */}
-          <div className="bg-gray-900/50 border border-amber-900/30 p-4 h-fit sticky top-24 rounded-lg order-1 lg:order-2">
+          <div className="bg-gray-900/50 border border-amber-900/30 p-4 h-fit lg:sticky lg:top-24 rounded-lg">
             <h3 className="text-lg font-bold text-amber-100 mb-4" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
               COȘ ({Object.keys(cart).length})
             </h3>
