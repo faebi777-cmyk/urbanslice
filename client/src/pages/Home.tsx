@@ -171,12 +171,12 @@ const MENU_DATA = {
 // Business Hours
 const BUSINESS_HOURS = {
   Monday: { open: '12:00', close: '22:00' },
-  Tuesday: { open: '12:30', close: '22:00' },
-  Wednesday: { open: '12:30', close: '22:00' },
-  Thursday: { open: '12:30', close: '22:00' },
-  Friday: { open: '12:30', close: '22:00' },
-  Saturday: { open: '12:30', close: '22:00' },
-  Sunday: { open: '12:30', close: '22:00' },
+  Tuesday: { open: '12:00', close: '22:00' },
+  Wednesday: { open: '12:00', close: '22:00' },
+  Thursday: { open: '12:00', close: '22:00' },
+  Friday: { open: '12:00', close: '22:00' },
+  Saturday: { open: '12:00', close: '22:00' },
+  Sunday: { open: '12:00', close: '22:00' },
 };
 
 // Testimonials/Reviews
@@ -467,6 +467,7 @@ function MenuSection() {
     { id: 'streetFood', label: 'STREET FOOD' },
     { id: 'gratar', label: 'GRĂTAR' },
     { id: 'beverages', label: 'BĂUTURI' },
+    { id: 'alcoholicBeverages', label: 'BĂUTURI ALCOOLICE' },
   ];
 
   const currentMenu = MENU_DATA[activeCategory as keyof typeof MENU_DATA];
@@ -747,6 +748,7 @@ function OrderSection() {
     { id: 'streetFood', label: 'STREET FOOD' },
     { id: 'gratar', label: 'GRĂTAR' },
     { id: 'beverages', label: 'BĂUTURI' },
+    { id: 'alcoholicBeverages', label: 'BĂUTURI ALCOOLICE' },
   ];
 
   const currentMenu = MENU_DATA[activeCategory as keyof typeof MENU_DATA];
