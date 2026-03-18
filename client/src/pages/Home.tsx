@@ -1181,7 +1181,7 @@ function LocationSection() {
 }
 
 // Component: Footer
-function Footer() {
+function Footer({ setShowPolicy }: { setShowPolicy: (policy: string) => void }) {
   return (
     <footer className="bg-gray-950 border-t border-amber-900/30 py-12 px-4">
       <div className="max-w-6xl mx-auto">
@@ -1224,11 +1224,11 @@ function Footer() {
         <div className="border-t border-amber-900/30 pt-8 text-center" style={{ fontFamily: "'Montserrat', sans-serif" }}>
           <p className="text-amber-50/50 text-sm mb-4">© 2025 Urban Slice. Toate drepturile rezervate.</p>
           <div className="flex justify-center gap-6 text-sm">
-            <a href="#privacy" className="text-amber-100 hover:text-amber-400 transition-colors duration-200">Privacy Policy</a>
+            <button onClick={() => setShowPolicy('privacy')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer">Privacy Policy</button>
             <span className="text-amber-900/50">|</span>
-            <a href="#terms" className="text-amber-100 hover:text-amber-400 transition-colors duration-200">Terms & Conditions</a>
+            <button onClick={() => setShowPolicy('terms')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer">Terms & Conditions</button>
             <span className="text-amber-900/50">|</span>
-            <a href="#cookies" className="text-amber-100 hover:text-amber-400 transition-colors duration-200">Cookie Policy</a>
+            <button onClick={() => setShowPolicy('cookies')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer">Cookie Policy</button>
           </div>
         </div>
       </div>
@@ -1272,10 +1272,55 @@ function CookieConsent() {
   );
 }
 
+// Policy Modals Component
+function PolicyModals({ activePolicy, onClose }: { activePolicy: string | null; onClose: () => void }) {
+  const policies: Record<string, { title: string; content: string }> = {
+    privacy: {
+      title: 'Politica de Confidențialitate',
+      content: `Ultima actualizare: martie 2025\n\nUrban Slice respectă confidențialitatea datelor dumneavoastră personale și se angajează să le protejeze în conformitate cu Regulamentul (UE) 2016/679 (GDPR).\n\nDate colectate\nColectăm datele furnizate voluntar: nume, adresă de e-mail, număr de telefon, la momentul rezervărilor sau contactării noastre.\n\nScopul prelucrării\n- Gestionarea rezervărilor și comenzilor\n- Comunicarea informațiilor despre oferte și evenimente\n- Îmbunătățirea serviciilor noastre\n\nDrepturile dumneavoastră\nAveți dreptul de acces, rectificare, ștergere, restricționare a prelucrării, portabilitate și opoziție. Puteți exercita aceste drepturi scriind la contact@urbanslice.ro.\n\nSecuritate\nDatele dumneavoastră sunt stocate în condiții de securitate și nu sunt vândute sau transferate către terți fără consimțământul dumneavoastră.\n\nContact DPO\nPentru orice întrebare legată de prelucrarea datelor, ne puteți contacta la adresa de mai sus sau prin poștă la sediul restaurantului.`
+    },
+    terms: {
+      title: 'Termeni și Condiții',
+      content: `Ultima actualizare: martie 2025\n\nPrin utilizarea site-ului Urban Slice, acceptați termenii și condițiile de mai jos.\n\nProprietate intelectuală\nTot conținutul acestui site (logo, imagini, texte, meniu) este proprietatea Urban Slice și este protejat de legea drepturilor de autor.\n\nRezervări\nRezervările se pot face online, telefonic sau prin e-mail. Vă rugăm să ne anunțați cu cel puțin 2 ore înainte în cazul anulării.\n\nResponsabilitate\nUrban Slice nu poate fi ținut responsabil pentru inexactitățile tehnice de pe site sau pentru disponibilitatea anumitor preparate în funcție de sezon.\n\nPrețuri\nPrețurile afișate sunt în lei (RON) și includ TVA conform legislației române în vigoare. Ne rezervăm dreptul de a modifica prețurile fără notificare prealabilă.\n\nLegislație aplicabilă\nPrezentul acord este guvernat de legislația română. Orice litigiu va fi soluționat de instanțele competente din România.`
+    },
+    cookies: {
+      title: 'Politica Cookies',
+      content: `Ultima actualizare: martie 2025\n\nSite-ul Urban Slice utilizează fișiere de tip cookie pentru a vă oferi o experiență optimă de navigare.\n\nCe sunt cookies?\nCookie-urile sunt fișiere mici stocate pe dispozitivul dumneavoastră când vizitați un site web. Ele ne ajută să îmbunătățim funcționalitatea și relevanța conținutului.\n\nTipuri de cookies utilizate\n- Cookie-uri esențiale – necesare pentru funcționarea site-ului (sesiune, coș de comenzi)\n- Cookie-uri analitice – pentru a înțelege cum este utilizat site-ul (Google Analytics)\n- Cookie-uri de marketing – pentru afișarea de conținut relevant pe platformele partenere\n\nGestionarea cookies\nPuteți controla și șterge cookie-urile prin setările browserului dumneavoastră. Dezactivarea cookies poate afecta funcționalitatea site-ului.\n\nConsimțământ\nPrin continuarea navigării pe site-ul nostru, vă exprimați acordul cu utilizarea cookies conform prezentei politici.`
+    }
+  };
+
+  if (!activePolicy || !policies[activePolicy]) return null;
+
+  const policy = policies[activePolicy];
+
+  return (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-slate-900 border border-amber-400/30 rounded-lg max-w-2xl w-full max-h-96 overflow-y-auto p-6" onClick={(e) => e.stopPropagation()}>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold text-amber-400" style={{ fontFamily: "'Playfair Display', serif" }}>
+            {policy.title}
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-amber-400 hover:text-amber-300 transition-colors text-2xl"
+          >
+            ✕
+          </button>
+        </div>
+        <div className="text-slate-200 whitespace-pre-wrap text-sm leading-relaxed">
+          {policy.content}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // Main Component
 export default function Home() {
+  const [showPolicy, setShowPolicy] = React.useState<string | null>(null);
   return (
     <div className="bg-black text-amber-50 overflow-hidden">
+      {showPolicy && <PolicyModals activePolicy={showPolicy} onClose={() => setShowPolicy(null)} />}
       {/* Google Fonts */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;500;700&display=swap');
@@ -1337,7 +1382,7 @@ export default function Home() {
       <OrderSection />
       <CateringSection />
       <LocationSection />
-      <Footer />
+      <Footer setShowPolicy={setShowPolicy} />
       <CookieConsent />
     </div>
   );
