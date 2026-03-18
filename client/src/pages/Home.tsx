@@ -624,7 +624,7 @@ function ReservationSection() {
     }
 
     try {
-      const response = await fetch('https://formspree.io/f/xyzabc123', {
+      const response = await fetch('https://formspree.io/f/xzdjyvol', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -809,7 +809,7 @@ function OrderSection() {
     const message = `COMANDĂ NOUĂ\n\nClient: ${customerData.name}\nTelefon: ${customerData.phone}\nAdresă: ${customerData.address}\n\nProduse:\n${cartItems}\n\nTotal: ${cartTotal} RON\n\nNote: ${customerData.notes || 'N/A'}`;
 
     try {
-      await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      await fetch('https://formspree.io/f/xlgpalzv', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message }),
