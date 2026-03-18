@@ -168,6 +168,15 @@ const MENU_DATA = {
     { name: 'Cappuccino', image: IMAGE_URLS.margherita, sizes: { '200ml': { price: 15, weight: '200 ml' } }, ingredients: '' },
   ],
 };
+// Navigation Menu Items Mapping
+const MENU_ITEMS = [
+  { label: 'Meniu', sectionId: 'meniu' },
+  { label: 'Galerie', sectionId: 'galerie' },
+  { label: 'Catering', sectionId: 'catering' },
+  { label: 'Rezervă Masă', sectionId: 'rezerva' },
+  { label: 'Comandă', sectionId: 'comanda' },
+];
+
 // Business Hours
 const BUSINESS_HOURS = {
   Monday: { open: '12:00', close: '22:00' },
@@ -224,14 +233,14 @@ function Navigation() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">
-            {['Meniu', 'Galerie', 'Catering', 'Rezervă Masă', 'Comandă'].map((item) => (
+            {MENU_ITEMS.map((menuItem) => (
               <button
-                key={item}
-                onClick={() => scrollToSection(item.toLowerCase().replace(/\s/g, '-'))}
+                key={menuItem.label}
+                onClick={() => scrollToSection(menuItem.sectionId)}
                 className="text-amber-100 hover:text-amber-400 transition-colors duration-200 text-sm font-medium"
                 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 500 }}
               >
-                {item}
+                {menuItem.label}
               </button>
             ))}
           </div>
@@ -250,14 +259,14 @@ function Navigation() {
         {/* Mobile Menu */}
         {isOpen && (
           <div className="md:hidden bg-black/95 backdrop-blur-md py-4 space-y-2">
-            {['Meniu', 'Galerie', 'Catering', 'Rezervă Masă', 'Comandă'].map((item) => (
+            {MENU_ITEMS.map((menuItem) => (
               <button
-                key={item}
-                onClick={() => scrollToSection(item.toLowerCase().replace(/\s/g, '-'))}
+                key={menuItem.label}
+                onClick={() => scrollToSection(menuItem.sectionId)}
                 className="block w-full text-left px-4 py-2 text-amber-100 hover:text-amber-400 hover:bg-amber-900/20 transition-colors"
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
-                {item}
+                {menuItem.label}
               </button>
             ))}
           </div>
