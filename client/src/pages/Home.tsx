@@ -38,6 +38,8 @@ const IMAGE_URLS = {
   salami_tartufata: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/salami_0f5f3a4b.png',
 };
 
+const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/logourbanslice_a919f1bf.png';
+
 // Complete Menu Data
 const MENU_DATA = {
   pizzaClassica: [
@@ -213,7 +215,8 @@ function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex items-center gap-3">
+            <img src={LOGO_URL} alt="Urban Slice" className="h-12 w-12 object-contain" />
             <h1 className="text-2xl font-bold text-amber-400" style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}>
               URBAN SLICE
             </h1>
