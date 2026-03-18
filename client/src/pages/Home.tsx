@@ -495,7 +495,7 @@ function ReservationSection() {
         setError('A apărut o eroare. Vă rugăm contactați-ne direct.');
       }
     } catch (err) {
-      setError('A apărut o eroare. Vă rugăm contactați-ne direct la Strada Măgura Vulturului 2, (0740) 011 876.');
+      setError('A apărut o eroare. Vă rugăm contactați-ne direct la (0740) 011 876.');
     }
   };
 
@@ -936,7 +936,7 @@ function CateringSection() {
             className="text-2xl font-bold hover:underline"
             style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}
           >
-            Strada Măgura Vulturului 2, (0740) 011 876
+            (0740) 011 876
           </a>
         </div>
       </div>
@@ -1016,7 +1016,7 @@ function LocationSection() {
                   style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 500 }}
                 >
                   <Phone size={20} />
-                  Strada Măgura Vulturului 2, (0740) 011 876
+                  (0740) 011 876
                 </a>
                 <a
                   href="mailto:mihai.grigoras82@gmail.com"
@@ -1069,7 +1069,7 @@ function Footer() {
               CONTACT
             </h4>
             <div className="space-y-2 text-amber-50/60 text-sm" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-              <p>Strada Măgura Vulturului 2, (0740) 011 876</p>
+              <p>(0740) 011 876</p>
               <p>mihai.grigoras82@gmail.com</p>
             </div>
           </div>
