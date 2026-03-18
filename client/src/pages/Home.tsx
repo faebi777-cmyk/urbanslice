@@ -216,36 +216,36 @@ function HeroSection() {
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <h1
-          className="text-6xl md:text-7xl lg:text-8xl font-bold text-amber-100 mb-6 drop-shadow-lg"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-amber-100 mb-6 drop-shadow-lg"
           style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '3px', fontWeight: 900 }}
         >
           PIZZA ARTIZANALĂ
         </h1>
         <h2
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-amber-400 mb-8 drop-shadow-lg"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-amber-400 mb-8 drop-shadow-lg"
           style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '4px', fontWeight: 900 }}
         >
           CU SUFLET URBAN
         </h2>
         <p
-          className="text-lg md:text-xl text-amber-50/80 mb-12 max-w-2xl mx-auto leading-relaxed"
+          className="text-sm md:text-lg text-amber-50/80 mb-12 max-w-2xl mx-auto leading-relaxed"
           style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
         >
           Fiecare pizza este o creație artizanală, preparată cu ingrediente premium și pasiune pentru detalii. Bine venit la Urban Slice.
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-16">
           <button
             onClick={() => document.getElementById('rezerva')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 py-4 bg-amber-500 text-black font-bold text-lg hover:bg-amber-400 transition-all duration-300 hover:scale-105 transform shadow-lg"
+            className="px-6 py-3 sm:px-8 sm:py-4 bg-amber-500 text-black font-bold text-base sm:text-lg hover:bg-amber-400 transition-all duration-300 hover:scale-105 transform shadow-lg"
             style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '2px', fontWeight: 700 }}
           >
             REZERVĂ MASĂ
           </button>
           <button
             onClick={() => document.getElementById('comanda')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 py-4 border-2 border-amber-500 text-amber-400 font-bold text-lg hover:bg-amber-500/10 transition-all duration-300 hover:scale-105 transform"
+            className="px-6 py-3 sm:px-8 sm:py-4 border-2 border-amber-500 text-amber-400 font-bold text-base sm:text-lg hover:bg-amber-500/10 transition-all duration-300 hover:scale-105 transform"
             style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '2px', fontWeight: 700 }}
           >
             COMANDĂ ACUM
@@ -253,7 +253,7 @@ function HeroSection() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce">
           <svg className="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
