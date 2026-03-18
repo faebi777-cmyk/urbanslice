@@ -181,77 +181,83 @@ function Navigation() {
   );
 }
 
-// Component: Hero Section with Rotating Pizza
+// Component: Hero Section
 function HeroSection() {
-  const [showScroll, setShowScroll] = useState(true);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScroll(window.scrollY < 100);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <section className="relative h-screen bg-black overflow-hidden pt-16">
-      {/* Animated Rotating Pizza Background */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
-        <div className="relative w-96 h-96 animate-spin" style={{ animationDuration: '20s' }}>
+    <section className="relative min-h-screen bg-black overflow-hidden flex items-center justify-center">
+      {/* Background Circles */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-amber-600/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl"></div>
+      </div>
+
+      {/* Rotating Pizza Background */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
+        <div className="relative w-96 h-96">
+          <style>{`
+            @keyframes rotatePizza {
+              from { transform: rotate(0deg); }
+              to { transform: rotate(360deg); }
+            }
+            .rotating-pizza {
+              animation: rotatePizza 20s linear infinite;
+              filter: blur(8px);
+            }
+          `}</style>
           <img
-            src={IMAGE_URLS.margherita}
-            alt="Pizza"
-            className="w-full h-full object-cover rounded-full blur-xl"
+            src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=400&h=400&fit=crop"
+            alt="Pizza Background"
+            className="rotating-pizza w-full h-full object-cover rounded-full"
           />
         </div>
       </div>
 
-      {/* Background Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black" />
-
       {/* Content */}
-      <div className="relative h-full flex flex-col items-center justify-center text-center px-4 z-10">
-        <div className="space-y-6 max-w-3xl">
-          <h1
-            className="text-5xl md:text-7xl font-bold text-amber-100 leading-tight"
-            style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '3px', fontWeight: 700 }}
-          >
-            PIZZA ARTIZANALĂ
-            <br />
-            <span className="text-amber-400">CU SUFLET URBAN</span>
-          </h1>
+      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <h1
+          className="text-6xl md:text-7xl lg:text-8xl font-bold text-amber-100 mb-6 drop-shadow-lg"
+          style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '3px', fontWeight: 900 }}
+        >
+          PIZZA ARTIZANALĂ
+        </h1>
+        <h2
+          className="text-4xl md:text-5xl lg:text-6xl font-bold text-amber-400 mb-8 drop-shadow-lg"
+          style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '4px', fontWeight: 900 }}
+        >
+          CU SUFLET URBAN
+        </h2>
+        <p
+          className="text-lg md:text-xl text-amber-50/80 mb-12 max-w-2xl mx-auto leading-relaxed"
+          style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
+        >
+          Fiecare pizza este o creație artizanală, preparată cu ingrediente premium și pasiune pentru detalii. Bine venit la Urban Slice.
+        </p>
 
-          <p
-            className="text-lg md:text-xl text-amber-50/80 max-w-2xl mx-auto"
-            style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <button
+            onClick={() => document.getElementById('rezerva')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-8 py-4 bg-amber-500 text-black font-bold text-lg hover:bg-amber-400 transition-all duration-300 hover:scale-105 transform shadow-lg"
+            style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '2px', fontWeight: 700 }}
           >
-            Fiecare pizza este o creație artizanală, preparată cu ingrediente premium și pasiune pentru detalii. Bine venit la Urban Slice.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-            <button
-              onClick={() => document.getElementById('rezerva-masa')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-3 bg-amber-500 text-black font-bold hover:bg-amber-400 transition-all duration-200 hover:scale-105 transform"
-              style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '1px', fontWeight: 700 }}
-            >
-              REZERVĂ MASĂ
-            </button>
-            <button
-              onClick={() => document.getElementById('comanda')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-3 border-2 border-amber-400 text-amber-400 font-bold hover:bg-amber-400/10 transition-all duration-200 hover:scale-105 transform"
-              style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '1px', fontWeight: 700 }}
-            >
-              COMANDĂ ACUM
-            </button>
-          </div>
+            REZERVĂ MASĂ
+          </button>
+          <button
+            onClick={() => document.getElementById('comanda')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-8 py-4 border-2 border-amber-500 text-amber-400 font-bold text-lg hover:bg-amber-500/10 transition-all duration-300 hover:scale-105 transform"
+            style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '2px', fontWeight: 700 }}
+          >
+            COMANDĂ ACUM
+          </button>
         </div>
 
         {/* Scroll Indicator */}
-        {showScroll && (
-          <div className="absolute bottom-8 animate-bounce">
-            <ChevronDown className="text-amber-400" size={32} />
-          </div>
-        )}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <svg className="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </div>
       </div>
     </section>
   );
@@ -332,12 +338,12 @@ function MenuSection() {
         </h2>
 
         {/* Category Tabs */}
-        <div className="flex justify-center gap-2 mb-8 overflow-x-auto pb-2">
+        <div className="flex flex-wrap justify-center gap-3 mb-8">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 font-bold transition-all duration-200 whitespace-nowrap text-sm ${
+              className={`px-4 py-2 font-bold transition-all duration-200 text-sm ${
                 activeCategory === cat.id
                   ? 'bg-amber-500 text-black'
                   : 'bg-gray-800 text-amber-100 hover:bg-gray-700'
@@ -679,12 +685,12 @@ function OrderSection() {
         </h2>
 
         {/* Category Tabs */}
-        <div className="flex justify-center gap-2 mb-8 overflow-x-auto pb-2">
+        <div className="flex flex-wrap justify-center gap-3 mb-8">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 font-bold transition-all duration-200 whitespace-nowrap text-sm ${
+              className={`px-4 py-2 font-bold transition-all duration-200 text-sm ${
                 activeCategory === cat.id
                   ? 'bg-amber-500 text-black'
                   : 'bg-gray-800 text-amber-100 hover:bg-gray-700'
