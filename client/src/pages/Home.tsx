@@ -268,7 +268,7 @@ function Navigation() {
 }
 
 // Component: Hero Section
-function HeroSection() {
+function HeroSection({ setShowPolicy }: { setShowPolicy?: (policy: string) => void } = {}) {
   return (
     <section className="relative min-h-screen bg-black overflow-hidden flex items-center justify-center">
       {/* Background Circles */}
@@ -645,7 +645,7 @@ function ReservationSection() {
   };
 
   return (
-    <section id="rezerva-masa" className="bg-black py-20 px-4">
+    <section id="rezerva" className="bg-black py-20 px-4">
       <div className="max-w-2xl mx-auto">
         <h2
           className="text-4xl md:text-5xl font-bold text-center text-amber-100 mb-12"
@@ -1084,6 +1084,20 @@ function CateringSection() {
             (0740) 011 876
           </a>
         </div>
+
+        {/* Scroll Arrow */}
+        <div className="flex justify-center mt-12">
+          <button
+            onClick={() => {
+              const element = document.getElementById('catering');
+              element?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="text-amber-400 hover:text-amber-300 transition-colors animate-bounce"
+            aria-label="Scroll down"
+          >
+            <ChevronDown size={32} />
+          </button>
+        </div>
       </div>
     </section>
   );
@@ -1371,7 +1385,7 @@ export default function Home() {
       `}</style>
 
       <Navigation />
-      <HeroSection />
+      <HeroSection setShowPolicy={setShowPolicy} />
       <AboutSection />
       <TestimonialsSection />
       <MenuSection />
