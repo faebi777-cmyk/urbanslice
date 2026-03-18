@@ -86,8 +86,8 @@ const MENU_DATA = {
     { name: 'CEAFĂ DE PORC LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '200 g' } }, ingredients: 'Ceafă de porc, condimente' },
     { name: 'COTLET DE PORC LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '200 g' } }, ingredients: 'Cotlet de porc, condimente' },
     { name: 'PIEPT DE PORC LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '200 g' } }, ingredients: 'Piept de porc, condimente' },
-    { name: 'PIEPT DE PUI LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '200 g' } }, ingredients: 'Piept de pui, condimente' },
-    { name: 'PASTRAMĂ DE BERBECUȚ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '100 g' } }, ingredients: 'Carne de berbecuț, condimente' },
+    { name: 'PIEPT DE PUI LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '200 g' } }, ingredients: 'Piept de pui, condimente' },
+    { name: 'PASTRAMĂ DE BERBECUȚ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '100 g' } }, ingredients: 'Carne de berbecuț, condimente' },
   ],
   beverages: [
     { name: 'Pepsi', image: IMAGE_URLS.margherita, sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
@@ -314,7 +314,7 @@ function MenuSection() {
   const categories = [
     { id: 'pizzaClassica', label: 'PIZZA CLASICĂ' },
     { id: 'pizzaCasa', label: 'PIZZA DELLA CASA' },
-    { id: 'streetFood', label: 'STREET FOOD ITALIAN' },
+    { id: 'streetFood', label: 'STREET FOOD' },
     { id: 'gratar', label: 'GRĂTAR' },
     { id: 'beverages', label: 'BĂUTURI' },
   ];
@@ -322,22 +322,22 @@ function MenuSection() {
   const currentMenu = MENU_DATA[activeCategory as keyof typeof MENU_DATA];
 
   return (
-    <section id="meniu" className="bg-black py-20 px-4">
+    <section id="meniu" className="bg-black py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <h2
-          className="text-4xl md:text-5xl font-bold text-center text-amber-100 mb-12"
+          className="text-4xl md:text-5xl font-bold text-center text-amber-100 mb-8"
           style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}
         >
           MENIU COMPLET
         </h2>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex justify-center gap-2 mb-8 overflow-x-auto pb-2">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-6 py-2 font-bold transition-all duration-200 ${
+              className={`px-4 py-2 font-bold transition-all duration-200 whitespace-nowrap text-sm ${
                 activeCategory === cat.id
                   ? 'bg-amber-500 text-black'
                   : 'bg-gray-800 text-amber-100 hover:bg-gray-700'
@@ -350,59 +350,33 @@ function MenuSection() {
         </div>
 
         {/* Menu Items Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           {currentMenu.map((item, idx) => {
             const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa';
             return (
             <div
               key={idx}
-              className="bg-gray-900/50 border border-amber-900/30 overflow-hidden hover:border-amber-500/50 transition-all duration-200 hover:shadow-lg hover:shadow-amber-900/20"
+              className="bg-gray-900/50 border border-amber-900/30 hover:border-amber-500/50 transition-all duration-200 hover:shadow-lg hover:shadow-amber-900/20 overflow-hidden"
             >
-              {/* Product Image - Only for Pizza categories */}
               {showImage && (
-              <div className="relative h-48 overflow-hidden bg-gray-800">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
+              <div className="relative h-32 overflow-hidden bg-gray-800">
+                <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
               </div>
               )}
-
-              {/* Product Info */}
-              <div className={showImage ? 'p-4' : 'p-6'}>
-                <h3
-                  className="text-lg font-bold text-amber-100 mb-2"
-                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
-                >
+              <div className="p-3">
+                <h3 className="text-sm font-bold text-amber-100 mb-1 line-clamp-2" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
                   {item.name}
                 </h3>
-
-                <p
-                  className="text-sm text-amber-50/60 mb-4"
-                  style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
-                >
+                {item.ingredients && (
+                <p className="text-xs text-amber-50/50 mb-2 line-clamp-2" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>
                   {item.ingredients}
                 </p>
-
-                <div className="flex flex-wrap gap-3 items-center justify-between">
+                )}
+                <div className="flex flex-wrap gap-2 items-center justify-between">
                   {Object.entries(item.sizes).map(([size, data]) => (
-                    <div key={size} className="flex items-center gap-2">
-                      <div>
-                        <p
-                          className="text-xs text-amber-50/50"
-                          style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
-                        >
-                          {size}
-                          {data.weight && ` • ${data.weight}`}
-                        </p>
-                        <p
-                          className="text-lg font-bold text-amber-400"
-                          style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
-                        >
-                          {data.price} RON
-                        </p>
-                      </div>
+                    <div key={size} className="flex flex-col">
+                      <p className="text-xs text-amber-50/50" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>{size}</p>
+                      <p className="text-sm font-bold text-amber-400" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>{data.price} RON</p>
                     </div>
                   ))}
                 </div>
@@ -712,27 +686,17 @@ function OrderSection() {
           COMANDĂ ONLINE
         </h2>
 
-        <div className="grid lg:grid-cols-4 gap-8">
+        <div className="grid lg:grid-cols-5 gap-4">
           {/* Menu Items */}
-          <div className="lg:col-span-3 space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
+          <div className="lg:col-span-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {allItems.map((item, idx) => (
-                <div key={idx} className="bg-gray-900/50 border border-amber-900/30 overflow-hidden hover:border-amber-500/50 transition-all duration-200">
-                  {/* Product Image */}
-                  <div className="relative h-40 overflow-hidden bg-gray-800">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  {/* Product Info */}
-                  <div className="p-4">
-                    <h3 className="text-amber-100 font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
-                      {item.name}
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
+                <div key={idx} className="bg-gray-900/50 border border-amber-900/30 hover:border-amber-500/50 transition-all duration-200 overflow-hidden">
+                    <div className="p-3">
+                      <h3 className="text-sm font-bold text-amber-100 mb-2" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
+                        {item.name}
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
                       {Object.entries(item.sizes).map(([size, data]) => (
                         <button
                           key={size}
@@ -751,7 +715,7 @@ function OrderSection() {
           </div>
 
           {/* Cart Sidebar */}
-          <div className="bg-gray-900/50 border border-amber-900/30 p-6 h-fit sticky top-24 rounded-lg">
+          <div className="bg-gray-900/50 border border-amber-900/30 p-4 h-fit sticky top-24 rounded-lg">
             <h3
               className="text-amber-100 font-bold mb-4 flex items-center justify-between"
               style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
