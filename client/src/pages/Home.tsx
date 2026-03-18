@@ -748,7 +748,6 @@ function OrderSection() {
     { id: 'streetFood', label: 'STREET FOOD' },
     { id: 'gratar', label: 'GRĂTAR' },
     { id: 'beverages', label: 'BĂUTURI' },
-    { id: 'alcoholicBeverages', label: 'BĂUTURI ALCOOLICE' },
   ];
 
   const currentMenu = MENU_DATA[activeCategory as keyof typeof MENU_DATA];
@@ -1222,8 +1221,15 @@ function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-amber-900/30 pt-8 text-center text-amber-50/50 text-sm" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-          <p>© 2025 Urban Slice. Toate drepturile rezervate.</p>
+        <div className="border-t border-amber-900/30 pt-8 text-center" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+          <p className="text-amber-50/50 text-sm mb-4">© 2025 Urban Slice. Toate drepturile rezervate.</p>
+          <div className="flex justify-center gap-6 text-sm">
+            <a href="#privacy" className="text-amber-100 hover:text-amber-400 transition-colors duration-200">Privacy Policy</a>
+            <span className="text-amber-900/50">|</span>
+            <a href="#terms" className="text-amber-100 hover:text-amber-400 transition-colors duration-200">Terms & Conditions</a>
+            <span className="text-amber-900/50">|</span>
+            <a href="#cookies" className="text-amber-100 hover:text-amber-400 transition-colors duration-200">Cookie Policy</a>
+          </div>
         </div>
       </div>
     </footer>
