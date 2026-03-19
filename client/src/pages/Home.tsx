@@ -1111,7 +1111,7 @@ function CateringSection() {
         <div className="flex justify-center mt-12">
           <button
             onClick={() => {
-              const element = document.getElementById('catering');
+              const element = document.getElementById('contact');
               element?.scrollIntoView({ behavior: 'smooth' });
             }}
             className="text-amber-400 hover:text-amber-300 transition-colors animate-bounce"
@@ -1128,7 +1128,7 @@ function CateringSection() {
 // Component: Location Section
 function LocationSection() {
   return (
-    <section className="bg-black py-20 px-4">
+    <section id="contact" className="bg-black py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <h2
           className="text-4xl md:text-5xl font-bold text-center text-amber-100 mb-12"
@@ -1163,9 +1163,9 @@ function LocationSection() {
                 className="text-amber-50/70"
                 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
               >
-                Urban Slice Pizzeria
+                Urban Slice
                 <br />
-                București, România
+                Strada Măgura Vulturului 2, 021704 București, Romania
               </p>
             </div>
 
@@ -1311,7 +1311,7 @@ function PolicyModals({ activePolicy, onClose }: { activePolicy: string | null; 
   const policies: Record<string, { title: string; content: string }> = {
     privacy: {
       title: 'Politica de Confidențialitate',
-      content: `Ultima actualizare: martie 2025\n\nUrban Slice respectă confidențialitatea datelor dumneavoastră personale și se angajează să le protejeze în conformitate cu Regulamentul (UE) 2016/679 (GDPR).\n\nDate colectate\nColectăm datele furnizate voluntar: nume, adresă de e-mail, număr de telefon, la momentul rezervărilor sau contactării noastre.\n\nScopul prelucrării\n- Gestionarea rezervărilor și comenzilor\n- Comunicarea informațiilor despre oferte și evenimente\n- Îmbunătățirea serviciilor noastre\n\nDrepturile dumneavoastră\nAveți dreptul de acces, rectificare, ștergere, restricționare a prelucrării, portabilitate și opoziție. Puteți exercita aceste drepturi scriind la contact@urbanslice.ro.\n\nSecuritate\nDatele dumneavoastră sunt stocate în condiții de securitate și nu sunt vândute sau transferate către terți fără consimțământul dumneavoastră.\n\nContact DPO\nPentru orice întrebare legată de prelucrarea datelor, ne puteți contacta la adresa de mai sus sau prin poștă la sediul restaurantului.`
+      content: `Ultima actualizare: martie 2025\n\nUrban Slice respectă confidențialitatea datelor dumneavoastră personale și se angajează să le protejeze în conformitate cu Regulamentul (UE) 2016/679 (GDPR).\n\nDate colectate\nColectăm datele furnizate voluntar: nume, adresă de e-mail, număr de telefon, la momentul rezervărilor sau contactării noastre.\n\nScopul prelucrării\n- Gestionarea rezervărilor și comenzilor\n- Comunicarea informațiilor despre oferte și evenimente\n- Îmbunătățirea serviciilor noastre\n\nDrepturile dumneavoastră\nAveți dreptul de acces, rectificare, ștergere, restricționare a prelucrării, portabilitate și opoziție. Puteți exercita aceste drepturi scriind la mihai.grigoras82@gmail.com.\n\nSecuritate\nDatele dumneavoastră sunt stocate în condiții de securitate și nu sunt vândute sau transferate către terți fără consimțământul dumneavoastră.\n\nContact DPO\nPentru orice întrebare legată de prelucrarea datelor, ne puteți contacta la adresa de mai sus sau prin poștă la sediul restaurantului.`
     },
     terms: {
       title: 'Termeni și Condiții',
