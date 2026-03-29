@@ -225,7 +225,6 @@ function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-3">
-            <img src={LOGO_URL} alt="Urban Slice" className="h-12 w-12 object-contain" />
             <h1 className="text-2xl font-bold text-amber-400" style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}>
               URBAN SLICE
             </h1>
@@ -365,33 +364,33 @@ function HeroSection({ setShowPolicy }: { setShowPolicy?: (policy: string) => vo
 // Component: About Section with Cover Image
 function AboutSection() {
   return (
-    <section id="despre" className="bg-gradient-to-b from-black to-gray-900 py-20 px-4">
+    <section id="despre" className="bg-gradient-to-b from-red-900 via-orange-900 to-yellow-900 py-20 px-4">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         {/* Text */}
         <div className="space-y-6">
           <h2
-            className="text-4xl md:text-5xl font-bold text-amber-100"
+            className="text-4xl md:text-5xl font-bold text-yellow-100"
             style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}
           >
             DESPRE URBAN SLICE
           </h2>
 
           <p
-            className="text-amber-50/70 leading-relaxed"
+            className="text-yellow-50/90 leading-relaxed"
             style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
           >
             Urban Slice nu este doar o pizzerie. Este o pasiune transformată în fiecare bucată pe care o servim. Folosim doar ingrediente premium, provenite din furnizori selectați, și o rețetă tradițională de aluat care se odihnește 72 de ore.
           </p>
 
           <p
-            className="text-amber-50/70 leading-relaxed"
+            className="text-yellow-50/90 leading-relaxed"
             style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
           >
-            Cuptorul nostru de lemn, încălzit la 350°C, asigură o coacere perfectă în doar 90 de secunde. Fiecare pizza este o operă de artă, preparată cu atenție la detalii și iubire pentru meserie.
+            Cuptorul nostru, încălzit la 400°C, asigură o coacere perfectă în doar 90 de secunde. Fiecare pizza este o operă de artă, preparată cu atenție la detalii și iubire pentru meserie.
           </p>
 
           <p
-            className="text-amber-50/70 leading-relaxed"
+            className="text-yellow-50/90 leading-relaxed"
             style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}
           >
             Bun venit în lumea Urban Slice, unde tradiția italiană se întâlnește cu spiritul urban și inovația.
@@ -405,7 +404,7 @@ function AboutSection() {
             alt="Urban Slice Cover"
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-red-900/60 to-transparent" />
         </div>
       </div>
     </section>
@@ -537,12 +536,16 @@ function MenuSection() {
                 </p>
                 )}
                 <div className="flex flex-wrap gap-2 items-center justify-between">
-                  {Object.entries(item.sizes).map(([size, data]) => (
-                    <div key={size} className="flex flex-col">
-                      <p className="text-xs text-amber-50/50" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>{size}</p>
-                      <p className="text-sm font-bold text-amber-400" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>{data.price} RON</p>
-                    </div>
-                  ))}
+                  <div className="text-center">
+                    <p className="text-xs text-amber-50/70 mb-1" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>Dimensiune pizza</p>
+                    {Object.entries(item.sizes).map(([size, data]) => (
+                      <div key={size} className="flex flex-col mb-2">
+                        <p className="text-lg font-bold text-amber-100" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}>{size}</p>
+                        <p className="text-lg font-bold text-amber-400" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>{data.price} RON</p>
+                      </div>
+                    ))}
+                    <p className="text-xs text-amber-50/50 mt-1" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>Prețul variază în funcție de dimensiune</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -888,9 +891,10 @@ function OrderSection() {
                           return (
                             <div key={size} className="flex items-center justify-between bg-gray-800/50 p-2 rounded">
                               <div>
-                                <p className="text-xs text-amber-50/70" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>
+                                <p className="text-sm font-bold text-amber-100" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}>
                                   {size} • {data.price} RON
                                 </p>
+                                <p className="text-xs text-amber-50/50" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>Dimensiune pizza</p>
                               </div>
                               <div className="flex items-center gap-2">
                                 {qty > 0 ? (
@@ -956,7 +960,7 @@ function OrderSection() {
                 </div>
                 <div className="border-t border-amber-900/30 pt-2 mb-4">
                   <div className="flex justify-between items-center text-amber-100 font-bold">
-                    <span>Total:</span>
+                    <span>Total (TVA inclus):</span>
                     <span className="text-lg text-amber-400">{cartTotal} RON</span>
                   </div>
                 </div>
