@@ -1266,7 +1266,7 @@ function Footer({ setShowPolicy }: { setShowPolicy: (policy: string) => void }) 
               className="inline-flex items-center gap-3 px-3 py-2 bg-white/10 border border-amber-700 hover:bg-white/20 rounded-lg transition-colors duration-200"
             >
               <img
-                src="https://anpc.ro/wp-content/uploads/2022/01/anpc-logo.png"
+                src="/anpc-logo.svg"
                 alt="ANPC"
                 className="h-10 w-auto"
               />
