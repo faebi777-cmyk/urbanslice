@@ -1268,7 +1268,7 @@ function Footer({ setShowPolicy }: { setShowPolicy: (policy: string) => void }) 
               <img
                 src="https://anpc.ro/wp-content/uploads/2022/01/anpc-logo.png"
                 alt="ANPC"
-                className="h-8 w-auto"
+                className="h-10 w-auto"
               />
               <span className="text-amber-100 text-xs md:text-sm" style={{ fontFamily: "'Montserrat', sans-serif" }}>
                 Verify ANPC SAL
