@@ -1251,12 +1251,29 @@ function Footer({ setShowPolicy }: { setShowPolicy: (policy: string) => void }) 
         {/* Bottom */}
         <div className="border-t border-amber-900/30 pt-8 text-center" style={{ fontFamily: "'Montserrat', sans-serif" }}>
           <p className="text-amber-50/50 text-sm mb-4">© 2025 Urban Slice. Toate drepturile rezervate.</p>
-          <div className="flex justify-center gap-6 text-sm">
-            <button onClick={() => setShowPolicy('privacy')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer">Privacy Policy</button>
-            <span className="text-amber-900/50">|</span>
-            <button onClick={() => setShowPolicy('terms')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer">Terms & Conditions</button>
-            <span className="text-amber-900/50">|</span>
-            <button onClick={() => setShowPolicy('cookies')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer">Cookie Policy</button>
+          <div className="flex flex-col md:flex-row justify-center md:items-center gap-6 text-sm">
+            <div className="flex items-center gap-2">
+              <button onClick={() => setShowPolicy('privacy')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer">Privacy Policy</button>
+              <span className="text-amber-900/50">|</span>
+              <button onClick={() => setShowPolicy('terms')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer">Terms & Conditions</button>
+              <span className="text-amber-900/50">|</span>
+              <button onClick={() => setShowPolicy('cookies')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer">Cookie Policy</button>
+            </div>
+            <a
+              href="https://anpc.ro/ce-este-sal/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-3 py-2 bg-white/10 border border-amber-700 hover:bg-white/20 rounded-lg transition-colors duration-200"
+            >
+              <img
+                src="https://anpc.ro/wp-content/uploads/2022/01/anpc-logo.png"
+                alt="ANPC"
+                className="h-8 w-auto"
+              />
+              <span className="text-amber-100 text-xs md:text-sm" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                Verify ANPC SAL
+              </span>
+            </a>
           </div>
         </div>
       </div>
