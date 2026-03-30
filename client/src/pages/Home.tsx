@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { Menu, X, ShoppingCart, MapPin, Phone, Mail, Instagram, Facebook, Music, ChevronDown, Check, AlertCircle, Globe, Star } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/components/ui/carousel';
 
@@ -518,8 +519,12 @@ function MenuSection() {
           {currentMenu.map((item, idx) => {
             const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa';
             return (
-            <div
+            <motion.div
               key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.08 }}
               className="bg-gray-900/50 border border-amber-900/30 hover:border-amber-500/50 transition-all duration-200 hover:shadow-lg hover:shadow-amber-900/20 overflow-hidden"
             >
               {showImage && (
@@ -533,7 +538,7 @@ function MenuSection() {
                 </h3>
                 {/* in curand voi include extra detalii produse */}
               </div>
-            </div>
+            </motion.div>
             );
           })}
         </div>
