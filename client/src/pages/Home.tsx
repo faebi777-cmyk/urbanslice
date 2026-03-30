@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ShoppingCart, MapPin, Phone, Mail, Instagram, Facebook, Music, ChevronDown, Check, AlertCircle, Globe, Star } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/components/ui/carousel';
 
 /**
  * URBAN SLICE - ARTISAN PIZZERIA WEBSITE
@@ -364,7 +365,7 @@ function HeroSection({ setShowPolicy }: { setShowPolicy?: (policy: string) => vo
 // Component: About Section with Cover Image
 function AboutSection() {
   return (
-    <section id="despre" className="bg-gradient-to-b from-red-900 via-orange-900 to-yellow-900 py-20 px-4">
+    <section id="despre" className="bg-slate-950/80 py-20 px-4">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         {/* Text */}
         <div className="space-y-6">
@@ -522,31 +523,15 @@ function MenuSection() {
               className="bg-gray-900/50 border border-amber-900/30 hover:border-amber-500/50 transition-all duration-200 hover:shadow-lg hover:shadow-amber-900/20 overflow-hidden"
             >
               {showImage && (
-              <div className="relative h-32 overflow-hidden bg-gray-800">
-                <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+              <div className="relative aspect-[4/3] overflow-hidden bg-gray-800">
+                <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
               </div>
               )}
-              <div className="p-3">
-                <h3 className="text-sm font-bold text-amber-100 mb-1 line-clamp-2" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
+              <div className="p-4">
+                <h3 className="text-base md:text-lg font-bold text-amber-100" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
                   {item.name}
                 </h3>
-                {item.ingredients && (
-                <p className="text-xs text-amber-50/50 mb-2 line-clamp-2" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>
-                  {item.ingredients}
-                </p>
-                )}
-                <div className="flex flex-wrap gap-2 items-center justify-between">
-                  <div className="text-center">
-                    <p className="text-xs text-amber-50/70 mb-1" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>Dimensiune pizza</p>
-                    {Object.entries(item.sizes).map(([size, data]) => (
-                      <div key={size} className="flex flex-col mb-2">
-                        <p className="text-lg font-bold text-amber-100" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}>{size}</p>
-                        <p className="text-lg font-bold text-amber-400" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>{data.price} RON</p>
-                      </div>
-                    ))}
-                    <p className="text-xs text-amber-50/50 mt-1" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>Prețul variază în funcție de dimensiune</p>
-                  </div>
-                </div>
+                {/* in curand voi include extra detalii produse */}
               </div>
             </div>
             );
@@ -578,27 +563,32 @@ function GallerySection() {
           GALERIE FOTO
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {galleryImages.map((image, idx) => (
-            <div
-              key={idx}
-              className="relative h-64 overflow-hidden group cursor-pointer rounded-lg"
-            >
-              <img
-                src={image.url}
-                alt={image.caption}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p
-                  className="text-amber-100 font-bold"
-                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
-                >
-                  {image.caption}
-                </p>
-              </div>
-            </div>
-          ))}
+        <div className="relative">
+          <Carousel opts={{ loop: true, align: 'center', skipSnaps: false }}>
+            <CarouselContent className="flex gap-4 pb-6">
+              {galleryImages.map((image, idx) => (
+                <CarouselItem key={idx} className="w-full md:w-2/3 lg:w-1/2">
+                  <div className="relative rounded-xl overflow-hidden shadow-2xl h-72 md:h-96">
+                    <img
+                      src={image.url}
+                      alt={image.caption}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/30 flex items-end">
+                      <p
+                        className="p-4 text-lg md:text-xl font-bold text-amber-100"
+                        style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
+                      >
+                        {image.caption}
+                      </p>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="text-amber-100 border-amber-100" />
+            <CarouselNext className="text-amber-100 border-amber-100" />
+          </Carousel>
         </div>
       </div>
     </section>
