@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Menu, X, ShoppingCart, MapPin, Phone, Mail, Instagram, Facebook, Music, ChevronDown, Check, AlertCircle, Globe, Star } from 'lucide-react';
 
 /**
@@ -600,16 +600,12 @@ function MenuSection() {
             const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa';
             const itemSubtitle = MENU_SUBTITLES[item.name];
             return (
-            <motion.div
+            <div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: Math.min(idx * 0.05, 0.3) }}
               className="bg-gray-900/50 border border-amber-900/30 hover:border-amber-500/50 transition-all duration-200 hover:shadow-lg hover:shadow-amber-900/20 overflow-hidden"
             >
               {showImage && (
-              <div className="relative aspect-[4/3] overflow-hidden bg-gray-800">
+              <div className="relative aspect-[4/3] overflow-hidden">
                 <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
               </div>
               )}
@@ -631,7 +627,7 @@ function MenuSection() {
                   ) : null;
                 })()}
               </div>
-            </motion.div>
+            </div>
             );
           })}
         </div>
@@ -640,41 +636,7 @@ function MenuSection() {
   );
 }
 
-// Component: Gallery Image with Scroll Zoom
-function GalleryImage({ url, caption }: { url: string; caption: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'center center'],
-  });
-  const scale = useTransform(scrollYProgress, [0, 1], [0.85, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [0.6, 1]);
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{ scale, opacity }}
-      className="relative rounded-xl overflow-hidden shadow-2xl h-64 sm:h-80 md:h-[28rem] will-change-transform"
-    >
-      <img
-        src={url}
-        alt={caption}
-        className="w-full h-full object-cover"
-        loading="lazy"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
-        <p
-          className="p-4 sm:p-6 text-lg md:text-2xl font-bold text-amber-100"
-          style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
-        >
-          {caption}
-        </p>
-      </div>
-    </motion.div>
-  );
-}
-
-// Component: Gallery Section
+// Component: Gallery Section — single-spot slideshow with zoom crossfade
 function GallerySection() {
   const galleryImages = [
     { url: IMAGE_URLS.margherita, caption: 'Pizza Artizanală' },
@@ -684,6 +646,21 @@ function GallerySection() {
     { url: IMAGE_URLS.taraneasca, caption: 'Taraneasca' },
     { url: IMAGE_URLS.carbonara, caption: 'Carbonara Tradițională' },
   ];
+
+  const [current, setCurrent] = useState(0);
+  const total = galleryImages.length;
+
+  // Auto-advance every 4s
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % total);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [total]);
+
+  const goTo = (idx: number) => setCurrent(idx);
+  const prev = () => setCurrent((c) => (c - 1 + total) % total);
+  const next = () => setCurrent((c) => (c + 1) % total);
 
   return (
     <section id="galerie" className="bg-gradient-to-b from-gray-900 to-black py-16 sm:py-20 px-4">
@@ -695,9 +672,77 @@ function GallerySection() {
           GALERIE FOTO
         </h2>
 
-        <div className="space-y-6 sm:space-y-10">
+        {/* Single image spot */}
+        <div className="relative rounded-xl overflow-hidden shadow-2xl h-64 sm:h-80 md:h-[28rem]">
+          {/* Stacked images with crossfade + zoom */}
           {galleryImages.map((image, idx) => (
-            <GalleryImage key={idx} url={image.url} caption={image.caption} />
+            <motion.div
+              key={idx}
+              initial={false}
+              animate={{
+                opacity: idx === current ? 1 : 0,
+                scale: idx === current ? 1.05 : 1,
+              }}
+              transition={{ duration: 1.2, ease: 'easeInOut' }}
+              className="absolute inset-0"
+              style={{ zIndex: idx === current ? 1 : 0 }}
+            >
+              <img
+                src={image.url}
+                alt={image.caption}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          ))}
+
+          {/* Gradient overlay + caption */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end z-10">
+            <motion.p
+              key={current}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="p-4 sm:p-6 text-lg md:text-2xl font-bold text-amber-100"
+              style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
+            >
+              {galleryImages[current].caption}
+            </motion.p>
+          </div>
+
+          {/* Navigation arrows */}
+          <button
+            onClick={prev}
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-amber-100 transition-colors"
+            aria-label="Previous"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+          </button>
+          <button
+            onClick={next}
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-amber-100 transition-colors"
+            aria-label="Next"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+
+        {/* Dots indicator */}
+        <div className="flex justify-center gap-2 mt-4">
+          {galleryImages.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => goTo(idx)}
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                idx === current ? 'bg-amber-400 scale-125' : 'bg-amber-100/30 hover:bg-amber-100/50'
+              }`}
+              aria-label={`Go to image ${idx + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
           ))}
         </div>
       </div>
