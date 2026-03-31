@@ -431,7 +431,7 @@ function AboutSection() {
         </div>
 
         {/* Cover Image */}
-        <div className="relative h-96 rounded-lg overflow-hidden shadow-2xl group">
+        <div className="relative h-64 sm:h-80 md:h-96 rounded-lg overflow-hidden shadow-2xl group">
           <img
             src="/despre-pizza.jpg"
             alt="Urban Slice Cover"
@@ -491,27 +491,27 @@ function TestimonialsSection() {
           <div className="marquee flex gap-6 w-fit">
             {/* First set of testimonials */}
             {TESTIMONIALS.map((testimonial, idx) => (
-              <div key={idx} className="flex-shrink-0 w-96 bg-slate-800 border border-amber-400/20 rounded-lg p-6 hover:border-amber-400/50 transition-all">
+              <div key={idx} className="flex-shrink-0 w-72 sm:w-80 md:w-96 bg-slate-800 border border-amber-400/20 rounded-lg p-4 sm:p-6 hover:border-amber-400/50 transition-all">
                 <div className="flex items-center gap-1 mb-3">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <p className="text-slate-200 mb-4 italic">"{testimonial.text}"</p>
-                <p className="text-amber-400 font-semibold">{testimonial.name}</p>
+                <p className="text-slate-200 mb-4 italic text-sm sm:text-base">"{testimonial.text}"</p>
+                <p className="text-amber-400 font-semibold text-sm sm:text-base">{testimonial.name}</p>
               </div>
             ))}
             
             {/* Duplicate set for seamless loop */}
             {TESTIMONIALS.map((testimonial, idx) => (
-              <div key={`dup-${idx}`} className="flex-shrink-0 w-96 bg-slate-800 border border-amber-400/20 rounded-lg p-6 hover:border-amber-400/50 transition-all">
+              <div key={`dup-${idx}`} className="flex-shrink-0 w-72 sm:w-80 md:w-96 bg-slate-800 border border-amber-400/20 rounded-lg p-4 sm:p-6 hover:border-amber-400/50 transition-all">
                 <div className="flex items-center gap-1 mb-3">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <p className="text-slate-200 mb-4 italic">"{testimonial.text}"</p>
-                <p className="text-amber-400 font-semibold">{testimonial.name}</p>
+                <p className="text-slate-200 mb-4 italic text-sm sm:text-base">"{testimonial.text}"</p>
+                <p className="text-amber-400 font-semibold text-sm sm:text-base">{testimonial.name}</p>
               </div>
             ))}
           </div>
@@ -576,12 +576,12 @@ function MenuSection() {
         </h2>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-8">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 px-1">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 font-bold transition-all duration-200 text-sm ${
+              className={`px-3 py-1.5 sm:px-4 sm:py-2 font-bold transition-all duration-200 text-xs sm:text-sm ${
                 activeCategory === cat.id
                   ? 'bg-amber-500 text-black'
                   : 'bg-gray-800 text-amber-100 hover:bg-gray-700'
@@ -664,8 +664,8 @@ function GallerySection() {
           <Carousel opts={{ loop: true, align: 'center', skipSnaps: false }}>
             <CarouselContent className="flex gap-4 pb-6">
               {galleryImages.map((image, idx) => (
-                <CarouselItem key={idx} className="w-full md:w-2/3 lg:w-1/2">
-                  <div className="relative rounded-xl overflow-hidden shadow-2xl h-72 md:h-96">
+                <CarouselItem key={idx} className="basis-[85%] sm:basis-2/3 lg:basis-1/2">
+                  <div className="relative rounded-xl overflow-hidden shadow-2xl h-56 sm:h-72 md:h-96">
                     <img
                       src={image.url}
                       alt={image.caption}
@@ -683,8 +683,8 @@ function GallerySection() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="text-amber-100 border-amber-100" />
-            <CarouselNext className="text-amber-100 border-amber-100" />
+            <CarouselPrevious className="text-amber-100 border-amber-100 hidden sm:flex" />
+            <CarouselNext className="text-amber-100 border-amber-100 hidden sm:flex" />
           </Carousel>
         </div>
       </div>
@@ -933,12 +933,12 @@ function OrderSection() {
         </h2>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-8">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 px-1">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 font-bold transition-all duration-200 text-sm ${
+              className={`px-3 py-1.5 sm:px-4 sm:py-2 font-bold transition-all duration-200 text-xs sm:text-sm ${
                 activeCategory === cat.id
                   ? 'bg-amber-500 text-black'
                   : 'bg-gray-800 text-amber-100 hover:bg-gray-700'
@@ -949,6 +949,20 @@ function OrderSection() {
             </button>
           ))}
         </div>
+
+        {/* Floating Cart Button - Mobile */}
+        {Object.keys(cart).length > 0 && (
+          <div className="lg:hidden fixed bottom-4 left-4 right-4 z-40">
+            <button
+              onClick={() => setShowCart(true)}
+              className="w-full bg-amber-500 text-black font-bold py-3 rounded-lg shadow-2xl shadow-amber-500/30 flex items-center justify-center gap-2 text-sm"
+              style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
+            >
+              <ShoppingCart size={18} />
+              COȘ ({Object.values(cart).reduce((a, b) => a + b, 0)}) • {cartTotal} RON — FINALIZEAZĂ
+            </button>
+          </div>
+        )}
 
         {/* Main Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
@@ -1026,8 +1040,8 @@ function OrderSection() {
             </div>
           </div>
 
-          {/* Cart Sidebar */}
-          <div className="bg-gray-900/50 border border-amber-900/30 p-4 h-fit lg:sticky lg:top-24 rounded-lg">
+          {/* Cart Sidebar - Hidden on mobile, shown on desktop */}
+          <div className="hidden lg:block bg-gray-900/50 border border-amber-900/30 p-4 h-fit lg:sticky lg:top-24 rounded-lg">
             <h3 className="text-lg font-bold text-amber-100 mb-4" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
               COȘ ({Object.keys(cart).length})
             </h3>
@@ -1080,12 +1094,32 @@ function OrderSection() {
 
         {/* Checkout Modal */}
         {showCart && (
-          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-            <div className="bg-gray-900 border border-amber-900/50 p-6 max-w-md w-full rounded-lg">
-              <h3 className="text-2xl font-bold text-amber-100 mb-4" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
+          <div className="fixed inset-0 bg-black/80 flex items-end sm:items-center justify-center z-50 p-0 sm:p-4">
+            <div className="bg-gray-900 border border-amber-900/50 p-5 sm:p-6 max-w-md w-full max-h-[90vh] overflow-y-auto rounded-t-xl sm:rounded-lg">
+              <h3 className="text-xl sm:text-2xl font-bold text-amber-100 mb-4" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
                 FINALIZEAZĂ COMANDA
               </h3>
-              <form onSubmit={handleOrderSubmit} className="space-y-4">
+              {/* Cart Summary in Modal */}
+              <div className="space-y-1 mb-4 max-h-32 overflow-y-auto border border-amber-900/20 rounded p-2 bg-gray-800/50">
+                {Object.entries(cart).map(([key, qty]) => {
+                  const [name, size, price] = key.split('|');
+                  return (
+                    <div key={key} className="text-xs text-amber-50/70 flex justify-between">
+                      <span>{name} ({size}) x{qty}</span>
+                      <span className="text-amber-400 font-bold">{parseInt(price) * qty} RON</span>
+                    </div>
+                  );
+                })}
+                <div className="border-t border-amber-900/30 pt-1 mt-1 flex justify-between text-xs text-amber-50/50">
+                  <span>Taxa de livrare:</span>
+                  <span>gratuită</span>
+                </div>
+                <div className="flex justify-between text-sm font-bold text-amber-100">
+                  <span>Total (TVA inclus):</span>
+                  <span className="text-amber-400">{cartTotal} RON</span>
+                </div>
+              </div>
+              <form onSubmit={handleOrderSubmit} className="space-y-3 sm:space-y-4">
                 <input
                   type="text"
                   placeholder="Nume *"
@@ -1118,18 +1152,18 @@ function OrderSection() {
                   className="w-full bg-gray-800 border border-amber-900/30 text-amber-50 px-4 py-2 focus:outline-none focus:border-amber-500"
                   style={{ fontFamily: "'Montserrat', sans-serif" }}
                 />
-                <div className="flex gap-2">
+                <div className="flex flex-col sm:flex-row gap-2">
                   <button
                     type="button"
                     onClick={() => setShowCart(false)}
-                    className="flex-1 bg-gray-700 text-amber-100 font-bold py-2 hover:bg-gray-600"
+                    className="sm:flex-1 bg-gray-700 text-amber-100 font-bold py-3 sm:py-2 hover:bg-gray-600 text-sm"
                     style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
                   >
                     ÎNAPOI
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 bg-amber-500 text-black font-bold py-2 hover:bg-amber-400"
+                    className="sm:flex-1 bg-amber-500 text-black font-bold py-3 sm:py-2 hover:bg-amber-400 text-sm"
                     style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
                   >
                     COMANDĂ CU OBLIGAȚIE DE PLATĂ
@@ -1141,10 +1175,12 @@ function OrderSection() {
         )}
 
         {orderSubmitted && (
-          <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg z-50">
+          <div className="fixed top-4 left-4 right-4 sm:left-auto sm:right-4 bg-green-600 text-white px-6 py-3 rounded-lg z-50 text-center sm:text-left">
             Comandă trimisă cu succes!
           </div>
         )}
+        {/* Spacer for floating cart button on mobile */}
+        {Object.keys(cart).length > 0 && <div className="h-16 lg:hidden" />}
       </div>
     </section>
   );
@@ -1234,7 +1270,7 @@ function LocationSection() {
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* Map */}
-          <div className="h-96 bg-gray-900 rounded overflow-hidden">
+          <div className="h-64 sm:h-80 md:h-96 bg-gray-900 rounded overflow-hidden">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2835.8!2d26.0968!3d44.4365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff0d6bd3d13b%3A0x6e94645937abf452!2sUrban%20Slice!5e0!3m2!1sen!2sro!4v1710769200"
               width="100%"
@@ -1354,12 +1390,12 @@ function Footer({ setShowPolicy }: { setShowPolicy: (policy: string) => void }) 
         <div className="border-t border-amber-900/30 pt-8 text-center" style={{ fontFamily: "'Montserrat', sans-serif" }}>
           <p className="text-amber-50/50 text-sm mb-4">© 2025 Urban Slice. Toate drepturile rezervate.</p>
           <div className="flex flex-col md:flex-row justify-center md:items-center gap-6 text-sm">
-            <div className="flex items-center gap-2">
-              <button onClick={() => setShowPolicy('privacy')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer">Privacy Policy</button>
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2">
+              <button onClick={() => setShowPolicy('privacy')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer text-xs sm:text-sm">Privacy Policy</button>
               <span className="text-amber-900/50">|</span>
-              <button onClick={() => setShowPolicy('terms')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer">Terms & Conditions</button>
+              <button onClick={() => setShowPolicy('terms')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer text-xs sm:text-sm">Terms & Conditions</button>
               <span className="text-amber-900/50">|</span>
-              <button onClick={() => setShowPolicy('cookies')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer">Cookie Policy</button>
+              <button onClick={() => setShowPolicy('cookies')} className="text-amber-100 hover:text-amber-400 transition-colors duration-200 bg-transparent border-none cursor-pointer text-xs sm:text-sm">Cookie Policy</button>
             </div>
             <a
               href="https://anpc.ro/ce-este-sal/"
@@ -1438,8 +1474,8 @@ function PolicyModals({ activePolicy, onClose }: { activePolicy: string | null; 
   const policy = policies[activePolicy];
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="bg-slate-900 border border-amber-400/30 rounded-lg max-w-2xl w-full max-h-96 overflow-y-auto p-6" onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4" onClick={onClose}>
+      <div className="bg-slate-900 border border-amber-400/30 rounded-t-xl sm:rounded-lg max-w-2xl w-full max-h-[85vh] sm:max-h-96 overflow-y-auto p-5 sm:p-6" onClick={(e) => e.stopPropagation()}>
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-amber-400" style={{ fontFamily: "'Playfair Display', serif" }}>
             {policy.title}
