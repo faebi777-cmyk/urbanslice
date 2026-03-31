@@ -185,6 +185,10 @@ const MENU_SUBTITLES: Record<string, string> = {
   'CALZONE': 'Palina 280g, sos roșii 50g, mozzarella 100g, șuncă 50g, bacon 75g (555g)',
   'TARANEASCA': 'Palina 280g, sos roșii 50g, bacon 75g, mozzarella 100g, șuncă 60g, salam 55g, cârnați 60g, ciuperci 70g, ardei gras 30g, porumb 20g, ceapă 20g (820g)',
   'QUATTRO STAGIONI': 'Palina 280g, sos roșii 50g, mozzarella 100g, șuncă 60g, ciuperci 70g, salam 55g, măsline 50g (665g)',
+  'COTTO': 'Palina 280g, sos roșii 50g, mozzarella 200g, șuncă 70g (600g)',
+  'ZUCCHINI': 'Palina 280g, sos roșii 50g, mozzarella 150g, zucchini 80g, gorgonzola 40g, peperoncino 30g (630g)',
+  'DIAVOLA TARTUFATA': 'Palina 280g, sos roșii 50g, mozzarella 200g, salam 80g, pastă de trufe 20g, peperoncini 30g (660g)',
+  'SALAMI TARTUFATA': 'Palina 280g, sos roșii 50g, mozzarella 200g, salam 100g, pastă de trufe 20g (650g)',
   'URBAN': 'Palina 280g, sos urban 20g, mozzarella 100g, ceapă 20g, crispy 100g',
   'MORTADELLA': 'Palina 280g, sos roșii 50g, mozzarella 250g, pesto, busuioc 0.1g, mortadella 60g, stracciatella 60g, fistic 6g, nuci 5g (700g)',
   'EL CIOLANESCU': 'Palina 280g, sos roșii 50g, mozzarella fior di latte 100g, ciolan afumat 60g, ouă de prepeliță 50g, ardei gras 30g, usturoi 10g, piper, ulei de măsline extra virgin',
@@ -433,7 +437,6 @@ function AboutSection() {
             alt="Urban Slice Cover"
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-red-900/60 to-transparent" />
           
           {/* Animated Steam Effect */}
           <motion.div
