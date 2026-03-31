@@ -333,9 +333,10 @@ function HeroSection({ setShowPolicy }: { setShowPolicy?: (policy: string) => vo
             }
           `}</style>
           <img
-            src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=400&h=400&fit=crop"
+            src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=400&h=400&fit=crop&q=60"
             alt="Pizza Background"
             className="rotating-pizza w-full h-full object-cover rounded-full"
+            loading="lazy"
           />
         </div>
       </div>
@@ -436,6 +437,7 @@ function AboutSection() {
             src="/despre-pizza.jpg"
             alt="Urban Slice Cover"
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            loading="lazy"
           />
           
           {/* Animated Steam Effect */}
@@ -604,12 +606,12 @@ function MenuSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.08 }}
+              transition={{ duration: 0.4, delay: Math.min(idx * 0.05, 0.3) }}
               className="bg-gray-900/50 border border-amber-900/30 hover:border-amber-500/50 transition-all duration-200 hover:shadow-lg hover:shadow-amber-900/20 overflow-hidden"
             >
               {showImage && (
               <div className="relative aspect-[4/3] overflow-hidden bg-gray-800">
-                <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+                <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy" />
               </div>
               )}
               <div className="p-4">
@@ -660,7 +662,7 @@ function GallerySection() {
           GALERIE FOTO
         </h2>
 
-        <div className="relative">
+        <div className="relative px-6 sm:px-14">
           <Carousel opts={{ loop: true, align: 'center', skipSnaps: false }}>
             <CarouselContent className="flex gap-4 pb-6">
               {galleryImages.map((image, idx) => (
@@ -670,6 +672,7 @@ function GallerySection() {
                       src={image.url}
                       alt={image.caption}
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-black/30 flex items-end">
                       <p
@@ -683,8 +686,8 @@ function GallerySection() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="text-amber-100 border-amber-100 hidden sm:flex" />
-            <CarouselNext className="text-amber-100 border-amber-100 hidden sm:flex" />
+            <CarouselPrevious className="text-amber-100 border-amber-100 -left-3 sm:-left-12 h-8 w-8 sm:h-10 sm:w-10" />
+            <CarouselNext className="text-amber-100 border-amber-100 -right-3 sm:-right-12 h-8 w-8 sm:h-10 sm:w-10" />
           </Carousel>
         </div>
       </div>
@@ -978,7 +981,7 @@ function OrderSection() {
                   >
                     {showImage && (
                       <div className="relative h-32 overflow-hidden bg-gray-800">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" loading="lazy" />
                       </div>
                     )}
                     <div className="p-3">
@@ -1381,7 +1384,6 @@ function Footer({ setShowPolicy }: { setShowPolicy: (policy: string) => void }) 
             <div className="space-y-2 text-amber-50/60 text-sm" style={{ fontFamily: "'Montserrat', sans-serif" }}>
               <p>(0740) 011 876</p>
               <p>mihai.grigoras82@gmail.com</p>
-              <p className="mt-2 text-amber-50/40 text-xs">CUI: [CUI_HERE] | Nr. Reg. Com.: [NR_REG_HERE]</p>
             </div>
           </div>
         </div>
@@ -1401,12 +1403,12 @@ function Footer({ setShowPolicy }: { setShowPolicy: (policy: string) => void }) 
               href="https://anpc.ro/ce-este-sal/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-0 px-1 py-1 bg-white/10 border border-amber-700 hover:bg-white/20 rounded-lg transition-colors duration-200"
+              className="inline-block"
             >
               <img
                 src="/anpc-logo.svg"
                 alt="ANPC"
-                className="h-10 w-auto"
+                className="h-10 w-auto rounded"
               />
             </a>
           </div>
@@ -1461,7 +1463,7 @@ function PolicyModals({ activePolicy, onClose }: { activePolicy: string | null; 
     },
     terms: {
       title: 'Termeni și Condiții',
-      content: `Ultima actualizare: martie 2025\n\nPrin utilizarea site-ului Urban Slice, acceptați termenii și condițiile de mai jos.\n\nProprietate intelectuală\nTot conținutul acestui site (logo, imagini, texte, meniu) este proprietatea Urban Slice și este protejat de legea drepturilor de autor.\n\nRezervări\nRezervările se pot face online, telefonic sau prin e-mail. Vă rugăm să ne anunțați cu cel puțin 2 ore înainte în cazul anulării.\n\nResponsabilitate\nUrban Slice nu poate fi ținut responsabil pentru inexactitățile tehnice de pe site sau pentru disponibilitatea anumitor preparate în funcție de sezon.\n\nPrețuri\nPrețurile afișate sunt în lei (RON) și includ TVA conform legislației române în vigoare. Ne rezervăm dreptul de a modifica prețurile fără notificare prealabilă.\n\nLegislație aplicabilă\nPrezentul acord este guvernat de legislația română. Orice litigiu va fi soluționat de instanțele competente din România.\n\nDreptul de retragere\nConform art. 16 lit. d) din OUG 34/2014, produsele alimentare preparate la comandă sunt exceptate de la dreptul de retragere, fiind produse perisabile. Odată plasată, comanda nu poate fi anulată sau returnată.`
+      content: `Ultima actualizare: martie 2025\n\nPrin utilizarea site-ului Urban Slice, acceptați termenii și condițiile de mai jos.\n\nDate de identificare\nCUI: [CUI_HERE] | Nr. Reg. Com.: [NR_REG_HERE]\n\nProprietate intelectuală\nTot conținutul acestui site (logo, imagini, texte, meniu) este proprietatea Urban Slice și este protejat de legea drepturilor de autor.\n\nRezervări\nRezervările se pot face online, telefonic sau prin e-mail. Vă rugăm să ne anunțați cu cel puțin 2 ore înainte în cazul anulării.\n\nResponsabilitate\nUrban Slice nu poate fi ținut responsabil pentru inexactitățile tehnice de pe site sau pentru disponibilitatea anumitor preparate în funcție de sezon.\n\nPrețuri\nPrețurile afișate sunt în lei (RON) și includ TVA conform legislației române în vigoare. Ne rezervăm dreptul de a modifica prețurile fără notificare prealabilă.\n\nLegislație aplicabilă\nPrezentul acord este guvernat de legislația română. Orice litigiu va fi soluționat de instanțele competente din România.\n\nDreptul de retragere\nConform art. 16 lit. d) din OUG 34/2014, produsele alimentare preparate la comandă sunt exceptate de la dreptul de retragere, fiind produse perisabile. Odată plasată, comanda nu poate fi anulată sau returnată.`
     },
     cookies: {
       title: 'Politica Cookies',
