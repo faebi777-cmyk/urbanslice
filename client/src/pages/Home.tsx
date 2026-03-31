@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Menu, X, ShoppingCart, MapPin, Phone, Mail, Instagram, Facebook, Music, ChevronDown, Check, AlertCircle, Globe, Star } from 'lucide-react';
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/components/ui/carousel';
 
 /**
  * URBAN SLICE - ARTISAN PIZZERIA WEBSITE
@@ -611,7 +610,7 @@ function MenuSection() {
             >
               {showImage && (
               <div className="relative aspect-[4/3] overflow-hidden bg-gray-800">
-                <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy" />
+                <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
               </div>
               )}
               <div className="p-4">
@@ -641,6 +640,40 @@ function MenuSection() {
   );
 }
 
+// Component: Gallery Image with Scroll Zoom
+function GalleryImage({ url, caption }: { url: string; caption: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'center center'],
+  });
+  const scale = useTransform(scrollYProgress, [0, 1], [0.85, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [0.6, 1]);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ scale, opacity }}
+      className="relative rounded-xl overflow-hidden shadow-2xl h-64 sm:h-80 md:h-[28rem] will-change-transform"
+    >
+      <img
+        src={url}
+        alt={caption}
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+        <p
+          className="p-4 sm:p-6 text-lg md:text-2xl font-bold text-amber-100"
+          style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
+        >
+          {caption}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
 // Component: Gallery Section
 function GallerySection() {
   const galleryImages = [
@@ -653,42 +686,19 @@ function GallerySection() {
   ];
 
   return (
-    <section id="galerie" className="bg-gradient-to-b from-gray-900 to-black py-20 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section id="galerie" className="bg-gradient-to-b from-gray-900 to-black py-16 sm:py-20 px-4">
+      <div className="max-w-4xl mx-auto">
         <h2
-          className="text-4xl md:text-5xl font-bold text-center text-amber-100 mb-12"
+          className="text-4xl md:text-5xl font-bold text-center text-amber-100 mb-10 sm:mb-14"
           style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px', fontWeight: 700 }}
         >
           GALERIE FOTO
         </h2>
 
-        <div className="relative px-6 sm:px-14">
-          <Carousel opts={{ loop: true, align: 'center', skipSnaps: false }}>
-            <CarouselContent className="flex gap-4 pb-6">
-              {galleryImages.map((image, idx) => (
-                <CarouselItem key={idx} className="basis-[85%] sm:basis-2/3 lg:basis-1/2">
-                  <div className="relative rounded-xl overflow-hidden shadow-2xl h-56 sm:h-72 md:h-96">
-                    <img
-                      src={image.url}
-                      alt={image.caption}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-black/30 flex items-end">
-                      <p
-                        className="p-4 text-lg md:text-xl font-bold text-amber-100"
-                        style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
-                      >
-                        {image.caption}
-                      </p>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="text-amber-100 border-amber-100 -left-3 sm:-left-12 h-8 w-8 sm:h-10 sm:w-10" />
-            <CarouselNext className="text-amber-100 border-amber-100 -right-3 sm:-right-12 h-8 w-8 sm:h-10 sm:w-10" />
-          </Carousel>
+        <div className="space-y-6 sm:space-y-10">
+          {galleryImages.map((image, idx) => (
+            <GalleryImage key={idx} url={image.url} caption={image.caption} />
+          ))}
         </div>
       </div>
     </section>
