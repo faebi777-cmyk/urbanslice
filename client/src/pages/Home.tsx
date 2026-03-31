@@ -743,12 +743,6 @@ function GallerySection() {
     </section>
   );
 }
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // Component: Simplified Reservation Form
 function ReservationSection() {
