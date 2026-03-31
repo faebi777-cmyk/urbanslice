@@ -429,7 +429,7 @@ function AboutSection() {
         {/* Cover Image */}
         <div className="relative h-96 rounded-lg overflow-hidden shadow-2xl group">
           <img
-            src={IMAGE_URLS.cover}
+            src="/despre-pizza.jpg"
             alt="Urban Slice Cover"
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
           />
