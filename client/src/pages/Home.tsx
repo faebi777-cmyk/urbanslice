@@ -518,6 +518,35 @@ function TestimonialsSection() {
   );
 }
 
+// Allergen detection helper
+function getAllergens(name: string, ingredientText: string): string[] {
+  if (!ingredientText.trim()) return [];
+  const lower = ingredientText.toLowerCase();
+  const allergens: string[] = [];
+  if (lower.includes('palina') || lower.includes('chiflă') || lower.includes('chifla')) {
+    allergens.push('gluten');
+  }
+  if (['mozzarella', 'parmezan', 'gorgonzola', 'cedar', 'cheddar', 'stracciatella', 'mascarpone', 'bufala', 'sos alb', 'unt'].some(d => lower.includes(d))) {
+    allergens.push('lactate');
+  }
+  if (/\bou\b/.test(lower) || lower.includes('ouă')) {
+    allergens.push('ouă');
+  }
+  if (/\bton\b/.test(lower)) {
+    allergens.push('pește');
+  }
+  if (lower.includes('fistic') || lower.includes('nuci')) {
+    allergens.push('nuci/fistic');
+  }
+  if (name === 'URBAN HOT DOG' || lower.includes('muștar') || lower.includes('mustar')) {
+    allergens.push('muștar');
+  }
+  if (lower.includes('țelină') || lower.includes('telina') || lower.includes('telină')) {
+    allergens.push('țelină');
+  }
+  return allergens;
+}
+
 // Component: Menu Section
 function MenuSection() {
   const [activeCategory, setActiveCategory] = useState('pizzaClassica');
@@ -589,6 +618,14 @@ function MenuSection() {
                     {itemSubtitle}
                   </p>
                 )}
+                {item.ingredients && (() => {
+                  const allergens = getAllergens(item.name, `${item.ingredients} ${itemSubtitle || ''}`);
+                  return allergens.length > 0 ? (
+                    <p className="mt-1 text-xs font-bold text-amber-400" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                      ⚠️ Alergeni: {allergens.join(', ')}
+                    </p>
+                  ) : null;
+                })()}
               </div>
             </motion.div>
             );
@@ -1006,6 +1043,10 @@ function OrderSection() {
                   })}
                 </div>
                 <div className="border-t border-amber-900/30 pt-2 mb-4">
+                  <div className="flex justify-between items-center text-amber-50/60 text-sm mb-1">
+                    <span>Taxa de livrare:</span>
+                    <span>gratuită</span>
+                  </div>
                   <div className="flex justify-between items-center text-amber-100 font-bold">
                     <span>Total (TVA inclus):</span>
                     <span className="text-lg text-amber-400">{cartTotal} RON</span>
@@ -1088,7 +1129,7 @@ function OrderSection() {
                     className="flex-1 bg-amber-500 text-black font-bold py-2 hover:bg-amber-400"
                     style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}
                   >
-                    TRIMITE COMANDA
+                    COMANDĂ CU OBLIGAȚIE DE PLATĂ
                   </button>
                 </div>
               </form>
@@ -1301,6 +1342,7 @@ function Footer({ setShowPolicy }: { setShowPolicy: (policy: string) => void }) 
             <div className="space-y-2 text-amber-50/60 text-sm" style={{ fontFamily: "'Montserrat', sans-serif" }}>
               <p>(0740) 011 876</p>
               <p>mihai.grigoras82@gmail.com</p>
+              <p className="mt-2 text-amber-50/40 text-xs">CUI: [CUI_HERE] | Nr. Reg. Com.: [NR_REG_HERE]</p>
             </div>
           </div>
         </div>
@@ -1380,7 +1422,7 @@ function PolicyModals({ activePolicy, onClose }: { activePolicy: string | null; 
     },
     terms: {
       title: 'Termeni și Condiții',
-      content: `Ultima actualizare: martie 2025\n\nPrin utilizarea site-ului Urban Slice, acceptați termenii și condițiile de mai jos.\n\nProprietate intelectuală\nTot conținutul acestui site (logo, imagini, texte, meniu) este proprietatea Urban Slice și este protejat de legea drepturilor de autor.\n\nRezervări\nRezervările se pot face online, telefonic sau prin e-mail. Vă rugăm să ne anunțați cu cel puțin 2 ore înainte în cazul anulării.\n\nResponsabilitate\nUrban Slice nu poate fi ținut responsabil pentru inexactitățile tehnice de pe site sau pentru disponibilitatea anumitor preparate în funcție de sezon.\n\nPrețuri\nPrețurile afișate sunt în lei (RON) și includ TVA conform legislației române în vigoare. Ne rezervăm dreptul de a modifica prețurile fără notificare prealabilă.\n\nLegislație aplicabilă\nPrezentul acord este guvernat de legislația română. Orice litigiu va fi soluționat de instanțele competente din România.`
+      content: `Ultima actualizare: martie 2025\n\nPrin utilizarea site-ului Urban Slice, acceptați termenii și condițiile de mai jos.\n\nProprietate intelectuală\nTot conținutul acestui site (logo, imagini, texte, meniu) este proprietatea Urban Slice și este protejat de legea drepturilor de autor.\n\nRezervări\nRezervările se pot face online, telefonic sau prin e-mail. Vă rugăm să ne anunțați cu cel puțin 2 ore înainte în cazul anulării.\n\nResponsabilitate\nUrban Slice nu poate fi ținut responsabil pentru inexactitățile tehnice de pe site sau pentru disponibilitatea anumitor preparate în funcție de sezon.\n\nPrețuri\nPrețurile afișate sunt în lei (RON) și includ TVA conform legislației române în vigoare. Ne rezervăm dreptul de a modifica prețurile fără notificare prealabilă.\n\nLegislație aplicabilă\nPrezentul acord este guvernat de legislația română. Orice litigiu va fi soluționat de instanțele competente din România.\n\nDreptul de retragere\nConform art. 16 lit. d) din OUG 34/2014, produsele alimentare preparate la comandă sunt exceptate de la dreptul de retragere, fiind produse perisabile. Odată plasată, comanda nu poate fi anulată sau returnată.`
     },
     cookies: {
       title: 'Politica Cookies',
