@@ -47,7 +47,7 @@ const MENU_DATA = {
   pizzaClassica: [
     { name: 'MARGHERITA', image: IMAGE_URLS.margherita, sizes: { '32cm': { price: 40, weight: '580 g' }, '40cm': { price: 55, weight: '700 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, busuioc' },
     { name: 'VEGETARIANA', image: IMAGE_URLS.vegetariana, sizes: { '32cm': { price: 40, weight: '660 g' }, '40cm': { price: 55, weight: '770 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, ciuperci, ardei gras, porumb, măsline' },
-    { name: 'CAPRICIOSA', image: IMAGE_URLS.capricciosa, sizes: { '32cm': { price: 45, weight: '670 g' }, '40cm': { price: 65, weight: '870 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, șuncă, ciuperci, măsline, cârnați' },
+    { name: 'CAPRICCIOSA', image: IMAGE_URLS.capricciosa, sizes: { '32cm': { price: 45, weight: '670 g' }, '40cm': { price: 65, weight: '870 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, șuncă, ciuperci, măsline, cârnați' },
     { name: 'PROSCIUTTO FUNGHI', image: IMAGE_URLS.prosciuttoFunghi, sizes: { '32cm': { price: 45, weight: '620 g' }, '40cm': { price: 65, weight: '720 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, șuncă, ciuperci' },
     { name: 'QUATTRO FORMAGGI', image: IMAGE_URLS.quattroFormaggi, sizes: { '32cm': { price: 50, weight: '600 g' }, '40cm': { price: 70, weight: '740 g' } }, ingredients: 'Palina, cheddar, mozzarella, gorgonzola, parmezan' },
     { name: 'COTTO', image: IMAGE_URLS.margherita, sizes: { '32cm': { price: 42, weight: '600 g' }, '40cm': { price: 65, weight: '700 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, șuncă' },
@@ -75,9 +75,9 @@ const MENU_DATA = {
   ],
   streetFood: [
     { name: 'URBAN HOT DOG', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '280 g' } }, ingredients: 'Cârnat semiafumat, sos Urban, cheddar, mozzarella, parmezan' },
-    { name: 'PANUZZO COTTO', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '320 g' } }, ingredients: 'Palina, sos de roșii cu busuioc, mozzarella, prosciutto cotto, rucola, unt, ulei de măsline' },
+    { name: 'PANUOZZO COTTO', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '320 g' } }, ingredients: 'Palina, sos de roșii cu busuioc, mozzarella, prosciutto cotto, rucola, unt, ulei de măsline' },
     { name: 'PANUZZO MORTADELA', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 35, weight: '320 g' } }, ingredients: 'Palina, mortadella, rucola, stracciatella, pesto, ulei de măsline' },
-    { name: 'PANUZZO CHORIZO', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '320 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, chorizo, rucola, cheddar, ulei picant' },
+    { name: 'PANUOZZO CHORIZO', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '320 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, chorizo, rucola, cheddar, ulei picant' },
     { name: 'PANUZZO CRISPY', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 35, weight: '320 g' } }, ingredients: 'Palina, pui crispy, sos Urban, rucola' },
     { name: 'PANUZZO CAPRESE', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '320 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pesto, roșii cherry, rucola, ulei de măsline' },
     { name: 'PANUZZO VENTRICINA', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '320 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam ventricina, rucola' },
@@ -171,6 +171,33 @@ const MENU_DATA = {
   ],
 };
 // Navigation Menu Items Mapping
+
+const MENU_SUBTITLES: Record<string, string> = {
+  'MARGHERITA': 'Palina 280g, sos roșii 50g, mozzarella 250g, busuioc 0.1g (580g)',
+  'VEGETARIANA': 'Palina 280g, sos roșii 50g, mozzarella 100g, ciuperci 140g, ardei gras 30g, porumb 30g, dovlecel 30g (660g)',
+  'CAPRICCIOSA': 'Palina 280g, sos roșii 50g, mozzarella 100g, șuncă 60g, ciuperci 70g, măsline 50g, cârnați 60g, salam chorizo 30g (670g)',
+  'PROSCIUTTO FUNGHI': 'Palina 280g, sos roșii 50g, mozzarella 100g, șuncă 60g, ciuperci 70g (560g)',
+  'QUATTRO FORMAGGI': 'Palina 280g, sos alb 20g, cedar 20g, mozzarella 225g, gorgonzola 30g, parmezan 25g (600g)',
+  'TONNO': 'Palina 280g, sos roșii 50g, mozzarella 100g, măsline 50g, ceapă 50g, ton 120g (650g)',
+  'CAPRESE': 'Palina 280g, sos roșii 50g, mozzarella 100g, sos pesto 30g, bufala 120g, roșii cherry 35g (615g)',
+  'DIAVOLA': 'Palina 280g, sos roșii 50g, mozzarella 250g, salam 150g, peperoncini 30g (760g)',
+  'SALAMI': 'Palina 280g, sos roșii 50g, mozzarella 250g, salam 150g (730g)',
+  'CALZONE': 'Palina 280g, sos roșii 50g, mozzarella 100g, șuncă 50g, bacon 75g (555g)',
+  'TARANEASCA': 'Palina 280g, sos roșii 50g, bacon 75g, mozzarella 100g, șuncă 60g, salam 55g, cârnați 60g, ciuperci 70g, ardei gras 30g, porumb 20g, ceapă 20g (820g)',
+  'QUATTRO STAGIONI': 'Palina 280g, sos roșii 50g, mozzarella 100g, șuncă 60g, ciuperci 70g, salam 55g, măsline 50g (665g)',
+  'URBAN': 'Palina 280g, sos urban 20g, mozzarella 100g, ceapă 20g, crispy 100g',
+  'MORTADELLA': 'Palina 280g, sos roșii 50g, mozzarella 250g, pesto, busuioc 0.1g, mortadella 60g, stracciatella 60g, fistic 6g, nuci 5g (700g)',
+  'EL CIOLANESCU': 'Palina 280g, sos roșii 50g, mozzarella fior di latte 100g, ciolan afumat 60g, ouă de prepeliță 50g, ardei gras 30g, usturoi 10g, piper, ulei de măsline extra virgin',
+  'QUATTRO CARNE': 'Palina 280g, sos roșii 50g, salam napoli 55g, prosciutto cotto 60g, ventricina 60g, cârnați 60g, mozzarella fior di latte 100g, parmezan (665g)',
+  'QUATTRO FORMAGGI E VENTRICINA': 'Palina 280g, sos alb 20g, cedar 20g, mozzarella 225g, gorgonzola 30g, parmezan 25g, ventriciana 50g',
+  'TARTUFO E SALSICCIA': 'Sos de roșii, mozzarella, pastă de trufe, cârnați proaspeți salsiccia',
+  'PASTRAMI CON POMODORI SECCHI': 'Palina 280g, sos roșii 50g, mozzarella 200g, pastrami 100g, roșii uscate 50g (680g)',
+  'PROSCIUTTO CRUDO E RUCOLA': 'Palina 280g, mozzarella 250g, roșii cherry 35g, rucola 30g, prosciutto crudo 50g, parmezan 25g (670g)',
+  'CARBONARA': 'Palina 280g, sos alb 20g, mozzarella 100g, pancetta 75g, ou 30g (565g)',
+  'PANUOZZO COTTO': 'Palina 140g, sos roșii cu busuioc 30g, mozzarella 30g, rucola, prosciutto cotto 40g, unt, ulei de măsline',
+  'PANUOZZO CHORIZO': 'Palina 140g, sos roșii 30g, unt 20g, rucola, chorizo 30g, ulei de măsline',
+  'BURGER URBAN BLACK ANGUS': 'Burger Black Angus Romania, sos urban, cedar, mozzarella, castraveți murați, salată, bacon, ceapă',
+};
 const MENU_ITEMS = [
   { label: 'Meniu', sectionId: 'meniu' },
   { label: 'Galerie', sectionId: 'galerie' },
@@ -400,13 +427,33 @@ function AboutSection() {
         </div>
 
         {/* Cover Image */}
-        <div className="relative h-96 rounded-lg overflow-hidden shadow-2xl">
+        <div className="relative h-96 rounded-lg overflow-hidden shadow-2xl group">
           <img
             src={IMAGE_URLS.cover}
             alt="Urban Slice Cover"
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-red-900/60 to-transparent" />
+          
+          {/* Animated Steam Effect */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 4, repeat: Infinity }}
+            className="absolute top-8 left-1/4 w-16 h-16 bg-white rounded-full filter blur-2xl opacity-20 pointer-events-none"
+          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.2, 0.5, 0.2], y: [0, -20, -40] }}
+            transition={{ duration: 5, repeat: Infinity, delay: 1 }}
+            className="absolute top-12 right-1/4 w-12 h-12 bg-white rounded-full filter blur-xl opacity-15 pointer-events-none"
+          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.25, 0.55, 0.25], y: [0, -30, -50] }}
+            transition={{ duration: 4.5, repeat: Infinity, delay: 0.5 }}
+            className="absolute top-16 left-1/3 w-14 h-14 bg-white rounded-full filter blur-2xl opacity-15 pointer-events-none"
+          />
         </div>
       </div>
     </section>
@@ -518,6 +565,7 @@ function MenuSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           {currentMenu.map((item, idx) => {
             const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa';
+            const itemSubtitle = MENU_SUBTITLES[item.name];
             return (
             <motion.div
               key={idx}
@@ -536,7 +584,11 @@ function MenuSection() {
                 <h3 className="text-base md:text-lg font-bold text-amber-100" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
                   {item.name}
                 </h3>
-                {/* in curand voi include extra detalii produse */}
+                {itemSubtitle && (
+                  <p className="mt-2 text-xs md:text-sm leading-relaxed text-amber-50/65" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>
+                    {itemSubtitle}
+                  </p>
+                )}
               </div>
             </motion.div>
             );
