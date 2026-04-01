@@ -19,23 +19,23 @@ import { Menu, X, ShoppingCart, MapPin, Phone, Mail, Instagram, Facebook, Music,
 const IMAGE_URLS = {
   cover: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/ 1. Cover_f80e1aff.png',
   margherita: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/margherita_654b8716.png',
-  vegetariana: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/vegerariana_cae58381.png',
+  vegetariana: '/poze ai urban slice/poza pizza vegetariana.png',
   capricciosa: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/capricciosa_a3f529c2.png',
-  prosciuttoFunghi: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/prosciutto e funghi_06e662c4.png',
+  prosciuttoFunghi: '/poze ai urban slice/poza prosciutto e funghi.png',
   quattroFormaggi: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/quattro fromaggi_5687a92d.png',
   tonno: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/tonno_bd3cfa2a.jpeg',
   caprese: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/capresse_30794f3a.png',
-  diavola: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/diavola_eb7c3fa5.png',
+  diavola: '/poze ai urban slice/poza salami diavola.png',
   salami: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/salami_0f5f3a4b.png',
   calzone: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/calzone_f2aab74b.png',
-  taraneasca: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/taraneasca_d34444e8.png',
-  quattroStagioni: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/quattro stagioni_ebd125f3.png',
+  taraneasca: '/poze ai urban slice/poza taraneasca.png',
+  quattroStagioni: '/poze ai urban slice/poza quatro stagionni.png',
   zucchini: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/quattro fromaggi_5687a92d.png',
-  urban: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/pollo_81e6630f.png',
+  urban: '/poze ai urban slice/poza pizza pollo.png',
   mortadella: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/prosciutto crudo_28078c58.png',
-  carbonara: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/carbonara_20be5bff.png',
+  carbonara: '/poze ai urban slice/poza carbonara.png',
   prosciuttoCrudo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/prosciutto crudo_28078c58.png',
-  diavola_tartufata: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/diavola_eb7c3fa5.png',
+  diavola_tartufata: '/poze ai urban slice/poza salami diavola.png',
   salami_tartufata: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/salami_0f5f3a4b.png',
 };
 
@@ -639,12 +639,12 @@ function MenuSection() {
 // Component: Gallery Section — single-spot slideshow with zoom crossfade
 function GallerySection() {
   const galleryImages = [
-    { url: IMAGE_URLS.margherita, caption: 'Pizza Artizanală' },
-    { url: IMAGE_URLS.diavola, caption: 'Diavola Specială' },
-    { url: IMAGE_URLS.cover, caption: 'Ingrediente Premium' },
-    { url: IMAGE_URLS.quattroFormaggi, caption: 'Quattro Formaggi' },
-    { url: IMAGE_URLS.taraneasca, caption: 'Taraneasca' },
-    { url: IMAGE_URLS.carbonara, caption: 'Carbonara Tradițională' },
+    { url: '/poze ai urban slice/poza carbonara.png', caption: 'Carbonara Tradițională' },
+    { url: '/poze ai urban slice/poza salami diavola.png', caption: 'Diavola Specială' },
+    { url: '/poze ai urban slice/poza pizza vegetariana.png', caption: 'Pizza Vegetariana' },
+    { url: '/poze ai urban slice/poza prosciutto e funghi.png', caption: 'Prosciutto e Funghi' },
+    { url: '/poze ai urban slice/poza quatro stagionni.png', caption: 'Quattro Stagioni' },
+    { url: '/poze ai urban slice/poza taraneasca.png', caption: 'Pizza Țărănească' },
   ];
 
   const [current, setCurrent] = useState(0);
