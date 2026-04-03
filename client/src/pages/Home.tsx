@@ -36,12 +36,13 @@ const IMAGE_URLS = {
   mortadella: '/poze ai urban slice/poza mortadela.png',
   carbonara: '/poze ai urban slice/poza carbonara.png',
   prosciuttoCrudo: '/poze ai urban slice/poza prosciutto crudo e rucola.png',
-  diavola_tartufata: '/poze ai urban slice/poza salami diavola.png',
-  salami_tartufata: '/poze ai urban slice/poza salami.png',
+  diavola_tartufata: '/poze ai urban slice/poza diavola tartufata.png',
+  salami_tartufata: '/poze ai urban slice/poza salami tartufata.png',
   quattroCarne: '/poze ai urban slice/poza quatro carne.png',
   elCiolanescu: '/poze ai urban slice/poza el ciolanescu.png',
   tartufoSalsiccia: '/poze ai urban slice/poza tartufo e salsiccia.png',
   pastramiPomodori: '/poze ai urban slice/poza pastrami con pomodori secchi.png',
+  quattroFormaggiVentricina: '/poze ai urban slice/poza quatro formaggi e ventricina.png',
 };
 
 const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/logourbanslice_a919f1bf.png';
@@ -69,7 +70,7 @@ const MENU_DATA = {
     { name: 'MORTADELLA', image: IMAGE_URLS.mortadella, sizes: { '32cm': { price: 50, weight: '640 g' }, '40cm': { price: 70, weight: '840 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, mortadella, pesto, busuioc' },
     { name: 'EL CIOLANESCU', image: IMAGE_URLS.elCiolanescu, sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '800 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, ciolan afumat, ouă de prepeliță, ardei gras, usturoi, piper, ulei de măsline extravirgin' },
     { name: 'QUATTRO CARNE', image: IMAGE_URLS.quattroCarne, sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '660 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam Napoli, prosciutto cotto, ventricina, cârnați, parmezan' },
-    { name: 'QUATTRO FORMAGGI E VENTRICINA', image: IMAGE_URLS.quattroFormaggi, sizes: { '32cm': { price: 50, weight: '640 g' }, '40cm': { price: 70, weight: '640 g' } }, ingredients: 'Palina, sos alb, cheddar, mozzarella, gorgonzola, parmezan, ventricina' },
+    { name: 'QUATTRO FORMAGGI E VENTRICINA', image: IMAGE_URLS.quattroFormaggiVentricina, sizes: { '32cm': { price: 50, weight: '640 g' }, '40cm': { price: 70, weight: '640 g' } }, ingredients: 'Palina, sos alb, cheddar, mozzarella, gorgonzola, parmezan, ventricina' },
     { name: 'TARTUFO E SALSICCIA', image: IMAGE_URLS.tartufoSalsiccia, sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '660 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pastă de trufe, cârnat proaspăt salsiccia' },
     { name: 'PASTRAMI CON POMODORI SECCHI', image: IMAGE_URLS.pastramiPomodori, sizes: { '32cm': { price: 45, weight: '660 g' }, '40cm': { price: 65, weight: '660 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pastramă, roșii uscate' },
     { name: 'PROSCIUTTO CRUDO E RUCOLA', image: IMAGE_URLS.prosciuttoCrudo, sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '660 g' } }, ingredients: 'Palina, mozzarella, roșii cherry, rucola, prosciutto crudo, parmezan' },
