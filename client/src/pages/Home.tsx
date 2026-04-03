@@ -26,7 +26,7 @@ const IMAGE_URLS = {
   tonno: '/poze ai urban slice/poza tonno.png',
   caprese: '/poze ai urban slice/poza capresse.png',
   diavola: '/poze ai urban slice/poza salami diavola.png',
-  salami: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/salami_0f5f3a4b.png',
+  salami: '/poze ai urban slice/poza salami.png',
   calzone: '/poze ai urban slice/poza calzone.png',
   cotto: '/poze ai urban slice/poza cotto.png',
   taraneasca: '/poze ai urban slice/poza taraneasca.png',
@@ -38,6 +38,7 @@ const IMAGE_URLS = {
   prosciuttoCrudo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/prosciutto crudo_28078c58.png',
   diavola_tartufata: '/poze ai urban slice/poza salami diavola.png',
   salami_tartufata: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/salami_0f5f3a4b.png',
+  quattroCarne: '/poze ai urban slice/poza quatro carne.png',
 };
 
 const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/logourbanslice_a919f1bf.png';
@@ -64,7 +65,7 @@ const MENU_DATA = {
     { name: 'URBAN', image: IMAGE_URLS.urban, sizes: { '32cm': { price: 45, weight: '660 g' }, '40cm': { price: 65, weight: '800 g' } }, ingredients: 'Palina, sos roșii, mozzarella, chorizo, gorgonzola, cedar, parmezan' },
     { name: 'MORTADELLA', image: IMAGE_URLS.mortadella, sizes: { '32cm': { price: 50, weight: '640 g' }, '40cm': { price: 70, weight: '840 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, mortadella, pesto, busuioc' },
     { name: 'EL CIOLANESCU', image: IMAGE_URLS.margherita, sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '800 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, ciolan afumat, ouă de prepeliță, ardei gras, usturoi, piper, ulei de măsline extravirgin' },
-    { name: 'QUATTRO CARNE', image: IMAGE_URLS.quattroFormaggi, sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '660 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam Napoli, prosciutto cotto, ventricina, cârnați, parmezan' },
+    { name: 'QUATTRO CARNE', image: IMAGE_URLS.quattroCarne, sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '660 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam Napoli, prosciutto cotto, ventricina, cârnați, parmezan' },
     { name: 'QUATTRO FORMAGGI E VENTRICINA', image: IMAGE_URLS.quattroFormaggi, sizes: { '32cm': { price: 50, weight: '640 g' }, '40cm': { price: 70, weight: '640 g' } }, ingredients: 'Palina, sos alb, cheddar, mozzarella, gorgonzola, parmezan, ventricina' },
     { name: 'TARTUFO E SALSICCIA', image: IMAGE_URLS.margherita, sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '660 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pastă de trufe, cârnat proaspăt salsiccia' },
     { name: 'PASTRAMI CON POMODORI SECCHI', image: IMAGE_URLS.margherita, sizes: { '32cm': { price: 45, weight: '660 g' }, '40cm': { price: 65, weight: '660 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pastramă, roșii uscate' },
@@ -607,7 +608,7 @@ function MenuSection() {
             >
               {showImage && (
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+                <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" style={{ imageRendering: 'auto', filter: 'contrast(1.05) brightness(1.02)' }} />
               </div>
               )}
               <div className="p-4">
@@ -1031,7 +1032,7 @@ function OrderSection() {
                   >
                     {showImage && (
                       <div className="relative h-32 overflow-hidden bg-gray-800">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" loading="lazy" />
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" style={{ imageRendering: 'auto', filter: 'contrast(1.05) brightness(1.02)' }} loading="lazy" />
                       </div>
                     )}
                     <div className="p-3">
