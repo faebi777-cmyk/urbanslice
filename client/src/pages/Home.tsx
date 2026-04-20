@@ -1469,6 +1469,19 @@ function Footer({ setShowPolicy }: { setShowPolicy: (policy: string) => void }) 
           </div>
         </div>
       </div>
+      <div className="border-t border-amber-900/20 mt-8 pt-6 text-center">
+        <p className="text-gray-500 text-sm">
+          Made with ❤️ by{" "}
+          <a
+            href="https://www.novigo.ro"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-amber-500 hover:text-amber-400 transition-colors"
+          >
+            novigo.ro
+          </a>
+        </p>
+      </div>
     </footer>
   );
 }
