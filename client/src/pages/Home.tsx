@@ -660,7 +660,7 @@ function MenuSection() {
           /* Standard Menu Items Grid */
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {currentMenu.map((item, idx) => {
-              const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa';
+              const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa' || activeCategory === 'beverages';
               const itemSubtitle = MENU_SUBTITLES[item.name];
               return (
               <div
@@ -1086,7 +1086,7 @@ function OrderSection() {
           <div className="lg:col-span-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {currentMenu.map((item, idx) => {
-                const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa';
+                const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa' || activeCategory === 'beverages';
                 return (
                   <div
                     key={idx}
