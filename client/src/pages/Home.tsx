@@ -102,55 +102,63 @@ const MENU_DATA = {
     { name: 'MURĂTURI ASORTATE', image: IMAGE_URLS.margherita, sizes: { '150g': { price: 10, weight: '150 g' } }, ingredients: 'Castraveți murați, gogonele, varză murată' },
   ],
   alcoholicBeverages: [
-    // Cocktails
-    { name: 'Cuba Libre', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    { name: 'Hugo', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    { name: 'Aperol Spritz', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    // De autobază
-    { name: '"Adio, mamă" (vin fiert cu rom)', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    { name: '"Submarin" (bere draft cu rom)', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    { name: 'Whiskey Jack Daniel\'s - 100 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    { name: 'Whiskey Glenfiddich 12 ani - 100 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '' } }, ingredients: '' },
-    { name: 'Vodcă Absolut - 100 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '' } }, ingredients: '' },
-    { name: 'Vodcă Grey Goose - 100 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '' } }, ingredients: '' },
-    { name: 'Rom Captain Morgan - 100 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    { name: 'Rom Bacardi Spiced - 100 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    { name: 'Coniac Alexandrion 5* - 100 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '' } }, ingredients: '' },
-    { name: 'Coniac Metax™ - 100 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    // Bere sticlă 500 ml
-    { name: 'Amstel - 500 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 10, weight: '' } }, ingredients: '' },
-    { name: 'Heineken - 500 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
-    { name: 'Birra Moretti - 500 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
-    { name: 'Silva neagra - 500 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
-    { name: 'Harghita - 500 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
-    { name: 'Hategana - 500 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
-    { name: 'Suceava - 500 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
-    { name: 'Solca - 500 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
-    { name: 'Calimani - 500 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
-    // Bere sticlă 330 ml
-    { name: 'Corona - 330 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
-    { name: 'Praga - 330 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
-    { name: 'St Miguel - 330 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
-    { name: 'Bermas - 330 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
-    { name: 'Paulaner - 330 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '' } }, ingredients: '' },
-    // Bere draft 400 ml
-    { name: 'Ciuc premium - 400 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 10, weight: '' } }, ingredients: '' },
-    { name: 'Birra Moretti - 400 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
-    { name: 'Calimani - 400 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
-    { name: 'St Miguel - 400 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
-    // Vinuri 0.75 ml
-    { name: 'Budureasca Clasic (rosé, roșu, fume) - 0.75 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 70, weight: '' } }, ingredients: '' },
-    { name: 'Compas (rosé, Pinot Grigio) - 0.75 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 65, weight: '' } }, ingredients: '' },
-    { name: 'Compas Shiraz (roșu) - 0.75 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 75, weight: '' } }, ingredients: '' },
-    { name: 'Caii de la Letea - Vol. I (roșu) - 0.75 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 75, weight: '' } }, ingredients: '' },
-    { name: 'Implicit (alb, rosé, roșu) - 0.75 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 85, weight: '' } }, ingredients: '' },
-    { name: 'Petro Vaselo (alb, rosé) - 0.75 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 75, weight: '' } }, ingredients: '' },
-    { name: 'Caraman Tabu (alb, rosé) - 0.75 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 70, weight: '' } }, ingredients: '' },
-    { name: 'Domeniul Bogdan (alb, rosé, roșu) - 0.75 ml', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 40, weight: '' } }, ingredients: '' },
-    // Vin casei și la pahar
-    { name: 'Vinul casei (carafa 0.500ml)', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 40, weight: '' } }, ingredients: '' },
-    { name: 'Vin pahar (alb, rosé, roșu)', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
-    { name: 'Spumant (alb, rosé)', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+    // BERE STICLA - 500 ML
+    { name: 'Amstel', price: 10, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 10, weight: '' } }, ingredients: '' },
+    { name: 'Heineken', price: 12, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
+    { name: 'Birra Moretti', price: 12, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
+    { name: 'Silva neagra', price: 15, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
+    { name: 'Harghita', price: 12, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
+    { name: 'Hategana', price: 12, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
+    { name: 'Suceava', price: 14, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
+    { name: 'Solca', price: 14, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
+    { name: 'Calimani', price: 14, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
+    
+    // BERE STICLA - 330 ML
+    { name: 'Corona', price: 15, category: 'BERE STICLA - 330 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
+    { name: 'Praga', price: 14, category: 'BERE STICLA - 330 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
+    { name: 'St Miguel', price: 14, category: 'BERE STICLA - 330 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
+    { name: 'Bermas', price: 14, category: 'BERE STICLA - 330 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
+    { name: 'Paulaner', price: 20, category: 'BERE STICLA - 330 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '' } }, ingredients: '' },
+    
+    // BERE DRAFT - 400 ML
+    { name: 'Ciuc premium', price: 10, category: 'BERE DRAFT - 400 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 10, weight: '' } }, ingredients: '' },
+    { name: 'Birra Moretti', price: 12, category: 'BERE DRAFT - 400 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
+    { name: 'Calimani', price: 14, category: 'BERE DRAFT - 400 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
+    { name: 'St Miguel', price: 15, category: 'BERE DRAFT - 400 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
+    
+    // VINURI 0.75 ML
+    { name: 'Budureasca Clasic (rosé, roșu, fume)', price: 70, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 70, weight: '' } }, ingredients: '' },
+    { name: 'Compas (rosé, Pinot Grigio)', price: 65, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 65, weight: '' } }, ingredients: '' },
+    { name: 'Compas Shiraz (roșu)', price: 75, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 75, weight: '' } }, ingredients: '' },
+    { name: 'Caii de la Letea - Vol. I (roșu)', price: 75, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 75, weight: '' } }, ingredients: '' },
+    { name: 'Implicit (alb, rosé, roșu)', price: 85, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 85, weight: '' } }, ingredients: '' },
+    { name: 'Petro Vaselo (alb, rosé)', price: 75, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 75, weight: '' } }, ingredients: '' },
+    { name: 'Caraman Tabu (alb, rosé)', price: 70, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 70, weight: '' } }, ingredients: '' },
+    { name: 'Domeniul Bogdan (alb, rosé, roșu)', price: 40, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 40, weight: '' } }, ingredients: '' },
+    
+    // VINUL CASEI (CARAFA 0.500ML)
+    { name: 'Vinul casei (carafa 0.500ml)', price: 40, category: 'VINUL CASEI', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 40, weight: '' } }, ingredients: '' },
+    
+    // LA PAHAR
+    { name: 'Vin pahar (alb, rosé, roșu)', price: 15, category: 'LA PAHAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
+    { name: 'Spumant (alb, rosé)', price: 25, category: 'LA PAHAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+    
+    // COCKTAILS
+    { name: 'Cuba Libre', price: 25, category: 'COCKTAILS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+    { name: 'Hugo', price: 25, category: 'COCKTAILS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+    { name: 'Aperol Spritz', price: 25, category: 'COCKTAILS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+    
+    // DE AUTOBAZĂ
+    { name: '"Adio, mamă" (vin fiert cu rom)', price: 25, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+    { name: '"Submarin" (bere draft cu rom)', price: 25, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+    { name: 'Whiskey Jack Daniel\'s - 100 ml', price: 25, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+    { name: 'Whiskey Glenfiddich 12 ani (Single Malt) - 100 ml', price: 30, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '' } }, ingredients: '' },
+    { name: 'Vodcă Absolut - 100 ml', price: 20, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '' } }, ingredients: '' },
+    { name: 'Vodcă Grey Goose - 100 ml', price: 30, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '' } }, ingredients: '' },
+    { name: 'Rom Captain Morgan - 100 ml', price: 25, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+    { name: 'Rom Bacardi Spiced - 100 ml', price: 25, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+    { name: 'Coniac Alexandrion 5* - 100 ml', price: 20, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '' } }, ingredients: '' },
+    { name: 'Coniac Metaxa 7*', price: 25, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
   ],
   gratar: [
     { name: 'MICI', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 7, weight: '90 g' } }, ingredients: 'Carne vită, carne porc, condimente' },
@@ -572,6 +580,20 @@ function MenuSection() {
 
   const currentMenu = MENU_DATA[activeCategory as keyof typeof MENU_DATA];
 
+  // Group alcoholic beverages by category
+  const getGroupedBeverages = () => {
+    const grouped: { [key: string]: typeof currentMenu } = {};
+    (currentMenu as any[]).forEach((item) => {
+      const cat = item.category || 'ALTELE';
+      if (!grouped[cat]) grouped[cat] = [];
+      grouped[cat].push(item);
+    });
+    return grouped;
+  };
+
+  const isAlcoholicBeverages = activeCategory === 'alcoholicBeverages';
+  const groupedBeverages = isAlcoholicBeverages ? getGroupedBeverages() : {};
+
   return (
     <section id="meniu" className="bg-black py-16 px-4">
       <div className="max-w-7xl mx-auto">
@@ -600,43 +622,68 @@ function MenuSection() {
           ))}
         </div>
 
-        {/* Menu Items Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-          {currentMenu.map((item, idx) => {
-            const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa';
-            const itemSubtitle = MENU_SUBTITLES[item.name];
-            return (
-            <div
-              key={idx}
-              className="bg-gray-900/50 border border-amber-900/30 hover:border-amber-500/50 transition-all duration-200 hover:shadow-lg hover:shadow-amber-900/20 overflow-hidden"
-            >
-              {showImage && (
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" style={{ imageRendering: 'auto', filter: 'contrast(1.05) brightness(1.02)' }} />
-              </div>
-              )}
-              <div className="p-4">
-                <h3 className="text-base md:text-lg font-bold text-amber-100" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
-                  {item.name}
+        {/* Alcoholic Beverages - Special Layout */}
+        {isAlcoholicBeverages ? (
+          <div className="space-y-8">
+            {Object.entries(groupedBeverages).map(([category, items]) => (
+              <div key={category} className="border-t border-amber-900/30 pt-6">
+                <h3 className="text-xl md:text-2xl font-bold text-amber-400 mb-4 pb-3 border-b border-amber-900/20" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  {category}
                 </h3>
-                {itemSubtitle && (
-                  <p className="mt-2 text-xs md:text-sm leading-relaxed text-amber-50/65" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>
-                    {itemSubtitle}
-                  </p>
-                )}
-                {item.ingredients && (() => {
-                  const allergens = getAllergens(item.name, `${item.ingredients} ${itemSubtitle || ''}`);
-                  return allergens.length > 0 ? (
-                    <p className="mt-1 text-xs font-bold text-amber-400" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-                      ⚠️ Alergeni: {allergens.join(', ')}
-                    </p>
-                  ) : null;
-                })()}
+                <div className="space-y-2">
+                  {items.map((item: any, idx: number) => (
+                    <div key={idx} className="flex justify-between items-center bg-gray-900/30 hover:bg-gray-900/50 px-4 py-3 rounded transition-colors duration-200 border border-amber-900/20 hover:border-amber-500/30">
+                      <span className="text-sm md:text-base text-amber-100 font-medium" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                        {item.name}
+                      </span>
+                      <span className="text-base md:text-lg font-bold text-amber-400 ml-4 whitespace-nowrap" style={{ fontFamily: "'Playfair Display', serif" }}>
+                        {item.price} RON
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        ) : (
+          /* Standard Menu Items Grid */
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            {currentMenu.map((item, idx) => {
+              const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa';
+              const itemSubtitle = MENU_SUBTITLES[item.name];
+              return (
+              <div
+                key={idx}
+                className="bg-gray-900/50 border border-amber-900/30 hover:border-amber-500/50 transition-all duration-200 hover:shadow-lg hover:shadow-amber-900/20 overflow-hidden"
+              >
+                {showImage && (
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" style={{ imageRendering: 'auto', filter: 'contrast(1.05) brightness(1.02)' }} />
+                </div>
+                )}
+                <div className="p-4">
+                  <h3 className="text-base md:text-lg font-bold text-amber-100" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>
+                    {item.name}
+                  </h3>
+                  {itemSubtitle && (
+                    <p className="mt-2 text-xs md:text-sm leading-relaxed text-amber-50/65" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>
+                      {itemSubtitle}
+                    </p>
+                  )}
+                  {item.ingredients && (() => {
+                    const allergens = getAllergens(item.name, `${item.ingredients} ${itemSubtitle || ''}`);
+                    return allergens.length > 0 ? (
+                      <p className="mt-1 text-xs font-bold text-amber-400" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                        ⚠️ Alergeni: {allergens.join(', ')}
+                      </p>
+                    ) : null;
+                  })()}
+                </div>
+              </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );

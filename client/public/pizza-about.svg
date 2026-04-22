@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <filter id="blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+    </filter>
+    <style>
+      @keyframes steam1 { 
+        0% { opacity: 1; transform: translateY(0) translateX(0); }
+        100% { opacity: 0; transform: translateY(-60px) translateX(15px); }
+      }
+      @keyframes steam2 { 
+        0% { opacity: 0.8; transform: translateY(0) translateX(0); }
+        100% { opacity: 0; transform: translateY(-80px) translateX(-20px); }
+      }
+      .steam1 { animation: steam1 3s ease-in infinite; }
+      .steam2 { animation: steam2 4s ease-in 1s infinite; }
+    </style>
+  </defs>
+  
+  <!-- Pizza base -->
+  <circle cx="200" cy="200" r="140" fill="#d4a574"/>
+  
+  <!-- Pizza crust texture -->
+  <circle cx="200" cy="200" r="135" fill="none" stroke="#c4956a" stroke-width="3" opacity="0.6"/>
+  
+  <!-- Cheese -->
+  <circle cx="200" cy="200" r="130" fill="#f4d36f" opacity="0.9"/>
+  
+  <!-- Toppings -->
+  <circle cx="160" cy="170" r="8" fill="#c0392b"/>
+  <circle cx="210" cy="190" r="8" fill="#c0392b"/>
+  <circle cx="240" cy="160" r="8" fill="#c0392b"/>
+  <circle cx="180" cy="220" r="8" fill="#c0392b"/>
+  <circle cx="220" cy="220" r="8" fill="#27ae60"/>
+  <circle cx="150" cy="200" r="6" fill="#27ae60"/>
+  
+  <!-- Basil leaf -->
+  <ellipse cx="200" cy="200" rx="15" ry="8" fill="#27ae60" transform="rotate(-30 200 200)"/>
+  
+  <!-- Steam puffs - animated -->
+  <g class="steam1">
+    <circle cx="180" cy="80" r="18" fill="#e0e0e0" opacity="0.5" filter="url(#blur)"/>
+    <circle cx="185" cy="70" r="14" fill="#e8e8e8" opacity="0.4" filter="url(#blur)"/>
+  </g>
+  
+  <g class="steam2">
+    <circle cx="220" cy="75" r="16" fill="#d5d5d5" opacity="0.5" filter="url(#blur)"/>
+    <circle cx="215" cy="60" r="12" fill="#e8e8e8" opacity="0.4" filter="url(#blur)"/>
+  </g>
+  
+  <g class="steam1" style="animation-delay: 0.5s;">
+    <circle cx="200" cy="85" r="15" fill="#e0e0e0" opacity="0.5" filter="url(#blur)"/>
+    <circle cx="205" cy="75" r="11" fill="#e8e8e8" opacity="0.4" filter="url(#blur)"/>
+  </g>
+</svg>
