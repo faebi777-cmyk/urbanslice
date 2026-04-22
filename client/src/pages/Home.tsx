@@ -668,8 +668,8 @@ function MenuSection() {
                 className="bg-gray-900/50 border border-amber-900/30 hover:border-amber-500/50 transition-all duration-200 hover:shadow-lg hover:shadow-amber-900/20 overflow-hidden"
               >
                 {showImage && (
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" style={{ imageRendering: 'auto', filter: 'contrast(1.05) brightness(1.02)' }} />
+                <div className={`relative aspect-[4/3] overflow-hidden flex items-center justify-center ${activeCategory === 'beverages' ? 'bg-black' : ''}`}>
+                  <img src={item.image} alt={item.name} className={`transition-transform duration-300 hover:scale-105 ${activeCategory === 'beverages' ? 'max-h-full max-w-full object-contain p-3' : 'w-full h-full object-cover'}`} style={{ imageRendering: 'auto', filter: 'contrast(1.05) brightness(1.02)' }} />
                 </div>
                 )}
                 <div className="p-4">
@@ -1093,8 +1093,8 @@ function OrderSection() {
                     className="bg-gray-900/50 border border-amber-900/30 hover:border-amber-500/50 transition-all duration-200 overflow-hidden"
                   >
                     {showImage && (
-                      <div className="relative h-32 overflow-hidden bg-gray-800">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" style={{ imageRendering: 'auto', filter: 'contrast(1.05) brightness(1.02)' }} loading="lazy" />
+                      <div className={`relative h-32 overflow-hidden flex items-center justify-center ${activeCategory === 'beverages' ? 'bg-black' : 'bg-gray-800'}`}>
+                        <img src={item.image} alt={item.name} className={`hover:scale-110 transition-transform duration-300 ${activeCategory === 'beverages' ? 'max-h-full max-w-full object-contain p-2' : 'w-full h-full object-cover'}`} style={{ imageRendering: 'auto', filter: 'contrast(1.05) brightness(1.02)' }} loading="lazy" />
                       </div>
                     )}
                     <div className="p-3">
