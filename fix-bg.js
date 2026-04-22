@@ -4,11 +4,17 @@ import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 const files = [
+  'apa-minerala.png',
+  'apa-plata.png',
   'cappuccino.png',
   'espresso.png',
   'ceai.png',
+  'latte.png',
+  'limonada-arome.png',
   'limonada.png',
   'lipton.png',
+  'mirinda.png',
+  'pepsi.png',
 ];
 
 const __filename = fileURLToPath(import.meta.url);
@@ -17,17 +23,8 @@ const dir = path.join(__dirname, 'client/public');
 
 async function addBlackBg(filename) {
   const input = path.join(dir, filename);
-  const meta = await sharp(input).metadata();
-  const { width, height } = meta;
-
-  const blackBg = await sharp({
-    create: { width, height, channels: 3, background: { r: 0, g: 0, b: 0 } },
-  })
-    .png()
-    .toBuffer();
-
-  await sharp(blackBg)
-    .composite([{ input, blend: 'over' }])
+  await sharp(input)
+    .flatten({ background: { r: 0, g: 0, b: 0 } })
     .png()
     .toFile(path.join(dir, filename + '.tmp.png'));
 
