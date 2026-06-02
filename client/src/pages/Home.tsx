@@ -1145,7 +1145,12 @@ function OrderSection() {
                                 <p className="text-sm font-bold text-amber-100" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}>
                                   {size} • {data.price} RON
                                 </p>
-                                <p className="text-xs text-amber-50/50" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>Dimensiune pizza</p>
+                                {activeCategory !== 'streetFood' && activeCategory !== 'paste' && (
+                                  <p className="text-xs text-amber-50/50" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>Dimensiune pizza</p>
+                                )}
+                                {(activeCategory === 'streetFood' || activeCategory === 'paste') && data.weight && (
+                                  <p className="text-xs text-amber-50/50" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>{data.weight}</p>
+                                )}
                               </div>
                               <div className="flex items-center gap-2">
                                 {qty > 0 ? (
