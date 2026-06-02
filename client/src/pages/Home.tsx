@@ -63,6 +63,10 @@ const IMAGE_URLS = {
   freshAfine: '/fresh afine.png',
   freshLamaie: '/fresh lamaie si portocale.png',
   smoothie: '/smoothie.png',
+  legumeGratar: '/legume garnitura.png',
+  cartofiPrajiti: '/cartofi prajiti garnituri.png',
+  cartofiParmezan: '/cartofi prajiti cu parmezan.png',
+  cartofiParmezanUsturoi: '/cartofi prajiti cu parmezan si usturoi garnituri.png',
 };
 
 const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/logourbanslice_a919f1bf.png';
@@ -116,10 +120,10 @@ const MENU_DATA = {
     { name: 'PASTE CARBONARA', image: IMAGE_URLS.pasteCarbonara, sizes: { '350g': { price: 43, weight: '350 g' } }, ingredients: 'Paste, ou, bacon, parmezan, sare, piper' },
   ],
   garnituri: [
-    { name: 'LEGUME LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { '200g': { price: 7, weight: '200 g' } }, ingredients: 'Dovlecel, ardei, vinete' },
-    { name: 'CARTOFI PRĂJIȚI', image: IMAGE_URLS.margherita, sizes: { '200g': { price: 10, weight: '200 g' } }, ingredients: 'Cartofi, ulei' },
-    { name: 'CARTOFI CU PARMEZAN', image: IMAGE_URLS.margherita, sizes: { '200g': { price: 12, weight: '200 g' } }, ingredients: 'Cartofi prăjiți, parmezan' },
-    { name: 'CARTOFI CU PARMEZAN ȘI USTUROI', image: IMAGE_URLS.margherita, sizes: { '200g': { price: 12, weight: '200 g' } }, ingredients: 'Cartofi prăjiți, parmezan, usturoi' },
+    { name: 'LEGUME LA GRĂTAR', image: IMAGE_URLS.legumeGratar, sizes: { '200g': { price: 7, weight: '200 g' } }, ingredients: 'Dovlecel, ardei, vinete' },
+    { name: 'CARTOFI PRĂJIȚI', image: IMAGE_URLS.cartofiPrajiti, sizes: { '200g': { price: 10, weight: '200 g' } }, ingredients: 'Cartofi, ulei' },
+    { name: 'CARTOFI CU PARMEZAN', image: IMAGE_URLS.cartofiParmezan, sizes: { '200g': { price: 12, weight: '200 g' } }, ingredients: 'Cartofi prăjiți, parmezan' },
+    { name: 'CARTOFI CU PARMEZAN ȘI USTUROI', image: IMAGE_URLS.cartofiParmezanUsturoi, sizes: { '200g': { price: 12, weight: '200 g' } }, ingredients: 'Cartofi prăjiți, parmezan, usturoi' },
   ],
   salate: [
     { name: 'SALATĂ DE VINETE', image: IMAGE_URLS.margherita, sizes: { '150g': { price: 20, weight: '150 g' } }, ingredients: 'Vinete coapte, ulei, ceapă' },
@@ -697,7 +701,7 @@ function MenuSection() {
           /* Standard Menu Items Grid */
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {currentMenu.map((item, idx) => {
-              const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa' || activeCategory === 'beverages' || activeCategory === 'paste';
+              const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa' || activeCategory === 'beverages' || activeCategory === 'paste' || activeCategory === 'garnituri';
               const itemSubtitle = MENU_SUBTITLES[item.name];
               return (
               <div
@@ -1131,7 +1135,7 @@ function OrderSection() {
           <div className="lg:col-span-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {currentMenu.map((item, idx) => {
-                const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa' || activeCategory === 'beverages' || activeCategory === 'paste';
+                const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa' || activeCategory === 'beverages' || activeCategory === 'paste' || activeCategory === 'garnituri';
                 return (
                   <div
                     key={idx}
