@@ -59,6 +59,10 @@ const IMAGE_URLS = {
   pastePomodoro: '/paste pomodoro.png',
   pasteAmatriciana: '/paste amatriciana.png',
   pasteCarbonara: '/paste carbonara.png',
+  freshPortocale: '/fresh portocale.png',
+  freshAfine: '/fresh afine.png',
+  freshLamaie: '/fresh lamaie si portocale.png',
+  smoothie: '/smoothie.png',
 };
 
 const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/logourbanslice_a919f1bf.png';
@@ -215,10 +219,10 @@ const MENU_DATA = {
     { name: 'Apa plată/minerală', image: IMAGE_URLS.apaPlata, sizes: { '750ml': { price: 18, weight: '750 ml' } }, ingredients: '' },
     { name: 'Limonada simplă', image: IMAGE_URLS.limonada, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
     { name: 'Limonada arome', image: IMAGE_URLS.limonadaArome, sizes: { 'standard': { price: 18, weight: '' } }, ingredients: '' },
-    { name: 'Fresh portocale', image: IMAGE_URLS.limonada, sizes: { '300ml': { price: 20, weight: '300 ml' } }, ingredients: '' },
-    { name: 'Fresh afine', image: IMAGE_URLS.limonada, sizes: { '330ml': { price: 12, weight: '330 ml' } }, ingredients: '' },
-    { name: 'Fresh lămâie & portocală', image: IMAGE_URLS.limonada, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
-    { name: 'Smoothie', image: IMAGE_URLS.limonada, sizes: { '300ml': { price: 20, weight: '300 ml' } }, ingredients: '' },
+    { name: 'Fresh portocale', image: IMAGE_URLS.freshPortocale, sizes: { '300ml': { price: 20, weight: '300 ml' } }, ingredients: '' },
+    { name: 'Fresh afine', image: IMAGE_URLS.freshAfine, sizes: { '330ml': { price: 12, weight: '330 ml' } }, ingredients: '' },
+    { name: 'Fresh lămâie & portocală', image: IMAGE_URLS.freshLamaie, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
+    { name: 'Smoothie', image: IMAGE_URLS.smoothie, sizes: { '300ml': { price: 20, weight: '300 ml' } }, ingredients: '' },
     { name: 'Ceai cald', image: IMAGE_URLS.ceai, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
     { name: 'Espresso', image: IMAGE_URLS.espresso, sizes: { '30ml': { price: 10, weight: '30 ml' } }, ingredients: '' },
     { name: 'Latte', image: IMAGE_URLS.latte, sizes: { '280ml': { price: 15, weight: '280 ml' } }, ingredients: '' },
