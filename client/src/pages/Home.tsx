@@ -264,6 +264,9 @@ const MENU_SUBTITLES: Record<string, string> = {
   'PANUOZZO COTTO': 'Palina 140g, sos roșii cu busuioc 30g, mozzarella 30g, rucola, prosciutto cotto 40g, unt, ulei de măsline',
   'PANUOZZO CHORIZO': 'Palina 140g, sos roșii 30g, unt 20g, rucola, chorizo 30g, ulei de măsline',
   'BURGER URBAN BLACK ANGUS': 'Burger Black Angus Romania, sos urban, cedar, mozzarella, castraveți murați, salată, bacon, ceapă',
+  'PASTE POMODORO': 'Paste, sos de roșii, ulei de măsline, sare, piper (350g)',
+  'PASTE AMATRICIANA': 'Paste, sos de roșii, bacon, ceapă, ulei de măsline (350g)',
+  'PASTE CARBONARA': 'Paste, ou, bacon, parmezan, sare, piper (350g)',
 };
 const MENU_ITEMS = [
   { label: 'Meniu', sectionId: 'meniu' },
