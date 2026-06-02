@@ -54,6 +54,11 @@ const IMAGE_URLS = {
   espresso: '/espresso.png',
   latte: '/latte.png',
   cappuccino: '/cappuccino.png',
+  crispy: '/poze ai urban slice/poza pizza crispy.png',
+  sevenUp: '/poza 7up.png',
+  pastePomodoro: '/paste pomodoro.png',
+  pasteAmatriciana: '/paste amatriciana.png',
+  pasteCarbonara: '/paste carbonara.png',
 };
 
 const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663414316478/mdHwtXncmAPABssMUNeNmG/logourbanslice_a919f1bf.png';
@@ -88,7 +93,7 @@ const MENU_DATA = {
     { name: 'CARBONARA', image: IMAGE_URLS.carbonara, sizes: { '32cm': { price: 45, weight: '620 g' }, '40cm': { price: 65, weight: '800 g' } }, ingredients: 'Palina, sos alb, mozzarella, pancetta, ou' },
     { name: 'DIAVOLA TARTUFATA', image: IMAGE_URLS.diavola_tartufata, sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '800 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam, pasta de trufe, peperoncini' },
     { name: 'SALAMI TARTUFATA', image: IMAGE_URLS.salami_tartufata, sizes: { '32cm': { price: 50, weight: '650 g' }, '40cm': { price: 70, weight: '750 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam, pastă de trufe' },
-    { name: 'CRISPY', image: IMAGE_URLS.margherita, sizes: { '32cm': { price: 45, weight: '630 g' }, '40cm': { price: 65, weight: '740 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pui crispy, măsline, sos cheddar' },
+    { name: 'CRISPY', image: IMAGE_URLS.crispy, sizes: { '32cm': { price: 45, weight: '630 g' }, '40cm': { price: 65, weight: '740 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pui crispy, măsline, sos cheddar' },
   ],
   streetFood: [
     { name: 'URBAN HOT DOG', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '280 g' } }, ingredients: 'Cârnat semiafumat, sos Urban, cheddar, mozzarella, parmezan' },
@@ -102,9 +107,9 @@ const MENU_DATA = {
     { name: 'BURGER CRISPY', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 45, weight: '350 g' } }, ingredients: 'Chiflă burger, 120 g pui crispy, sos Urban, cheddar, mozzarella, castraveți murați, salată, bacon, ceapă - Vin și cu cartofi prăjiți cu parmezan' },
   ],
   paste: [
-    { name: 'PASTE POMODORO', image: IMAGE_URLS.margherita, sizes: { '350g': { price: 43, weight: '350 g' } }, ingredients: 'Paste, sos de roșii, ulei de măsline, sare, piper' },
-    { name: 'PASTE AMATRICIANA', image: IMAGE_URLS.margherita, sizes: { '350g': { price: 43, weight: '350 g' } }, ingredients: 'Paste, sos de roșii, bacon, ceapă, ulei de măsline' },
-    { name: 'PASTE CARBONARA', image: IMAGE_URLS.margherita, sizes: { '350g': { price: 43, weight: '350 g' } }, ingredients: 'Paste, ou, bacon, parmezan, sare, piper' },
+    { name: 'PASTE POMODORO', image: IMAGE_URLS.pastePomodoro, sizes: { '350g': { price: 43, weight: '350 g' } }, ingredients: 'Paste, sos de roșii, ulei de măsline, sare, piper' },
+    { name: 'PASTE AMATRICIANA', image: IMAGE_URLS.pasteAmatriciana, sizes: { '350g': { price: 43, weight: '350 g' } }, ingredients: 'Paste, sos de roșii, bacon, ceapă, ulei de măsline' },
+    { name: 'PASTE CARBONARA', image: IMAGE_URLS.pasteCarbonara, sizes: { '350g': { price: 43, weight: '350 g' } }, ingredients: 'Paste, ou, bacon, parmezan, sare, piper' },
   ],
   garnituri: [
     { name: 'LEGUME LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { '200g': { price: 7, weight: '200 g' } }, ingredients: 'Dovlecel, ardei, vinete' },
@@ -190,22 +195,22 @@ const MENU_DATA = {
     { name: 'Music Bucket Stalinskayana 5+1', price: 75, category: 'LONG DRINKS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 75, weight: '' } }, ingredients: '' },
   ],
   gratar: [
-    { name: 'MICI', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 7, weight: '90 g' } }, ingredients: 'Carne vită, carne porc, condimente' },
+    { name: 'MICI GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 7, weight: '90 g' } }, ingredients: 'Carne vită, carne porc, condimente' },
     { name: 'CÂRNAȚI SEMIAFUMAȚI', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 8, weight: '80 g' } }, ingredients: 'Carne porc, usturoi, condimente' },
+    { name: 'CÂRNAȚI DE PLEȘCOI', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 17, weight: '100 g' } }, ingredients: 'Carne oaie/porc, condimente' },
     { name: 'CEAFĂ DE PORC LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '200 g' } }, ingredients: 'Ceafă de porc, condimente' },
     { name: 'COTLET DE PORC LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '200 g' } }, ingredients: 'Cotlet de porc, condimente' },
     { name: 'PIEPT DE PORC LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '200 g' } }, ingredients: 'Piept de porc, condimente' },
     { name: 'PIEPT DE PUI LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '200 g' } }, ingredients: 'Piept de pui, condimente' },
+    { name: 'PUI GRILL COQUELET', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 50, weight: '700 g' } }, ingredients: '' },
     { name: 'PASTRAMĂ DE BERBECUȚ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '100 g' } }, ingredients: 'Carne de berbecuț, condimente' },
-    { name: 'PUI GRILL COQUELET', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 50, weight: '700 g' } }, ingredients: 'Pui, condimente' },
-    { name: 'CÂRNAȚI DE PLEȘCOI', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 17, weight: '100 g' } }, ingredients: 'Carne oaie/porc, condimente' },
     { name: 'FILE DE ȘALĂU', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 45, weight: '280 g' } }, ingredients: 'File de șalău, condimente' },
     { name: 'PUI LA CEAUN', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 65, weight: '650 g' } }, ingredients: 'Pui, cartofi, focaccia' },
   ],
   beverages: [
     { name: 'Pepsi', image: IMAGE_URLS.pepsi, sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
     { name: 'Mirinda', image: IMAGE_URLS.mirinda, sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
-    { name: '7UP', image: IMAGE_URLS.mirinda, sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
+    { name: '7UP', image: IMAGE_URLS.sevenUp, sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
     { name: 'Lipton', image: IMAGE_URLS.lipton, sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
     { name: 'Apa plată/minerală', image: IMAGE_URLS.apaPlata, sizes: { '750ml': { price: 18, weight: '750 ml' } }, ingredients: '' },
     { name: 'Limonada simplă', image: IMAGE_URLS.limonada, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
@@ -612,6 +617,7 @@ function MenuSection() {
     { id: 'streetFood', label: 'STREET FOOD' },
     { id: 'paste', label: 'PASTE' },
     { id: 'gratar', label: 'GRĂTAR' },
+    { id: 'garnituri', label: 'GARNITURI' },
     { id: 'beverages', label: 'BĂUTURI' },
     { id: 'alcoholicBeverages', label: 'BĂUTURI ALCOOLICE' },
   ];
@@ -687,7 +693,7 @@ function MenuSection() {
           /* Standard Menu Items Grid */
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {currentMenu.map((item, idx) => {
-              const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa' || activeCategory === 'beverages';
+              const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa' || activeCategory === 'beverages' || activeCategory === 'paste';
               const itemSubtitle = MENU_SUBTITLES[item.name];
               return (
               <div
@@ -1000,6 +1006,7 @@ function OrderSection() {
     { id: 'streetFood', label: 'STREET FOOD' },
     { id: 'paste', label: 'PASTE' },
     { id: 'gratar', label: 'GRĂTAR' },
+    { id: 'garnituri', label: 'GARNITURI' },
     { id: 'beverages', label: 'BĂUTURI' },
   ];
 
@@ -1120,7 +1127,7 @@ function OrderSection() {
           <div className="lg:col-span-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {currentMenu.map((item, idx) => {
-                const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa' || activeCategory === 'beverages';
+                const showImage = activeCategory === 'pizzaClassica' || activeCategory === 'pizzaCasa' || activeCategory === 'beverages' || activeCategory === 'paste';
                 return (
                   <div
                     key={idx}
@@ -1143,12 +1150,9 @@ function OrderSection() {
                             <div key={size} className="flex items-center justify-between bg-gray-800/50 p-2 rounded">
                               <div>
                                 <p className="text-sm font-bold text-amber-100" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}>
-                                  {size} • {data.price} RON
+                                  {activeCategory === 'paste' || activeCategory === 'streetFood' || activeCategory === 'gratar' || activeCategory === 'garnituri' || activeCategory === 'salate' ? '' : `${size} • `}{data.price} RON
                                 </p>
-                                {activeCategory !== 'streetFood' && activeCategory !== 'paste' && (
-                                  <p className="text-xs text-amber-50/50" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>Dimensiune pizza</p>
-                                )}
-                                {(activeCategory === 'streetFood' || activeCategory === 'paste') && data.weight && (
+                                {data.weight && (
                                   <p className="text-xs text-amber-50/50" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400 }}>{data.weight}</p>
                                 )}
                               </div>
