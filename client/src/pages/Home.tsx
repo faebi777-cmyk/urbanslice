@@ -88,6 +88,7 @@ const MENU_DATA = {
     { name: 'CARBONARA', image: IMAGE_URLS.carbonara, sizes: { '32cm': { price: 45, weight: '620 g' }, '40cm': { price: 65, weight: '800 g' } }, ingredients: 'Palina, sos alb, mozzarella, pancetta, ou' },
     { name: 'DIAVOLA TARTUFATA', image: IMAGE_URLS.diavola_tartufata, sizes: { '32cm': { price: 50, weight: '660 g' }, '40cm': { price: 70, weight: '800 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam, pasta de trufe, peperoncini' },
     { name: 'SALAMI TARTUFATA', image: IMAGE_URLS.salami_tartufata, sizes: { '32cm': { price: 50, weight: '650 g' }, '40cm': { price: 70, weight: '750 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, salam, pastă de trufe' },
+    { name: 'CRISPY', image: IMAGE_URLS.margherita, sizes: { '32cm': { price: 45, weight: '630 g' }, '40cm': { price: 65, weight: '740 g' } }, ingredients: 'Palina, sos de roșii, mozzarella, pui crispy, măsline, sos cheddar' },
   ],
   streetFood: [
     { name: 'URBAN HOT DOG', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '280 g' } }, ingredients: 'Cârnat semiafumat, sos Urban, cheddar, mozzarella, parmezan' },
@@ -100,10 +101,16 @@ const MENU_DATA = {
     { name: 'BURGER URBAN BLACK ANGUS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 50, weight: '350 g' } }, ingredients: 'Chiflă burger, burger Black Angus România, sos Urban, cheddar, mozzarella, castraveți murați, salată, bacon, ceapă - Vin și cu cartofi prăjiți cu parmezan' },
     { name: 'BURGER CRISPY', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 45, weight: '350 g' } }, ingredients: 'Chiflă burger, 120 g pui crispy, sos Urban, cheddar, mozzarella, castraveți murați, salată, bacon, ceapă - Vin și cu cartofi prăjiți cu parmezan' },
   ],
+  paste: [
+    { name: 'PASTE POMODORO', image: IMAGE_URLS.margherita, sizes: { '350g': { price: 43, weight: '350 g' } }, ingredients: 'Paste, sos de roșii, ulei de măsline, sare, piper' },
+    { name: 'PASTE AMATRICIANA', image: IMAGE_URLS.margherita, sizes: { '350g': { price: 43, weight: '350 g' } }, ingredients: 'Paste, sos de roșii, bacon, ceapă, ulei de măsline' },
+    { name: 'PASTE CARBONARA', image: IMAGE_URLS.margherita, sizes: { '350g': { price: 43, weight: '350 g' } }, ingredients: 'Paste, ou, bacon, parmezan, sare, piper' },
+  ],
   garnituri: [
     { name: 'LEGUME LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { '200g': { price: 7, weight: '200 g' } }, ingredients: 'Dovlecel, ardei, vinete' },
     { name: 'CARTOFI PRĂJIȚI', image: IMAGE_URLS.margherita, sizes: { '200g': { price: 10, weight: '200 g' } }, ingredients: 'Cartofi, ulei' },
     { name: 'CARTOFI CU PARMEZAN', image: IMAGE_URLS.margherita, sizes: { '200g': { price: 12, weight: '200 g' } }, ingredients: 'Cartofi prăjiți, parmezan' },
+    { name: 'CARTOFI CU PARMEZAN ȘI USTUROI', image: IMAGE_URLS.margherita, sizes: { '200g': { price: 12, weight: '200 g' } }, ingredients: 'Cartofi prăjiți, parmezan, usturoi' },
   ],
   salate: [
     { name: 'SALATĂ DE VINETE', image: IMAGE_URLS.margherita, sizes: { '150g': { price: 20, weight: '150 g' } }, ingredients: 'Vinete coapte, ulei, ceapă' },
@@ -114,62 +121,73 @@ const MENU_DATA = {
   ],
   alcoholicBeverages: [
     // BERE STICLA - 500 ML
-    { name: 'Amstel', price: 10, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 10, weight: '' } }, ingredients: '' },
-    { name: 'Heineken', price: 12, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
-    { name: 'Birra Moretti', price: 12, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
-    { name: 'Silva neagra', price: 15, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
-    { name: 'Harghita', price: 12, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
-    { name: 'Hategana', price: 12, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
-    { name: 'Suceava', price: 14, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
-    { name: 'Solca', price: 14, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
-    { name: 'Calimani', price: 14, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
-    
-    // BERE STICLA - 330 ML
-    { name: 'Corona', price: 15, category: 'BERE STICLA - 330 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
-    { name: 'Praga', price: 14, category: 'BERE STICLA - 330 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
-    { name: 'St Miguel', price: 14, category: 'BERE STICLA - 330 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
-    { name: 'Bermas', price: 14, category: 'BERE STICLA - 330 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
-    { name: 'Paulaner', price: 20, category: 'BERE STICLA - 330 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '' } }, ingredients: '' },
-    
+    { name: 'Caraiman', price: 10, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 10, weight: '' } }, ingredients: '' },
+    { name: 'Bergenbier', price: 10, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 10, weight: '' } }, ingredients: '' },
+    { name: 'Madri', price: 12, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
+    { name: "Beck's", price: 16, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 16, weight: '' } }, ingredients: '' },
+    { name: 'Stella Artois', price: 16, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 16, weight: '' } }, ingredients: '' },
+    { name: 'Staropramen', price: 12, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
+    { name: 'Efes', price: 16, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 16, weight: '' } }, ingredients: '' },
+    { name: 'Suceava', price: 15, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
+    { name: 'Solca', price: 15, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
+    { name: 'Bermas', price: 15, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
+    { name: 'Leffe Brown', price: 20, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '' } }, ingredients: '' },
+    { name: 'Leffe Blondă', price: 20, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '' } }, ingredients: '' },
+    { name: 'Stella Artois 0% alcool', price: 15, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
+    { name: 'Corona', price: 20, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '' } }, ingredients: '' },
+    { name: 'Silva', price: 15, category: 'BERE STICLA - 500 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
+
     // BERE DRAFT - 400 ML
-    { name: 'Ciuc premium', price: 10, category: 'BERE DRAFT - 400 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 10, weight: '' } }, ingredients: '' },
-    { name: 'Birra Moretti', price: 12, category: 'BERE DRAFT - 400 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
-    { name: 'Calimani', price: 14, category: 'BERE DRAFT - 400 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
-    { name: 'St Miguel', price: 15, category: 'BERE DRAFT - 400 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
-    
+    { name: 'Caraiman', price: 10, category: 'BERE DRAFT - 400 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 10, weight: '' } }, ingredients: '' },
+    { name: "Beck's", price: 14, category: 'BERE DRAFT - 400 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 14, weight: '' } }, ingredients: '' },
+
     // VINURI 0.75 ML
     { name: 'Budureasca Clasic (rosé, roșu, fume)', price: 70, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 70, weight: '' } }, ingredients: '' },
     { name: 'Compas (rosé, Pinot Grigio)', price: 65, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 65, weight: '' } }, ingredients: '' },
     { name: 'Compas Shiraz (roșu)', price: 75, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 75, weight: '' } }, ingredients: '' },
-    { name: 'Caii de la Letea - Vol. I (roșu)', price: 75, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 75, weight: '' } }, ingredients: '' },
     { name: 'Implicit (alb, rosé, roșu)', price: 85, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 85, weight: '' } }, ingredients: '' },
     { name: 'Petro Vaselo (alb, rosé)', price: 75, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 75, weight: '' } }, ingredients: '' },
     { name: 'Caraman Tabu (alb, rosé)', price: 70, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 70, weight: '' } }, ingredients: '' },
     { name: 'Domeniul Bogdan (alb, rosé, roșu)', price: 40, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 40, weight: '' } }, ingredients: '' },
-    
-    // VINUL CASEI (CARAFA 0.500ML)
-    { name: 'Vinul casei (carafa 0.500ml)', price: 40, category: 'VINUL CASEI', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 40, weight: '' } }, ingredients: '' },
-    
+    { name: 'Weinland (alb, roze)', price: 45, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 45, weight: '' } }, ingredients: '' },
+    { name: 'Zeppelin Frizzante (alb, roze)', price: 65, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 65, weight: '' } }, ingredients: '' },
+    { name: '3 Hectare (alb, roze)', price: 80, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 80, weight: '' } }, ingredients: '' },
+    { name: 'Aerosoli (alb, roze)', price: 75, category: 'VINURI 0.75 ML', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 75, weight: '' } }, ingredients: '' },
+
+    // VINUL CASEI (CARAFA 1 LITRU)
+    { name: 'Vinul casei (carafa 1 litru)', price: 40, category: 'VINUL CASEI', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 40, weight: '' } }, ingredients: '' },
+
     // LA PAHAR
     { name: 'Vin pahar (alb, rosé, roșu)', price: 15, category: 'LA PAHAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
     { name: 'Spumant (alb, rosé)', price: 25, category: 'LA PAHAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    
+
     // COCKTAILS
     { name: 'Cuba Libre', price: 25, category: 'COCKTAILS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
     { name: 'Hugo', price: 25, category: 'COCKTAILS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
     { name: 'Aperol Spritz', price: 25, category: 'COCKTAILS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    
+    { name: 'Campari Orange', price: 25, category: 'COCKTAILS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+    { name: 'Gin Tonic', price: 25, category: 'COCKTAILS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+    { name: 'Orange Vodca', price: 25, category: 'COCKTAILS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+
     // DE AUTOBAZĂ
     { name: '"Adio, mamă" (vin fiert cu rom)', price: 25, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
     { name: '"Submarin" (bere draft cu rom)', price: 25, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    { name: 'Whiskey Jack Daniel\'s - 100 ml', price: 25, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    { name: 'Whiskey Glenfiddich 12 ani (Single Malt) - 100 ml', price: 30, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '' } }, ingredients: '' },
-    { name: 'Vodcă Absolut - 100 ml', price: 20, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '' } }, ingredients: '' },
-    { name: 'Vodcă Grey Goose - 100 ml', price: 30, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '' } }, ingredients: '' },
+    { name: 'Stalinskayana Gold - 100 ml', price: 20, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '' } }, ingredients: '' },
+    { name: 'Glen Moray Single Malt Whiskey - 100 ml', price: 40, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 40, weight: '' } }, ingredients: '' },
+    { name: 'Duppy Share Aged Rom - 100 ml', price: 30, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 30, weight: '' } }, ingredients: '' },
+    { name: 'Cutty Sark Whiskey Blended - 100 ml', price: 25, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
     { name: 'Rom Captain Morgan - 100 ml', price: 25, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    { name: 'Rom Bacardi Spiced - 100 ml', price: 25, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
-    { name: 'Coniac Alexandrion 5* - 100 ml', price: 20, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '' } }, ingredients: '' },
-    { name: 'Coniac Metaxa 7*', price: 25, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+    { name: 'Cognac Grand Passion VS - 100 ml', price: 20, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '' } }, ingredients: '' },
+    { name: 'Coniac Metaxa 7★ - 100 ml', price: 25, category: 'DE AUTOBAZĂ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '' } }, ingredients: '' },
+
+    // SHOTURI
+    { name: 'Vodka', price: 12, category: 'SHOTURI', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
+    { name: 'Tequila', price: 15, category: 'SHOTURI', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
+
+    // LONG DRINKS
+    { name: 'Stalinskayana Music Lime & Mint (0.275 ml)', price: 15, category: 'LONG DRINKS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
+    { name: 'Stalinskayana Music Raspberry (0.275 ml)', price: 15, category: 'LONG DRINKS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
+    { name: 'Music Bucket Stalinskayana 5+1', price: 75, category: 'LONG DRINKS', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 75, weight: '' } }, ingredients: '' },
   ],
   gratar: [
     { name: 'MICI', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 7, weight: '90 g' } }, ingredients: 'Carne vită, carne porc, condimente' },
@@ -179,15 +197,23 @@ const MENU_DATA = {
     { name: 'PIEPT DE PORC LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '200 g' } }, ingredients: 'Piept de porc, condimente' },
     { name: 'PIEPT DE PUI LA GRĂTAR', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 25, weight: '200 g' } }, ingredients: 'Piept de pui, condimente' },
     { name: 'PASTRAMĂ DE BERBECUȚ', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 20, weight: '100 g' } }, ingredients: 'Carne de berbecuț, condimente' },
+    { name: 'PUI GRILL COQUELET', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 50, weight: '700 g' } }, ingredients: 'Pui, condimente' },
+    { name: 'CÂRNAȚI DE PLEȘCOI', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 17, weight: '100 g' } }, ingredients: 'Carne oaie/porc, condimente' },
+    { name: 'FILE DE ȘALĂU', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 45, weight: '280 g' } }, ingredients: 'File de șalău, condimente' },
+    { name: 'PUI LA CEAUN', image: IMAGE_URLS.margherita, sizes: { 'standard': { price: 65, weight: '650 g' } }, ingredients: 'Pui, cartofi, focaccia' },
   ],
   beverages: [
     { name: 'Pepsi', image: IMAGE_URLS.pepsi, sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
     { name: 'Mirinda', image: IMAGE_URLS.mirinda, sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
+    { name: '7UP', image: IMAGE_URLS.mirinda, sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
     { name: 'Lipton', image: IMAGE_URLS.lipton, sizes: { '330ml': { price: 10, weight: '330 ml' } }, ingredients: '' },
-    { name: 'Apa plată', image: IMAGE_URLS.apaPlata, sizes: { '500ml': { price: 10, weight: '500 ml' } }, ingredients: '' },
-    { name: 'Apa minerală', image: IMAGE_URLS.apaMinerala, sizes: { '500ml': { price: 10, weight: '500 ml' } }, ingredients: '' },
+    { name: 'Apa plată/minerală', image: IMAGE_URLS.apaPlata, sizes: { '750ml': { price: 18, weight: '750 ml' } }, ingredients: '' },
     { name: 'Limonada simplă', image: IMAGE_URLS.limonada, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
     { name: 'Limonada arome', image: IMAGE_URLS.limonadaArome, sizes: { 'standard': { price: 18, weight: '' } }, ingredients: '' },
+    { name: 'Fresh portocale', image: IMAGE_URLS.limonada, sizes: { '300ml': { price: 20, weight: '300 ml' } }, ingredients: '' },
+    { name: 'Fresh afine', image: IMAGE_URLS.limonada, sizes: { '330ml': { price: 12, weight: '330 ml' } }, ingredients: '' },
+    { name: 'Fresh lămâie & portocală', image: IMAGE_URLS.limonada, sizes: { 'standard': { price: 12, weight: '' } }, ingredients: '' },
+    { name: 'Smoothie', image: IMAGE_URLS.limonada, sizes: { '300ml': { price: 20, weight: '300 ml' } }, ingredients: '' },
     { name: 'Ceai cald', image: IMAGE_URLS.ceai, sizes: { 'standard': { price: 15, weight: '' } }, ingredients: '' },
     { name: 'Espresso', image: IMAGE_URLS.espresso, sizes: { '30ml': { price: 10, weight: '30 ml' } }, ingredients: '' },
     { name: 'Latte', image: IMAGE_URLS.latte, sizes: { '280ml': { price: 15, weight: '280 ml' } }, ingredients: '' },
@@ -584,6 +610,7 @@ function MenuSection() {
     { id: 'pizzaClassica', label: 'PIZZA CLASICĂ' },
     { id: 'pizzaCasa', label: 'PIZZA DELLA CASA' },
     { id: 'streetFood', label: 'STREET FOOD' },
+    { id: 'paste', label: 'PASTE' },
     { id: 'gratar', label: 'GRĂTAR' },
     { id: 'beverages', label: 'BĂUTURI' },
     { id: 'alcoholicBeverages', label: 'BĂUTURI ALCOOLICE' },
@@ -971,6 +998,7 @@ function OrderSection() {
     { id: 'pizzaClassica', label: 'PIZZA CLASICĂ' },
     { id: 'pizzaCasa', label: 'PIZZA DELLA CASA' },
     { id: 'streetFood', label: 'STREET FOOD' },
+    { id: 'paste', label: 'PASTE' },
     { id: 'gratar', label: 'GRĂTAR' },
     { id: 'beverages', label: 'BĂUTURI' },
   ];
